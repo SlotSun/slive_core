@@ -1,92 +1,180 @@
 # slive_core
 
-A new Flutter FFI plugin project.
+A Flutter plugin for multi-platform live streaming aggregation, powered by Rust via [flutter_rust_bridge](https://github.com/aspect-build/aspect-flutter-rust-bridge).
 
-## Getting Started
+Wraps [slive-core-api-rust](https://github.com/SlotSun/slive-core-api-rust) to provide stream extraction and real-time danmaku (chat) for 5 platforms.
 
-This project is a starting point for a Flutter
-[FFI plugin](https://flutter.dev/to/ffi-package),
-a specialized package that includes native code directly invoked with Dart FFI.
+## Supported Platforms
 
-## Project structure
+| Platform | Stream Extraction | Danmaku (Chat) |
+|----------|:-----------------:|:--------------:|
+| Bilibili (哔哩哔哩) |         ✓         |       ✓        |
+| Douyin (抖音) |         ✓         |       ✓        |
+| Douyu (斗鱼) |         ✓         |       ✓        |
+| Huya (虎牙) |         ✓         |       ✓        |
+| Twitch |         x         |       x        |
 
-This template uses the following structure:
-
-* `src`: Contains the native source code, and a CmakeFile.txt file for building
-  that source code into a dynamic library.
-
-* `lib`: Contains the Dart code that defines the API of the plugin, and which
-  calls into the native code using `dart:ffi`.
-
-* platform folders (`android`, `ios`, `windows`, etc.): Contains the build files
-  for building and bundling the native code library with the platform application.
-
-## Building and bundling native code
-
-The `pubspec.yaml` specifies FFI plugins as follows:
+## Installation
 
 ```yaml
-  plugin:
-    platforms:
-      some_platform:
-        ffiPlugin: true
+dependencies:
+  slive_core:
+    git:
+      url: https://github.com/SlotSun/slive_core.git
+      path: .
 ```
 
-This configuration invokes the native build for the various target platforms
-and bundles the binaries in Flutter applications using these FFI plugins.
+## Quick Start
 
-This can be combined with dartPluginClass, such as when FFI is used for the
-implementation of one platform in a federated plugin:
+### Initialize Rust Bridge
 
-```yaml
-  plugin:
-    implements: some_other_plugin
-    platforms:
-      some_platform:
-        dartPluginClass: SomeClass
-        ffiPlugin: true
+```dart
+import 'package:slive_core/slive_core.dart';
+
+await RustLib.init();
 ```
 
-A plugin can have both FFI and method channels:
+### Create a Platform Site
 
-```yaml
-  plugin:
-    platforms:
-      some_platform:
-        pluginClass: SomeName
-        ffiPlugin: true
+```dart
+final site = await SliveFactory.create('bilibili');
+// Supported: 'bilibili', 'douyin', 'douyu', 'huya', 'twitch'
 ```
 
-The native build systems that are invoked by FFI (and method channel) plugins are:
+### Get Room Detail
 
-* For Android: Gradle, which invokes the Android NDK for native builds.
-  * See the documentation in android/build.gradle.
-* For iOS and MacOS: Xcode, via CocoaPods.
-  * See the documentation in ios/slive_core.podspec.
-  * See the documentation in macos/slive_core.podspec.
-* For Linux and Windows: CMake.
-  * See the documentation in linux/CMakeLists.txt.
-  * See the documentation in windows/CMakeLists.txt.
+```dart
+final detail = await site.getRoomDetail(roomId: '6');
+print('${detail.userName}: ${detail.title}');
+print('Status: ${detail.status ? "Live" : "Offline"}');
+```
 
-## Binding to native code
+### Get Play URLs
 
-To use the native code, bindings in Dart are needed.
-To avoid writing these by hand, they are generated from the header file
-(`src/slive_core.h`) by `package:ffigen`.
-Regenerate the bindings by running `dart run ffigen --config ffigen.yaml`.
+```dart
+final qualities = await site.getPlayQualities(detail: detail);
+final playUrl = await site.getPlayUrls(detail: detail, quality: qualities.first);
+print('Stream URL: ${playUrl.urls.first}');
+```
 
-## Invoking native code
+### Search Rooms & Anchors
 
-Very short-running native functions can be directly invoked from any isolate.
-For example, see `sum` in `lib/slive_core.dart`.
+```dart
+final rooms = await site.searchRooms('keyword', page: 1);
+for (final room in rooms.items) {
+  print('${room.userName}: ${room.title}');
+}
 
-Longer-running functions should be invoked on a helper isolate to avoid
-dropping frames in Flutter applications.
-For example, see `sumAsync` in `lib/slive_core.dart`.
+final anchors = await site.searchAnchors('keyword', page: 1);
+for (final anchor in anchors.items) {
+  print('${anchor.userName} - Live: ${anchor.isLive}');
+}
+```
 
-## Flutter help
+### Browse Categories
 
-For help getting started with Flutter, view our
-[online documentation](https://docs.flutter.dev), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```dart
+final categories = await site.getCategories();
+final result = await site.getCategoryRooms(
+  categories.first.subCategories.first,
+  page: 1,
+);
+```
 
+### Real-time Danmaku (Chat)
+
+```dart
+final danmaku = site.getDanmaku();
+
+danmaku.onMessage = (msg) {
+  print('${msg.username}: ${msg.content}');
+};
+
+danmaku.onSuperChat = (sc) {
+  print('SC from ${sc.userName}: ${sc.content}');
+};
+
+danmaku.onControl = (event) {
+  // StreamClosed, RoomInfoChanged, etc.
+};
+
+danmaku.onClose = (msg) => print('Disconnected: $msg');
+
+await danmaku.start('12345', cookies: 'SESSDATA=...');
+
+// Later:
+await danmaku.stop();
+```
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Dart API | Flutter + flutter_rust_bridge 2.11.1 |
+| Native Core | Rust (tokio async runtime) |
+| FFI Bridge | flutter_rust_bridge codegen |
+| Data Models | freezed + json_annotation |
+| HTTP | reqwest (Rust) with cookie/retry support |
+| WebSocket | tokio-tungstenite (Rust) |
+| Binary Protocols | Tars (Huya), Protobuf (Bilibili/Douyin) |
+
+## Architecture
+
+```
+┌──────────────────────────────────────────┐
+│              Flutter / Dart              │
+│                                          │
+│   SliveFactory → SliveSite → SliveDanmaku│
+│        │              │           │       │
+│   SliveBilibiliSite   getDanmaku()       │
+│   SliveDouyinSite     onMessage callback  │
+│   SliveDouyuSite      onSuperChat        │
+│   SliveHuyaSite       onControl          │
+│   SliveTwitchSite                        │
+└────────────────┬─────────────────────────┘
+                 │ flutter_rust_bridge (FFI)
+┌────────────────┴─────────────────────────┐
+│              Rust Core                   │
+│                                          │
+│   platforms-parser                       │
+│   ├── LiveExtractor (trait)              │
+│   ├── DanmuProvider (trait)              │
+│   ├── Bilibili / Douyin / Douyu /        │
+│   │   Huya / Twitch                      │
+│   └── HttpClient / WebSocket framework   │
+└──────────────────────────────────────────┘
+```
+
+## API Reference
+
+### SliveSite
+
+| Method | Description |
+|--------|-------------|
+| `getCategories()` | Get all platform categories |
+| `searchRooms(keyword, page)` | Search live rooms |
+| `searchAnchors(keyword, page)` | Search anchors (not supported on Douyin) |
+| `getCategoryRooms(category, page)` | Get rooms in a category |
+| `getRecommendRooms(page)` | Get recommended rooms |
+| `getRoomDetail(roomId)` | Get full room info |
+| `getPlayQualities(detail)` | Get available quality levels |
+| `getPlayUrls(detail, quality)` | Get stream URLs |
+| `getLiveStatus(roomId)` | Check if room is live |
+| `getSuperChatMessages(roomId)` | Get super chat messages |
+| `getDanmaku()` | Get danmaku handler for this platform |
+
+### SliveDanmaku
+
+| Property/Method | Description |
+|-----------------|-------------|
+| `onMessage` | Callback for chat messages |
+| `onSuperChat` | Callback for super chat messages |
+| `onControl` | Callback for control events (stream close, etc.) |
+| `onClose` | Callback for disconnection |
+| `onReady` | Callback when connection is ready |
+| `start(roomId, {cookies})` | Start listening to danmaku |
+| `stop()` | Stop and disconnect |
+
+## License
+
+[MIT](LICENSE)

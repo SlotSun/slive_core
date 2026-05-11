@@ -1,7 +1,7 @@
 name: slive_core
-description: "A new Flutter FFI plugin project."
+description: "Flutter plugin for multi-platform live streaming aggregation, powered by Rust via flutter_rust_bridge."
 version: 0.0.1
-homepage:
+homepage: https://github.com/SlotSun/slive_core
 
 environment:
   sdk: ^3.11.5
