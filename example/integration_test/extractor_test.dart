@@ -26,7 +26,7 @@ void main() {
 
     test('extractRoomId extracts room ID from URL', () async {
       final result = await extractor.extractRoomId(
-        url: 'https://live.bilibili.com/21652717',
+        url: 'https://live.bilibili.com/7777',
       );
       expect(result, isNotNull);
       expect(result, isNotEmpty);
@@ -35,7 +35,7 @@ void main() {
     test('getRoomDetail returns valid detail (may fail without cookies)',
         () async {
       try {
-        final detail = await extractor.getRoomDetail(roomId: '21652717');
+        final detail = await extractor.getRoomDetail(roomId: '7777');
         expect(detail.roomId, isNotEmpty);
         expect(detail.userName, isNotEmpty);
         expect(detail.title, isNotEmpty);

@@ -11,6 +11,7 @@ abstract class SliveSite {
   String get id;
   String get name;
 
+  void setCookies(String cookies);
   SliveDanmaku getDanmaku();
 
   Future<List<SliveCategory>> getCategories();
@@ -55,6 +56,8 @@ class SliveBilibiliSite implements SliveSite {
   String get id => 'bilibili';
   @override
   String get name => '哔哩哔哩直播';
+  @override
+  void setCookies(String cookies) => _extractor.setCookies(cookies: cookies);
   @override
   SliveDanmaku getDanmaku() => SliveBilibiliDanmaku(_danmakuProvider);
   @override
@@ -122,6 +125,8 @@ class SliveDouyinSite implements SliveSite {
   @override
   String get name => '抖音直播';
   @override
+  void setCookies(String cookies) => _extractor.setCookies(cookies: cookies);
+  @override
   SliveDanmaku getDanmaku() => SliveDouyinDanmaku(_danmakuProvider);
   @override
   Future<List<SliveCategory>> getCategories() => _extractor.getCategories();
@@ -187,6 +192,8 @@ class SliveDouyuSite implements SliveSite {
   String get id => 'douyu';
   @override
   String get name => '斗鱼直播';
+  @override
+  void setCookies(String cookies) {}
   @override
   SliveDanmaku getDanmaku() => SliveDouyuDanmaku(_danmakuProvider);
   @override
@@ -254,6 +261,8 @@ class SliveHuyaSite implements SliveSite {
   @override
   String get name => '虎牙直播';
   @override
+  void setCookies(String cookies) {}
+  @override
   SliveDanmaku getDanmaku() => SliveHuyaDanmaku(_danmakuProvider);
   @override
   Future<List<SliveCategory>> getCategories() => _extractor.getCategories();
@@ -319,6 +328,8 @@ class SliveTwitchSite implements SliveSite {
   String get id => 'twitch';
   @override
   String get name => 'Twitch';
+  @override
+  void setCookies(String cookies) {}
   @override
   SliveDanmaku getDanmaku() => SliveTwitchDanmaku(_danmakuProvider);
   @override
