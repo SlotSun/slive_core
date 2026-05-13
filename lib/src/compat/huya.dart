@@ -48,8 +48,6 @@ class HuyaSite extends LiveSite {
 
   HuyaDanmakuArgs? _lastDanmakuArgs;
 
-  HuyaSite();
-
   Future<void> _ensureInit() async {
     if (_extractor == null) {
       await ensureFrbInit();

@@ -58,16 +58,19 @@ class BiliBiliSite extends LiveSite {
 
   String cookie = "";
   int userId = 0;
-
-  BiliBiliSite();
+  bool cookieSet = false;
 
   Future<void> _ensureInit() async {
     if (_extractor == null) {
       await ensureFrbInit();
       _extractor = await frb.SliveBilibiliExtractor.newInstance();
-      _extractor?.setCookies(cookies: cookie);
       _danmakuProvider =
           await frb_dan.SliveBilibiliDanmakuProvider.newInstance();
+    }
+    // make cookie was set
+    if (cookieSet == false && _extractor != null) {
+      _extractor!.setCookies(cookies: cookie);
+      cookieSet = true;
     }
   }
 

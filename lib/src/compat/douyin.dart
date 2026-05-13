@@ -51,8 +51,6 @@ class DouyinSite extends LiveSite {
   bool hlsFirst = false;
   Map<String, String> headers = {};
 
-  DouyinSite();
-
   Future<void> _ensureInit() async {
     if (_extractor == null) {
       await ensureFrbInit();

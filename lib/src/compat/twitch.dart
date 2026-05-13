@@ -10,8 +10,6 @@ class TwitchSite extends LiveSite {
   frb.SliveTwitchExtractor? _extractor;
   frb_dan.SliveTwitchDanmakuProvider? _danmakuProvider;
 
-  TwitchSite();
-
   Future<void> _ensureInit() async {
     if (_extractor == null) {
       await ensureFrbInit();

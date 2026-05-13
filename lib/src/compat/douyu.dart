@@ -10,8 +10,6 @@ class DouyuSite extends LiveSite {
   frb.SliveDouyuExtractor? _extractor;
   frb_dan.SliveDouyuDanmakuProvider? _danmakuProvider;
 
-  DouyuSite();
-
   Future<void> _ensureInit() async {
     if (_extractor == null) {
       await ensureFrbInit();
