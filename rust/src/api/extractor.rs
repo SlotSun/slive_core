@@ -3,6 +3,7 @@
 //! frb cannot bridge `dyn LiveExtractor` directly, so each platform gets a concrete struct.
 
 use crate::api::types::*;
+use log::info;
 use platforms_parser::extractor::LiveExtractor as _;
 
 /// Generate a concrete extractor wrapper for a platform.
@@ -31,8 +32,10 @@ macro_rules! impl_extractor {
                 self.inner.extract_room_id(&url)
             }
 
-            pub async fn get_categories(&self) -> anyhow::Result<Vec<SliveCategory>> {
+            pub async fn get_categories(&self) -> anyhow::Result<Vec<LiveCategory>> {
+                info!("[{}] get_categories called", $platform_id);
                 let result = self.inner.get_categories().await?;
+                info!("[{}] get_categories returned {} items", $platform_id, result.len());
                 Ok(result.into_iter().map(Into::into).collect())
             }
 
@@ -40,7 +43,7 @@ macro_rules! impl_extractor {
                 &self,
                 keyword: String,
                 page: i32,
-            ) -> anyhow::Result<SliveSearchRoomResult> {
+            ) -> anyhow::Result<LiveSearchRoomResult> {
                 let result = self.inner.search_rooms(&keyword, page as u32).await?;
                 Ok(result.into())
             }
@@ -49,16 +52,16 @@ macro_rules! impl_extractor {
                 &self,
                 keyword: String,
                 page: i32,
-            ) -> anyhow::Result<SliveSearchAnchorResult> {
+            ) -> anyhow::Result<LiveSearchAnchorResult> {
                 let result = self.inner.search_anchors(&keyword, page as u32).await?;
                 Ok(result.into())
             }
 
             pub async fn get_category_rooms(
                 &self,
-                category: SliveSubCategory,
+                category: LiveSubCategory,
                 page: i32,
-            ) -> anyhow::Result<SliveCategoryResult> {
+            ) -> anyhow::Result<LiveCategoryResult> {
                 let cat = platforms_parser::extractor::models::LiveSubCategory::from(category);
                 let result = self.inner.get_category_rooms(&cat, page as u32).await?;
                 Ok(result.into())
@@ -67,7 +70,7 @@ macro_rules! impl_extractor {
             pub async fn get_recommend_rooms(
                 &self,
                 page: i32,
-            ) -> anyhow::Result<SliveCategoryResult> {
+            ) -> anyhow::Result<LiveCategoryResult> {
                 let result = self.inner.get_recommend_rooms(page as u32).await?;
                 Ok(result.into())
             }
@@ -75,8 +78,10 @@ macro_rules! impl_extractor {
             pub async fn get_room_detail(
                 &self,
                 room_id: String,
-            ) -> anyhow::Result<SliveRoomDetail> {
+            ) -> anyhow::Result<LiveRoomDetail> {
+                info!("[{}] get_room_detail called for room_id={}", $platform_id, room_id);
                 let detail = self.inner.get_room_detail(&room_id).await?;
+                info!("[{}] get_room_detail success: title={}", $platform_id, detail.title);
                 Ok(detail.into())
             }
 
@@ -87,8 +92,8 @@ macro_rules! impl_extractor {
 
             pub async fn get_play_qualities(
                 &self,
-                detail: SliveRoomDetail,
-            ) -> anyhow::Result<Vec<SlivePlayQuality>> {
+                detail: LiveRoomDetail,
+            ) -> anyhow::Result<Vec<LivePlayQuality>> {
                 let inner_detail =
                     platforms_parser::extractor::models::LiveRoomDetail::from(detail);
                 let qualities = self.inner.get_play_qualities(&inner_detail).await?;
@@ -97,9 +102,9 @@ macro_rules! impl_extractor {
 
             pub async fn get_play_urls(
                 &self,
-                detail: SliveRoomDetail,
-                quality: SlivePlayQuality,
-            ) -> anyhow::Result<SlivePlayUrl> {
+                detail: LiveRoomDetail,
+                quality: LivePlayQuality,
+            ) -> anyhow::Result<LivePlayUrl> {
                 let inner_detail =
                     platforms_parser::extractor::models::LiveRoomDetail::from(detail);
                 let inner_quality =
@@ -111,7 +116,7 @@ macro_rules! impl_extractor {
             pub async fn get_super_chat_messages(
                 &self,
                 room_id: String,
-            ) -> anyhow::Result<Vec<SliveSuperChatMessage>> {
+            ) -> anyhow::Result<Vec<LiveSuperChatMessage>> {
                 let messages = self.inner.get_super_chat_messages(&room_id).await?;
                 Ok(messages.into_iter().map(Into::into).collect())
             }
@@ -121,34 +126,35 @@ macro_rules! impl_extractor {
 
 // Concrete implementations for each platform
 impl_extractor!(
-    SliveBilibiliExtractor,
+    LiveBilibiliExtractor,
     platforms_parser::extractor::platforms::bilibili::BilibiliExtractor,
     "bilibili"
 );
 impl_extractor!(
-    SliveDouyinExtractor,
+    LiveDouyinExtractor,
     platforms_parser::extractor::platforms::douyin::DouyinExtractor,
     "douyin"
 );
 impl_extractor!(
-    SliveDouyuExtractor,
+    LiveDouyuExtractor,
     platforms_parser::extractor::platforms::douyu::DouyuExtractor,
     "douyu"
 );
 impl_extractor!(
-    SliveHuyaExtractor,
+    LiveHuyaExtractor,
     platforms_parser::extractor::platforms::huya::HuyaExtractor,
     "huya"
 );
 
-impl SliveHuyaExtractor {
+impl LiveHuyaExtractor {
     /// Set a custom User-Agent for Huya HTTP requests (e.g. HYSDK_UA).
     pub fn set_sdk_ua(&self, ua: String) {
         self.inner.set_sdk_ua(&ua);
     }
 }
+
 impl_extractor!(
-    SliveTwitchExtractor,
+    LiveTwitchExtractor,
     platforms_parser::extractor::platforms::twitch::TwitchExtractor,
     "twitch"
 );

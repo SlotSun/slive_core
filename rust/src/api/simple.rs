@@ -1,5 +1,13 @@
 //! Utility functions.
 
+/// Test logging — call from Dart to verify Rust→Dart log bridge works.
+pub fn test_log() {
+    log::error!("[test] this is an error log");
+    log::warn!("[test] this is a warn log");
+    log::info!("[test] this is an info log");
+    log::debug!("[test] this is a debug log");
+}
+
 /// Detect platform from a live stream URL.
 /// Returns the platform ID (e.g. "bilibili", "douyin", "douyu", "huya", "twitch") or None.
 pub fn detect_platform(url: String) -> Option<String> {

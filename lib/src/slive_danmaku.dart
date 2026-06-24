@@ -1,16 +1,16 @@
-import 'rust/api/danmaku.dart' as frb;
-import 'rust/api/types.dart' as frb_types;
+import 'package:slive_core/src/rust/api/danmaku.dart';
+import 'package:slive_core/src/rust/api/types.dart';
 
-/// Callback-based danmaku interface matching the original `LiveDanmaku` pattern.
-abstract class SliveDanmaku {
-  /// Called when a chat message is received.
-  void Function(frb_types.SliveMessage msg)? onMessage;
-
-  /// Called when a super chat message is received.
-  void Function(frb_types.SliveSuperChatMessage msg)? onSuperChat;
+/// Callback-based danmaku interface.
+///
+/// All messages (chat/gift/superChat/online) go through [onMessage].
+/// Use [LiveMessage.messageType] to distinguish them.
+abstract class LiveDanmaku {
+  /// Called for all message types. Check [LiveMessage.messageType] to distinguish.
+  void Function(LiveMessage msg)? onMessage;
 
   /// Called when a control event is received (stream closed, room info changed, etc).
-  void Function(frb_types.SliveDanmuControlEvent event)? onControl;
+  void Function(LiveDanmuControlEvent event)? onControl;
 
   /// Called when the connection is closed.
   void Function(String msg)? onClose;
@@ -19,7 +19,11 @@ abstract class SliveDanmaku {
   void Function()? onReady;
 
   /// Start listening to danmaku for the given room.
-  Future<void> start(String roomId, {String? cookies});
+  ///
+  /// [danmakuData] is an optional platform-specific JSON string from
+  /// [LiveRoomDetail.danmakuData]. It is passed through to the Rust layer
+  /// where each platform parses it as needed (e.g. Huya uses it for extras).
+  Future<void> start(String roomId, {String? cookies, String? danmakuData});
 
   /// Stop listening and disconnect.
   Future<void> stop();
@@ -28,13 +32,14 @@ abstract class SliveDanmaku {
 /// Adapter that abstracts over the frb-generated danmaku provider types,
 /// since they don't share a common interface despite identical method signatures.
 class _DanmakuAdapter {
-  final Future<frb.SliveDanmuConnection> Function(
+  final Future<LiveDanmuConnection> Function(
     String roomId,
     String? cookies,
+    String? danmakuData,
   ) connect;
-  final Future<void> Function(frb.SliveDanmuConnection connection) disconnect;
-  final Future<frb_types.SliveDanmuItem?> Function(
-    frb.SliveDanmuConnection connection,
+  final Future<void> Function(LiveDanmuConnection connection) disconnect;
+  final Future<LiveDanmuItem?> Function(
+    LiveDanmuConnection connection,
   ) receive;
 
   _DanmakuAdapter({
@@ -45,17 +50,17 @@ class _DanmakuAdapter {
 }
 
 /// Base implementation that handles the receive loop and dispatch.
-class _SliveDanmakuBase extends SliveDanmaku {
+class _LiveDanmakuBase extends LiveDanmaku {
   final _DanmakuAdapter _adapter;
   final String platformId;
-  frb.SliveDanmuConnection? _connection;
+  LiveDanmuConnection? _connection;
   bool _running = false;
 
-  _SliveDanmakuBase(this._adapter, this.platformId);
+  _LiveDanmakuBase(this._adapter, this.platformId);
 
   @override
-  Future<void> start(String roomId, {String? cookies}) async {
-    _connection = await _adapter.connect(roomId, cookies);
+  Future<void> start(String roomId, {String? cookies, String? danmakuData}) async {
+    _connection = await _adapter.connect(roomId, cookies, danmakuData);
     _running = true;
     onReady?.call();
     _receiveLoop();
@@ -86,13 +91,11 @@ class _SliveDanmakuBase extends SliveDanmaku {
     }
   }
 
-  void _dispatch(frb_types.SliveDanmuItem item) {
+  void _dispatch(LiveDanmuItem item) {
     switch (item) {
-      case frb_types.SliveDanmuItem_Message(:final field0):
+      case LiveDanmuItem_Message(:final field0):
         onMessage?.call(field0);
-      case frb_types.SliveDanmuItem_SuperChat(:final field0):
-        onSuperChat?.call(field0);
-      case frb_types.SliveDanmuItem_Control(:final field0):
+      case LiveDanmuItem_Control(:final field0):
         onControl?.call(field0);
     }
   }
@@ -102,12 +105,12 @@ class _SliveDanmakuBase extends SliveDanmaku {
 // Platform implementations — each wraps its frb-generated provider
 // ---------------------------------------------------------------------------
 
-class SliveBilibiliDanmaku extends _SliveDanmakuBase {
-  SliveBilibiliDanmaku(frb.SliveBilibiliDanmakuProvider provider)
+class LiveBilibiliDanmaku extends _LiveDanmakuBase {
+  LiveBilibiliDanmaku(LiveBilibiliDanmakuProvider provider)
       : super(
           _DanmakuAdapter(
-            connect: (roomId, cookies) =>
-                provider.connect(roomId: roomId, cookies: cookies),
+            connect: (roomId, cookies, danmakuData) => provider.connect(
+                roomId: roomId, cookies: cookies, danmakuData: danmakuData),
             disconnect: (conn) => provider.disconnect(connection: conn),
             receive: (conn) => provider.receive(connection: conn),
           ),
@@ -115,12 +118,12 @@ class SliveBilibiliDanmaku extends _SliveDanmakuBase {
         );
 }
 
-class SliveDouyinDanmaku extends _SliveDanmakuBase {
-  SliveDouyinDanmaku(frb.SliveDouyinDanmakuProvider provider)
+class LiveDouyinDanmaku extends _LiveDanmakuBase {
+  LiveDouyinDanmaku(LiveDouyinDanmakuProvider provider)
       : super(
           _DanmakuAdapter(
-            connect: (roomId, cookies) =>
-                provider.connect(roomId: roomId, cookies: cookies),
+            connect: (roomId, cookies, danmakuData) => provider.connect(
+                roomId: roomId, cookies: cookies, danmakuData: danmakuData),
             disconnect: (conn) => provider.disconnect(connection: conn),
             receive: (conn) => provider.receive(connection: conn),
           ),
@@ -128,12 +131,12 @@ class SliveDouyinDanmaku extends _SliveDanmakuBase {
         );
 }
 
-class SliveDouyuDanmaku extends _SliveDanmakuBase {
-  SliveDouyuDanmaku(frb.SliveDouyuDanmakuProvider provider)
+class LiveDouyuDanmaku extends _LiveDanmakuBase {
+  LiveDouyuDanmaku(LiveDouyuDanmakuProvider provider)
       : super(
           _DanmakuAdapter(
-            connect: (roomId, cookies) =>
-                provider.connect(roomId: roomId, cookies: cookies),
+            connect: (roomId, cookies, danmakuData) => provider.connect(
+                roomId: roomId, cookies: cookies, danmakuData: danmakuData),
             disconnect: (conn) => provider.disconnect(connection: conn),
             receive: (conn) => provider.receive(connection: conn),
           ),
@@ -141,12 +144,12 @@ class SliveDouyuDanmaku extends _SliveDanmakuBase {
         );
 }
 
-class SliveHuyaDanmaku extends _SliveDanmakuBase {
-  SliveHuyaDanmaku(frb.SliveHuyaDanmakuProvider provider)
+class LiveHuyaDanmaku extends _LiveDanmakuBase {
+  LiveHuyaDanmaku(LiveHuyaDanmakuProvider provider)
       : super(
           _DanmakuAdapter(
-            connect: (roomId, cookies) =>
-                provider.connect(roomId: roomId, cookies: cookies),
+            connect: (roomId, cookies, danmakuData) => provider.connect(
+                roomId: roomId, cookies: cookies, danmakuData: danmakuData),
             disconnect: (conn) => provider.disconnect(connection: conn),
             receive: (conn) => provider.receive(connection: conn),
           ),
@@ -154,12 +157,12 @@ class SliveHuyaDanmaku extends _SliveDanmakuBase {
         );
 }
 
-class SliveTwitchDanmaku extends _SliveDanmakuBase {
-  SliveTwitchDanmaku(frb.SliveTwitchDanmakuProvider provider)
+class LiveTwitchDanmaku extends _LiveDanmakuBase {
+  LiveTwitchDanmaku(LiveTwitchDanmakuProvider provider)
       : super(
           _DanmakuAdapter(
-            connect: (roomId, cookies) =>
-                provider.connect(roomId: roomId, cookies: cookies),
+            connect: (roomId, cookies, danmakuData) => provider.connect(
+                roomId: roomId, cookies: cookies, danmakuData: danmakuData),
             disconnect: (conn) => provider.disconnect(connection: conn),
             receive: (conn) => provider.receive(connection: conn),
           ),

@@ -1,5 +1,3 @@
-library;
-
 // frb-generated bindings
 export 'src/rust/frb_generated.dart' show RustLib;
 
@@ -12,8 +10,14 @@ export 'src/rust/api/danmaku.dart';
 // Data types
 export 'src/rust/api/types.dart';
 
+// Log
+export 'src/rust/api/log.dart';
+
 // Utility functions
 export 'src/rust/api/simple.dart';
+
+// CoreLog
+export 'src/common/corelog.dart';
 
 // LiveSite-style wrapper layer
 export 'src/slive_site.dart';

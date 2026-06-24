@@ -6,31 +6,33 @@
 //! These types avoid `serde_json::Value`, `DateTime<Utc>`, and `HashMap` in
 //! struct fields, which flutter_rust_bridge cannot bridge directly.
 
+use flutter_rust_bridge::frb;
 use platforms_parser::danmaku::event as event;
 use platforms_parser::danmaku::message as danmu;
 use platforms_parser::extractor::models as ext;
-
+use std::collections::HashMap;
 // ---------------------------------------------------------------------------
 // Extractor types
 // ---------------------------------------------------------------------------
 
 #[derive(Debug, Clone)]
-pub struct SliveCategory {
+pub struct LiveCategory {
     pub id: String,
     pub name: String,
-    pub children: Vec<SliveSubCategory>,
+    pub children: Vec<LiveSubCategory>,
 }
 
 #[derive(Debug, Clone)]
-pub struct SliveSubCategory {
+pub struct LiveSubCategory {
     pub id: String,
     pub name: String,
     pub parent_id: String,
     pub pic: Option<String>,
 }
 
+#[frb(type_64bit_int)]
 #[derive(Debug, Clone)]
-pub struct SliveRoomItem {
+pub struct LiveRoomItem {
     pub room_id: String,
     pub title: String,
     pub cover: String,
@@ -39,15 +41,16 @@ pub struct SliveRoomItem {
 }
 
 #[derive(Debug, Clone)]
-pub struct SliveAnchorItem {
+pub struct LiveAnchorItem {
     pub room_id: String,
     pub avatar: String,
     pub user_name: String,
     pub live_status: bool,
 }
 
+#[frb(type_64bit_int)]
 #[derive(Debug, Clone)]
-pub struct SliveRoomDetail {
+pub struct LiveRoomDetail {
     pub room_id: String,
     pub title: String,
     pub cover: String,
@@ -66,45 +69,40 @@ pub struct SliveRoomDetail {
 }
 
 #[derive(Debug, Clone)]
-pub struct SlivePlayQuality {
+pub struct LivePlayQuality {
     pub quality: String,
     pub data: String,
     pub sort: i32,
 }
 
 #[derive(Debug, Clone)]
-pub struct SlivePlayUrl {
+pub struct LivePlayUrl {
     pub urls: Vec<String>,
-    pub headers: Option<Vec<SliveMapEntry>>,
-}
-
-/// A single key-value entry for bridging `Map<String, String>`.
-#[derive(Debug, Clone)]
-pub struct SliveMapEntry {
-    pub key: String,
-    pub value: String,
+    pub headers: Option<HashMap<String, String>>,
 }
 
 #[derive(Debug, Clone)]
-pub struct SliveCategoryResult {
+pub struct LiveCategoryResult {
     pub has_more: bool,
-    pub items: Vec<SliveRoomItem>,
+    pub items: Vec<LiveRoomItem>,
 }
 
 #[derive(Debug, Clone)]
-pub struct SliveSearchRoomResult {
+pub struct LiveSearchRoomResult {
     pub has_more: bool,
-    pub items: Vec<SliveRoomItem>,
+    pub items: Vec<LiveRoomItem>,
 }
 
 #[derive(Debug, Clone)]
-pub struct SliveSearchAnchorResult {
+pub struct LiveSearchAnchorResult {
     pub has_more: bool,
-    pub items: Vec<SliveAnchorItem>,
+    pub items: Vec<LiveAnchorItem>,
 }
 
+#[frb(type_64bit_int)]
 #[derive(Debug, Clone)]
-pub struct SliveSuperChatMessage {
+#[frb(json_serializable)]
+pub struct LiveSuperChatMessage {
     pub user_name: String,
     pub face: String,
     pub message: String,
@@ -117,13 +115,17 @@ pub struct SliveSuperChatMessage {
     pub background_bottom_color: String,
 }
 
+
 // ---------------------------------------------------------------------------
 // Danmaku types
 // ---------------------------------------------------------------------------
 
+
+/// Arguments passed to the danmaku WebSocket after room detail is fetched.
+
 /// Mirrors `LiveMessageType` enum from the reference.
 #[derive(Debug, Clone)]
-pub enum SliveMessageType {
+pub enum LiveMessageType {
     Chat,
     Gift,
     Online,
@@ -132,27 +134,62 @@ pub enum SliveMessageType {
 
 /// Mirrors `LiveMessageColor` from the reference.
 #[derive(Debug, Clone)]
-pub struct SliveMessageColor {
+pub struct LiveMessageColor {
     pub r: i32,
     pub g: i32,
     pub b: i32,
 }
 
-/// Mirrors `LiveMessage` from the reference.
+impl LiveMessageColor {
+    #[frb(sync)]
+    pub fn white() -> Self {
+        Self { r: 255, g: 255, b: 255 }
+    }
+
+    #[frb(sync)]
+    pub fn from_int(int_color: i32) -> Self {
+        let obj = format!("{int_color:06x}");
+        if obj.len() == 6 {
+            let r = i32::from_str_radix(&obj[0..2], 16).unwrap_or(255);
+            let g = i32::from_str_radix(&obj[2..4], 16).unwrap_or(255);
+            let b = i32::from_str_radix(&obj[4..6], 16).unwrap_or(255);
+            Self { r, g, b }
+        } else if obj.len() == 8 {
+            let r = i32::from_str_radix(&obj[2..4], 16).unwrap_or(255);
+            let g = i32::from_str_radix(&obj[4..6], 16).unwrap_or(255);
+            let b = i32::from_str_radix(&obj[6..8], 16).unwrap_or(255);
+            Self { r, g, b }
+        } else {
+            Self::white()
+        }
+    }
+
+    #[frb(sync)]
+    pub fn to_hex(&self) -> String {
+        format!("#{:02x}{:02x}{:02x}", self.r, self.g, self.b)
+    }
+}
+
+/// Mirrors `DanmuMessage` from platforms-parser.
+#[frb(type_64bit_int)]
 #[derive(Debug, Clone)]
-pub struct SliveMessage {
-    pub message_type: SliveMessageType,
+pub struct LiveMessage {
+    pub id: String,
+    pub user_id: String,
     pub user_name: String,
     pub message: String,
-    /// JSON-serialized data (e.g. online count as string).
-    pub data: Option<String>,
-    pub color: SliveMessageColor,
+    pub color: LiveMessageColor,
+    /// Unix timestamp in milliseconds.
+    pub time_millis: i64,
+    pub message_type: LiveMessageType,
+    /// Platform-specific metadata serialized as JSON string.
+    pub metadata: Option<String>,
 }
 
 /// Mirrors `LiveMessage` superChat variant — kept as a separate type because
 /// frb does not support `dynamic` fields, so the super-chat payload is typed.
 #[derive(Debug, Clone)]
-pub struct SliveDanmuControlEvent {
+pub struct LiveDanmuControlEvent {
     pub kind: String,
     pub message: Option<String>,
     pub title: Option<String>,
@@ -161,18 +198,17 @@ pub struct SliveDanmuControlEvent {
 }
 
 #[derive(Debug, Clone)]
-pub enum SliveDanmuItem {
-    Message(SliveMessage),
-    SuperChat(SliveSuperChatMessage),
-    Control(SliveDanmuControlEvent),
+pub enum LiveDanmuItem {
+    Message(LiveMessage),
+    Control(LiveDanmuControlEvent),
 }
 
 // ---------------------------------------------------------------------------
 // Conversion: frb types → platforms-parser (reverse)
 // ---------------------------------------------------------------------------
 
-impl From<SliveSubCategory> for ext::LiveSubCategory {
-    fn from(c: SliveSubCategory) -> Self {
+impl From<LiveSubCategory> for ext::LiveSubCategory {
+    fn from(c: LiveSubCategory) -> Self {
         Self {
             id: c.id,
             name: c.name,
@@ -182,8 +218,8 @@ impl From<SliveSubCategory> for ext::LiveSubCategory {
     }
 }
 
-impl From<SliveRoomDetail> for ext::LiveRoomDetail {
-    fn from(d: SliveRoomDetail) -> Self {
+impl From<LiveRoomDetail> for ext::LiveRoomDetail {
+    fn from(d: LiveRoomDetail) -> Self {
         Self {
             room_id: d.room_id,
             title: d.title,
@@ -200,8 +236,8 @@ impl From<SliveRoomDetail> for ext::LiveRoomDetail {
     }
 }
 
-impl From<SlivePlayQuality> for ext::LivePlayQuality {
-    fn from(q: SlivePlayQuality) -> Self {
+impl From<LivePlayQuality> for ext::LivePlayQuality {
+    fn from(q: LivePlayQuality) -> Self {
         Self {
             quality: q.quality,
             data: q.data,
@@ -213,7 +249,7 @@ impl From<SlivePlayQuality> for ext::LivePlayQuality {
 // Conversion: platforms-parser → frb types
 // ---------------------------------------------------------------------------
 
-impl From<ext::LiveCategory> for SliveCategory {
+impl From<ext::LiveCategory> for LiveCategory {
     fn from(c: ext::LiveCategory) -> Self {
         Self {
             id: c.id,
@@ -223,7 +259,7 @@ impl From<ext::LiveCategory> for SliveCategory {
     }
 }
 
-impl From<ext::LiveSubCategory> for SliveSubCategory {
+impl From<ext::LiveSubCategory> for LiveSubCategory {
     fn from(c: ext::LiveSubCategory) -> Self {
         Self {
             id: c.id,
@@ -234,7 +270,7 @@ impl From<ext::LiveSubCategory> for SliveSubCategory {
     }
 }
 
-impl From<ext::LiveRoomItem> for SliveRoomItem {
+impl From<ext::LiveRoomItem> for LiveRoomItem {
     fn from(r: ext::LiveRoomItem) -> Self {
         Self {
             room_id: r.room_id,
@@ -246,7 +282,7 @@ impl From<ext::LiveRoomItem> for SliveRoomItem {
     }
 }
 
-impl From<ext::LiveAnchorItem> for SliveAnchorItem {
+impl From<ext::LiveAnchorItem> for LiveAnchorItem {
     fn from(a: ext::LiveAnchorItem) -> Self {
         Self {
             room_id: a.room_id.unwrap_or_default(),
@@ -257,7 +293,7 @@ impl From<ext::LiveAnchorItem> for SliveAnchorItem {
     }
 }
 
-impl From<ext::LiveRoomDetail> for SliveRoomDetail {
+impl From<ext::LiveRoomDetail> for LiveRoomDetail {
     fn from(d: ext::LiveRoomDetail) -> Self {
         Self {
             room_id: d.room_id,
@@ -277,7 +313,7 @@ impl From<ext::LiveRoomDetail> for SliveRoomDetail {
     }
 }
 
-impl From<ext::LivePlayQuality> for SlivePlayQuality {
+impl From<ext::LivePlayQuality> for LivePlayQuality {
     fn from(q: ext::LivePlayQuality) -> Self {
         Self {
             quality: q.quality,
@@ -287,21 +323,17 @@ impl From<ext::LivePlayQuality> for SlivePlayQuality {
     }
 }
 
-impl From<ext::LivePlayUrl> for SlivePlayUrl {
+impl From<ext::LivePlayUrl> for LivePlayUrl {
     fn from(u: ext::LivePlayUrl) -> Self {
         let _ = u.url_type; // not exposed in reference model
         Self {
             urls: u.urls,
-            headers: u.headers.map(|h| {
-                h.into_iter()
-                    .map(|(k, v)| SliveMapEntry { key: k, value: v })
-                    .collect()
-            }),
+            headers: u.headers.map(|h| h.into_iter().collect()),
         }
     }
 }
 
-impl From<ext::LiveCategoryResult> for SliveCategoryResult {
+impl From<ext::LiveCategoryResult> for LiveCategoryResult {
     fn from(r: ext::LiveCategoryResult) -> Self {
         Self {
             has_more: r.has_more,
@@ -310,7 +342,7 @@ impl From<ext::LiveCategoryResult> for SliveCategoryResult {
     }
 }
 
-impl From<ext::LiveSearchRoomResult> for SliveSearchRoomResult {
+impl From<ext::LiveSearchRoomResult> for LiveSearchRoomResult {
     fn from(r: ext::LiveSearchRoomResult) -> Self {
         Self {
             has_more: r.has_more,
@@ -319,7 +351,7 @@ impl From<ext::LiveSearchRoomResult> for SliveSearchRoomResult {
     }
 }
 
-impl From<ext::LiveSearchAnchorResult> for SliveSearchAnchorResult {
+impl From<ext::LiveSearchAnchorResult> for LiveSearchAnchorResult {
     fn from(r: ext::LiveSearchAnchorResult) -> Self {
         Self {
             has_more: r.has_more,
@@ -328,7 +360,7 @@ impl From<ext::LiveSearchAnchorResult> for SliveSearchAnchorResult {
     }
 }
 
-impl From<ext::LiveSuperChatMessage> for SliveSuperChatMessage {
+impl From<ext::LiveSuperChatMessage> for LiveSuperChatMessage {
     fn from(m: ext::LiveSuperChatMessage) -> Self {
         Self {
             user_name: m.user_name,
@@ -347,28 +379,28 @@ impl From<ext::LiveSuperChatMessage> for SliveSuperChatMessage {
 // Danmaku conversions
 // ---------------------------------------------------------------------------
 
-fn danmu_type_to_message_type(t: danmu::DanmuType) -> SliveMessageType {
+fn danmu_type_to_message_type(t: danmu::DanmuType) -> LiveMessageType {
     match t {
-        danmu::DanmuType::Chat => SliveMessageType::Chat,
-        danmu::DanmuType::Gift => SliveMessageType::Gift,
-        danmu::DanmuType::SuperChat => SliveMessageType::SuperChat,
-        danmu::DanmuType::System => SliveMessageType::Chat,
-        danmu::DanmuType::UserJoin => SliveMessageType::Chat,
-        danmu::DanmuType::Follow => SliveMessageType::Chat,
-        danmu::DanmuType::Subscription => SliveMessageType::Chat,
-        danmu::DanmuType::Other => SliveMessageType::Chat,
+        danmu::DanmuType::Chat => LiveMessageType::Chat,
+        danmu::DanmuType::Gift => LiveMessageType::Gift,
+        danmu::DanmuType::SuperChat => LiveMessageType::SuperChat,
+        danmu::DanmuType::System => LiveMessageType::Chat,
+        danmu::DanmuType::UserJoin => LiveMessageType::Chat,
+        danmu::DanmuType::Follow => LiveMessageType::Chat,
+        danmu::DanmuType::Subscription => LiveMessageType::Chat,
+        danmu::DanmuType::Other => LiveMessageType::Chat,
     }
 }
 
-fn parse_hex_color(hex: &str) -> SliveMessageColor {
+fn parse_hex_color(hex: &str) -> LiveMessageColor {
     let clean = hex.trim_start_matches('#');
     if clean.len() >= 6 {
         let r = i32::from_str_radix(&clean[0..2], 16).unwrap_or(255);
         let g = i32::from_str_radix(&clean[2..4], 16).unwrap_or(255);
         let b = i32::from_str_radix(&clean[4..6], 16).unwrap_or(255);
-        SliveMessageColor { r, g, b }
+        LiveMessageColor { r, g, b }
     } else {
-        SliveMessageColor {
+        LiveMessageColor {
             r: 255,
             g: 255,
             b: 255,
@@ -376,7 +408,7 @@ fn parse_hex_color(hex: &str) -> SliveMessageColor {
     }
 }
 
-impl From<danmu::DanmuMessage> for SliveSuperChatMessage {
+impl From<danmu::DanmuMessage> for LiveSuperChatMessage {
     fn from(m: danmu::DanmuMessage) -> Self {
         let meta = m.metadata.as_ref();
         let price = meta
@@ -432,27 +464,26 @@ impl From<danmu::DanmuMessage> for SliveSuperChatMessage {
     }
 }
 
-impl From<danmu::DanmuMessage> for SliveMessage {
+impl From<danmu::DanmuMessage> for LiveMessage {
     fn from(m: danmu::DanmuMessage) -> Self {
         Self {
-            message_type: danmu_type_to_message_type(m.message_type),
+            id: m.id,
+            user_id: m.user_id,
             user_name: m.username,
             message: m.content,
-            data: None,
             color: m
                 .color
                 .as_deref()
                 .map(parse_hex_color)
-                .unwrap_or(SliveMessageColor {
-                    r: 255,
-                    g: 255,
-                    b: 255,
-                }),
+                .unwrap_or(LiveMessageColor::white()),
+            time_millis: m.timestamp.timestamp_millis(),
+            message_type: danmu_type_to_message_type(m.message_type),
+            metadata: m.metadata.map(|m| serde_json::to_string(&m).unwrap_or_default()),
         }
     }
 }
 
-impl From<event::DanmuControlEvent> for SliveDanmuControlEvent {
+impl From<event::DanmuControlEvent> for LiveDanmuControlEvent {
     fn from(e: event::DanmuControlEvent) -> Self {
         match e {
             event::DanmuControlEvent::StreamClosed { message, .. } => Self {
@@ -486,17 +517,11 @@ impl From<event::DanmuControlEvent> for SliveDanmuControlEvent {
     }
 }
 
-impl From<event::DanmuItem> for SliveDanmuItem {
+impl From<event::DanmuItem> for LiveDanmuItem {
     fn from(item: event::DanmuItem) -> Self {
         match item {
-            event::DanmuItem::Message(m) => {
-                if m.message_type == danmu::DanmuType::SuperChat {
-                    SliveDanmuItem::SuperChat(m.into())
-                } else {
-                    SliveDanmuItem::Message(m.into())
-                }
-            }
-            event::DanmuItem::Control(e) => SliveDanmuItem::Control(e.into()),
+            event::DanmuItem::Message(m) => LiveDanmuItem::Message(m.into()),
+            event::DanmuItem::Control(e) => LiveDanmuItem::Control(e.into()),
         }
     }
 }

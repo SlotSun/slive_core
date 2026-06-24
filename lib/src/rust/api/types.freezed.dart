@@ -12,7 +12,7 @@ part of 'types.dart';
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
-mixin _$SliveDanmuItem {
+mixin _$LiveDanmuItem {
 
  Object get field0;
 
@@ -20,7 +20,7 @@ mixin _$SliveDanmuItem {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SliveDanmuItem&&const DeepCollectionEquality().equals(other.field0, field0));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LiveDanmuItem&&const DeepCollectionEquality().equals(other.field0, field0));
 }
 
 
@@ -29,20 +29,20 @@ int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(
 
 @override
 String toString() {
-  return 'SliveDanmuItem(field0: $field0)';
+  return 'LiveDanmuItem(field0: $field0)';
 }
 
 
 }
 
 /// @nodoc
-class $SliveDanmuItemCopyWith<$Res>  {
-$SliveDanmuItemCopyWith(SliveDanmuItem _, $Res Function(SliveDanmuItem) __);
+class $LiveDanmuItemCopyWith<$Res>  {
+$LiveDanmuItemCopyWith(LiveDanmuItem _, $Res Function(LiveDanmuItem) __);
 }
 
 
-/// Adds pattern-matching-related methods to [SliveDanmuItem].
-extension SliveDanmuItemPatterns on SliveDanmuItem {
+/// Adds pattern-matching-related methods to [LiveDanmuItem].
+extension LiveDanmuItemPatterns on LiveDanmuItem {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -55,12 +55,11 @@ extension SliveDanmuItemPatterns on SliveDanmuItem {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( SliveDanmuItem_Message value)?  message,TResult Function( SliveDanmuItem_SuperChat value)?  superChat,TResult Function( SliveDanmuItem_Control value)?  control,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( LiveDanmuItem_Message value)?  message,TResult Function( LiveDanmuItem_Control value)?  control,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case SliveDanmuItem_Message() when message != null:
-return message(_that);case SliveDanmuItem_SuperChat() when superChat != null:
-return superChat(_that);case SliveDanmuItem_Control() when control != null:
+case LiveDanmuItem_Message() when message != null:
+return message(_that);case LiveDanmuItem_Control() when control != null:
 return control(_that);case _:
   return orElse();
 
@@ -79,12 +78,11 @@ return control(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( SliveDanmuItem_Message value)  message,required TResult Function( SliveDanmuItem_SuperChat value)  superChat,required TResult Function( SliveDanmuItem_Control value)  control,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( LiveDanmuItem_Message value)  message,required TResult Function( LiveDanmuItem_Control value)  control,}){
 final _that = this;
 switch (_that) {
-case SliveDanmuItem_Message():
-return message(_that);case SliveDanmuItem_SuperChat():
-return superChat(_that);case SliveDanmuItem_Control():
+case LiveDanmuItem_Message():
+return message(_that);case LiveDanmuItem_Control():
 return control(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
@@ -99,12 +97,11 @@ return control(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( SliveDanmuItem_Message value)?  message,TResult? Function( SliveDanmuItem_SuperChat value)?  superChat,TResult? Function( SliveDanmuItem_Control value)?  control,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( LiveDanmuItem_Message value)?  message,TResult? Function( LiveDanmuItem_Control value)?  control,}){
 final _that = this;
 switch (_that) {
-case SliveDanmuItem_Message() when message != null:
-return message(_that);case SliveDanmuItem_SuperChat() when superChat != null:
-return superChat(_that);case SliveDanmuItem_Control() when control != null:
+case LiveDanmuItem_Message() when message != null:
+return message(_that);case LiveDanmuItem_Control() when control != null:
 return control(_that);case _:
   return null;
 
@@ -122,11 +119,10 @@ return control(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( SliveMessage field0)?  message,TResult Function( SliveSuperChatMessage field0)?  superChat,TResult Function( SliveDanmuControlEvent field0)?  control,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( LiveMessage field0)?  message,TResult Function( LiveDanmuControlEvent field0)?  control,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case SliveDanmuItem_Message() when message != null:
-return message(_that.field0);case SliveDanmuItem_SuperChat() when superChat != null:
-return superChat(_that.field0);case SliveDanmuItem_Control() when control != null:
+case LiveDanmuItem_Message() when message != null:
+return message(_that.field0);case LiveDanmuItem_Control() when control != null:
 return control(_that.field0);case _:
   return orElse();
 
@@ -145,11 +141,10 @@ return control(_that.field0);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( SliveMessage field0)  message,required TResult Function( SliveSuperChatMessage field0)  superChat,required TResult Function( SliveDanmuControlEvent field0)  control,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( LiveMessage field0)  message,required TResult Function( LiveDanmuControlEvent field0)  control,}) {final _that = this;
 switch (_that) {
-case SliveDanmuItem_Message():
-return message(_that.field0);case SliveDanmuItem_SuperChat():
-return superChat(_that.field0);case SliveDanmuItem_Control():
+case LiveDanmuItem_Message():
+return message(_that.field0);case LiveDanmuItem_Control():
 return control(_that.field0);}
 }
 /// A variant of `when` that fallback to returning `null`
@@ -164,11 +159,10 @@ return control(_that.field0);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( SliveMessage field0)?  message,TResult? Function( SliveSuperChatMessage field0)?  superChat,TResult? Function( SliveDanmuControlEvent field0)?  control,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( LiveMessage field0)?  message,TResult? Function( LiveDanmuControlEvent field0)?  control,}) {final _that = this;
 switch (_that) {
-case SliveDanmuItem_Message() when message != null:
-return message(_that.field0);case SliveDanmuItem_SuperChat() when superChat != null:
-return superChat(_that.field0);case SliveDanmuItem_Control() when control != null:
+case LiveDanmuItem_Message() when message != null:
+return message(_that.field0);case LiveDanmuItem_Control() when control != null:
 return control(_that.field0);case _:
   return null;
 
@@ -180,23 +174,23 @@ return control(_that.field0);case _:
 /// @nodoc
 
 
-class SliveDanmuItem_Message extends SliveDanmuItem {
-  const SliveDanmuItem_Message(this.field0): super._();
+class LiveDanmuItem_Message extends LiveDanmuItem {
+  const LiveDanmuItem_Message(this.field0): super._();
   
 
-@override final  SliveMessage field0;
+@override final  LiveMessage field0;
 
-/// Create a copy of SliveDanmuItem
+/// Create a copy of LiveDanmuItem
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$SliveDanmuItem_MessageCopyWith<SliveDanmuItem_Message> get copyWith => _$SliveDanmuItem_MessageCopyWithImpl<SliveDanmuItem_Message>(this, _$identity);
+$LiveDanmuItem_MessageCopyWith<LiveDanmuItem_Message> get copyWith => _$LiveDanmuItem_MessageCopyWithImpl<LiveDanmuItem_Message>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SliveDanmuItem_Message&&(identical(other.field0, field0) || other.field0 == field0));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LiveDanmuItem_Message&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
@@ -205,18 +199,18 @@ int get hashCode => Object.hash(runtimeType,field0);
 
 @override
 String toString() {
-  return 'SliveDanmuItem.message(field0: $field0)';
+  return 'LiveDanmuItem.message(field0: $field0)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $SliveDanmuItem_MessageCopyWith<$Res> implements $SliveDanmuItemCopyWith<$Res> {
-  factory $SliveDanmuItem_MessageCopyWith(SliveDanmuItem_Message value, $Res Function(SliveDanmuItem_Message) _then) = _$SliveDanmuItem_MessageCopyWithImpl;
+abstract mixin class $LiveDanmuItem_MessageCopyWith<$Res> implements $LiveDanmuItemCopyWith<$Res> {
+  factory $LiveDanmuItem_MessageCopyWith(LiveDanmuItem_Message value, $Res Function(LiveDanmuItem_Message) _then) = _$LiveDanmuItem_MessageCopyWithImpl;
 @useResult
 $Res call({
- SliveMessage field0
+ LiveMessage field0
 });
 
 
@@ -224,19 +218,19 @@ $Res call({
 
 }
 /// @nodoc
-class _$SliveDanmuItem_MessageCopyWithImpl<$Res>
-    implements $SliveDanmuItem_MessageCopyWith<$Res> {
-  _$SliveDanmuItem_MessageCopyWithImpl(this._self, this._then);
+class _$LiveDanmuItem_MessageCopyWithImpl<$Res>
+    implements $LiveDanmuItem_MessageCopyWith<$Res> {
+  _$LiveDanmuItem_MessageCopyWithImpl(this._self, this._then);
 
-  final SliveDanmuItem_Message _self;
-  final $Res Function(SliveDanmuItem_Message) _then;
+  final LiveDanmuItem_Message _self;
+  final $Res Function(LiveDanmuItem_Message) _then;
 
-/// Create a copy of SliveDanmuItem
+/// Create a copy of LiveDanmuItem
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
-  return _then(SliveDanmuItem_Message(
+  return _then(LiveDanmuItem_Message(
 null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
-as SliveMessage,
+as LiveMessage,
   ));
 }
 
@@ -246,23 +240,23 @@ as SliveMessage,
 /// @nodoc
 
 
-class SliveDanmuItem_SuperChat extends SliveDanmuItem {
-  const SliveDanmuItem_SuperChat(this.field0): super._();
+class LiveDanmuItem_Control extends LiveDanmuItem {
+  const LiveDanmuItem_Control(this.field0): super._();
   
 
-@override final  SliveSuperChatMessage field0;
+@override final  LiveDanmuControlEvent field0;
 
-/// Create a copy of SliveDanmuItem
+/// Create a copy of LiveDanmuItem
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$SliveDanmuItem_SuperChatCopyWith<SliveDanmuItem_SuperChat> get copyWith => _$SliveDanmuItem_SuperChatCopyWithImpl<SliveDanmuItem_SuperChat>(this, _$identity);
+$LiveDanmuItem_ControlCopyWith<LiveDanmuItem_Control> get copyWith => _$LiveDanmuItem_ControlCopyWithImpl<LiveDanmuItem_Control>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SliveDanmuItem_SuperChat&&(identical(other.field0, field0) || other.field0 == field0));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LiveDanmuItem_Control&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
@@ -271,18 +265,18 @@ int get hashCode => Object.hash(runtimeType,field0);
 
 @override
 String toString() {
-  return 'SliveDanmuItem.superChat(field0: $field0)';
+  return 'LiveDanmuItem.control(field0: $field0)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $SliveDanmuItem_SuperChatCopyWith<$Res> implements $SliveDanmuItemCopyWith<$Res> {
-  factory $SliveDanmuItem_SuperChatCopyWith(SliveDanmuItem_SuperChat value, $Res Function(SliveDanmuItem_SuperChat) _then) = _$SliveDanmuItem_SuperChatCopyWithImpl;
+abstract mixin class $LiveDanmuItem_ControlCopyWith<$Res> implements $LiveDanmuItemCopyWith<$Res> {
+  factory $LiveDanmuItem_ControlCopyWith(LiveDanmuItem_Control value, $Res Function(LiveDanmuItem_Control) _then) = _$LiveDanmuItem_ControlCopyWithImpl;
 @useResult
 $Res call({
- SliveSuperChatMessage field0
+ LiveDanmuControlEvent field0
 });
 
 
@@ -290,65 +284,63 @@ $Res call({
 
 }
 /// @nodoc
-class _$SliveDanmuItem_SuperChatCopyWithImpl<$Res>
-    implements $SliveDanmuItem_SuperChatCopyWith<$Res> {
-  _$SliveDanmuItem_SuperChatCopyWithImpl(this._self, this._then);
+class _$LiveDanmuItem_ControlCopyWithImpl<$Res>
+    implements $LiveDanmuItem_ControlCopyWith<$Res> {
+  _$LiveDanmuItem_ControlCopyWithImpl(this._self, this._then);
 
-  final SliveDanmuItem_SuperChat _self;
-  final $Res Function(SliveDanmuItem_SuperChat) _then;
+  final LiveDanmuItem_Control _self;
+  final $Res Function(LiveDanmuItem_Control) _then;
 
-/// Create a copy of SliveDanmuItem
+/// Create a copy of LiveDanmuItem
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
-  return _then(SliveDanmuItem_SuperChat(
+  return _then(LiveDanmuItem_Control(
 null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
-as SliveSuperChatMessage,
+as LiveDanmuControlEvent,
   ));
 }
 
 
 }
 
+
 /// @nodoc
+mixin _$LiveSuperChatMessage {
 
-
-class SliveDanmuItem_Control extends SliveDanmuItem {
-  const SliveDanmuItem_Control(this.field0): super._();
-  
-
-@override final  SliveDanmuControlEvent field0;
-
-/// Create a copy of SliveDanmuItem
+ String get userName; String get face; String get message; int get price; int get startTime; int get endTime; String get backgroundColor; String get backgroundBottomColor;
+/// Create a copy of LiveSuperChatMessage
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$SliveDanmuItem_ControlCopyWith<SliveDanmuItem_Control> get copyWith => _$SliveDanmuItem_ControlCopyWithImpl<SliveDanmuItem_Control>(this, _$identity);
+$LiveSuperChatMessageCopyWith<LiveSuperChatMessage> get copyWith => _$LiveSuperChatMessageCopyWithImpl<LiveSuperChatMessage>(this as LiveSuperChatMessage, _$identity);
 
+  /// Serializes this LiveSuperChatMessage to a JSON map.
+  Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SliveDanmuItem_Control&&(identical(other.field0, field0) || other.field0 == field0));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LiveSuperChatMessage&&(identical(other.userName, userName) || other.userName == userName)&&(identical(other.face, face) || other.face == face)&&(identical(other.message, message) || other.message == message)&&(identical(other.price, price) || other.price == price)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.endTime, endTime) || other.endTime == endTime)&&(identical(other.backgroundColor, backgroundColor) || other.backgroundColor == backgroundColor)&&(identical(other.backgroundBottomColor, backgroundBottomColor) || other.backgroundBottomColor == backgroundBottomColor));
 }
 
-
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode => Object.hash(runtimeType,userName,face,message,price,startTime,endTime,backgroundColor,backgroundBottomColor);
 
 @override
 String toString() {
-  return 'SliveDanmuItem.control(field0: $field0)';
+  return 'LiveSuperChatMessage(userName: $userName, face: $face, message: $message, price: $price, startTime: $startTime, endTime: $endTime, backgroundColor: $backgroundColor, backgroundBottomColor: $backgroundBottomColor)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $SliveDanmuItem_ControlCopyWith<$Res> implements $SliveDanmuItemCopyWith<$Res> {
-  factory $SliveDanmuItem_ControlCopyWith(SliveDanmuItem_Control value, $Res Function(SliveDanmuItem_Control) _then) = _$SliveDanmuItem_ControlCopyWithImpl;
+abstract mixin class $LiveSuperChatMessageCopyWith<$Res>  {
+  factory $LiveSuperChatMessageCopyWith(LiveSuperChatMessage value, $Res Function(LiveSuperChatMessage) _then) = _$LiveSuperChatMessageCopyWithImpl;
 @useResult
 $Res call({
- SliveDanmuControlEvent field0
+ String userName, String face, String message, int price, int startTime, int endTime, String backgroundColor, String backgroundBottomColor
 });
 
 
@@ -356,19 +348,233 @@ $Res call({
 
 }
 /// @nodoc
-class _$SliveDanmuItem_ControlCopyWithImpl<$Res>
-    implements $SliveDanmuItem_ControlCopyWith<$Res> {
-  _$SliveDanmuItem_ControlCopyWithImpl(this._self, this._then);
+class _$LiveSuperChatMessageCopyWithImpl<$Res>
+    implements $LiveSuperChatMessageCopyWith<$Res> {
+  _$LiveSuperChatMessageCopyWithImpl(this._self, this._then);
 
-  final SliveDanmuItem_Control _self;
-  final $Res Function(SliveDanmuItem_Control) _then;
+  final LiveSuperChatMessage _self;
+  final $Res Function(LiveSuperChatMessage) _then;
 
-/// Create a copy of SliveDanmuItem
+/// Create a copy of LiveSuperChatMessage
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
-  return _then(SliveDanmuItem_Control(
-null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
-as SliveDanmuControlEvent,
+@pragma('vm:prefer-inline') @override $Res call({Object? userName = null,Object? face = null,Object? message = null,Object? price = null,Object? startTime = null,Object? endTime = null,Object? backgroundColor = null,Object? backgroundBottomColor = null,}) {
+  return _then(_self.copyWith(
+userName: null == userName ? _self.userName : userName // ignore: cast_nullable_to_non_nullable
+as String,face: null == face ? _self.face : face // ignore: cast_nullable_to_non_nullable
+as String,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
+as int,startTime: null == startTime ? _self.startTime : startTime // ignore: cast_nullable_to_non_nullable
+as int,endTime: null == endTime ? _self.endTime : endTime // ignore: cast_nullable_to_non_nullable
+as int,backgroundColor: null == backgroundColor ? _self.backgroundColor : backgroundColor // ignore: cast_nullable_to_non_nullable
+as String,backgroundBottomColor: null == backgroundBottomColor ? _self.backgroundBottomColor : backgroundBottomColor // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [LiveSuperChatMessage].
+extension LiveSuperChatMessagePatterns on LiveSuperChatMessage {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _LiveSuperChatMessage value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _LiveSuperChatMessage() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _LiveSuperChatMessage value)  $default,){
+final _that = this;
+switch (_that) {
+case _LiveSuperChatMessage():
+return $default(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _LiveSuperChatMessage value)?  $default,){
+final _that = this;
+switch (_that) {
+case _LiveSuperChatMessage() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String userName,  String face,  String message,  int price,  int startTime,  int endTime,  String backgroundColor,  String backgroundBottomColor)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _LiveSuperChatMessage() when $default != null:
+return $default(_that.userName,_that.face,_that.message,_that.price,_that.startTime,_that.endTime,_that.backgroundColor,_that.backgroundBottomColor);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String userName,  String face,  String message,  int price,  int startTime,  int endTime,  String backgroundColor,  String backgroundBottomColor)  $default,) {final _that = this;
+switch (_that) {
+case _LiveSuperChatMessage():
+return $default(_that.userName,_that.face,_that.message,_that.price,_that.startTime,_that.endTime,_that.backgroundColor,_that.backgroundBottomColor);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String userName,  String face,  String message,  int price,  int startTime,  int endTime,  String backgroundColor,  String backgroundBottomColor)?  $default,) {final _that = this;
+switch (_that) {
+case _LiveSuperChatMessage() when $default != null:
+return $default(_that.userName,_that.face,_that.message,_that.price,_that.startTime,_that.endTime,_that.backgroundColor,_that.backgroundBottomColor);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _LiveSuperChatMessage implements LiveSuperChatMessage {
+  const _LiveSuperChatMessage({required this.userName, required this.face, required this.message, required this.price, required this.startTime, required this.endTime, required this.backgroundColor, required this.backgroundBottomColor});
+  factory _LiveSuperChatMessage.fromJson(Map<String, dynamic> json) => _$LiveSuperChatMessageFromJson(json);
+
+@override final  String userName;
+@override final  String face;
+@override final  String message;
+@override final  int price;
+@override final  int startTime;
+@override final  int endTime;
+@override final  String backgroundColor;
+@override final  String backgroundBottomColor;
+
+/// Create a copy of LiveSuperChatMessage
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$LiveSuperChatMessageCopyWith<_LiveSuperChatMessage> get copyWith => __$LiveSuperChatMessageCopyWithImpl<_LiveSuperChatMessage>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$LiveSuperChatMessageToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LiveSuperChatMessage&&(identical(other.userName, userName) || other.userName == userName)&&(identical(other.face, face) || other.face == face)&&(identical(other.message, message) || other.message == message)&&(identical(other.price, price) || other.price == price)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.endTime, endTime) || other.endTime == endTime)&&(identical(other.backgroundColor, backgroundColor) || other.backgroundColor == backgroundColor)&&(identical(other.backgroundBottomColor, backgroundBottomColor) || other.backgroundBottomColor == backgroundBottomColor));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,userName,face,message,price,startTime,endTime,backgroundColor,backgroundBottomColor);
+
+@override
+String toString() {
+  return 'LiveSuperChatMessage(userName: $userName, face: $face, message: $message, price: $price, startTime: $startTime, endTime: $endTime, backgroundColor: $backgroundColor, backgroundBottomColor: $backgroundBottomColor)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$LiveSuperChatMessageCopyWith<$Res> implements $LiveSuperChatMessageCopyWith<$Res> {
+  factory _$LiveSuperChatMessageCopyWith(_LiveSuperChatMessage value, $Res Function(_LiveSuperChatMessage) _then) = __$LiveSuperChatMessageCopyWithImpl;
+@override @useResult
+$Res call({
+ String userName, String face, String message, int price, int startTime, int endTime, String backgroundColor, String backgroundBottomColor
+});
+
+
+
+
+}
+/// @nodoc
+class __$LiveSuperChatMessageCopyWithImpl<$Res>
+    implements _$LiveSuperChatMessageCopyWith<$Res> {
+  __$LiveSuperChatMessageCopyWithImpl(this._self, this._then);
+
+  final _LiveSuperChatMessage _self;
+  final $Res Function(_LiveSuperChatMessage) _then;
+
+/// Create a copy of LiveSuperChatMessage
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? userName = null,Object? face = null,Object? message = null,Object? price = null,Object? startTime = null,Object? endTime = null,Object? backgroundColor = null,Object? backgroundBottomColor = null,}) {
+  return _then(_LiveSuperChatMessage(
+userName: null == userName ? _self.userName : userName // ignore: cast_nullable_to_non_nullable
+as String,face: null == face ? _self.face : face // ignore: cast_nullable_to_non_nullable
+as String,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
+as int,startTime: null == startTime ? _self.startTime : startTime // ignore: cast_nullable_to_non_nullable
+as int,endTime: null == endTime ? _self.endTime : endTime // ignore: cast_nullable_to_non_nullable
+as int,backgroundColor: null == backgroundColor ? _self.backgroundColor : backgroundColor // ignore: cast_nullable_to_non_nullable
+as String,backgroundBottomColor: null == backgroundBottomColor ? _self.backgroundBottomColor : backgroundBottomColor // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 

@@ -13,21 +13,21 @@ class SliveFactory {
     'twitch',
   ];
 
-  /// Create a [SliveSite] for the given platform ID.
+  /// Create a [LiveSite] for the given platform ID.
   ///
   /// Throws [ArgumentError] if the platform is not supported.
-  static Future<SliveSite> create(String platformId) {
+  static LiveSite create(String platformId) {
     switch (platformId) {
       case 'bilibili':
-        return SliveBilibiliSite.create();
+        return BilibiliSite();
       case 'douyin':
-        return SliveDouyinSite.create();
+        return DouyinSite();
       case 'douyu':
-        return SliveDouyuSite.create();
+        return DouyuSite();
       case 'huya':
-        return SliveHuyaSite.create();
+        return HuyaSite();
       case 'twitch':
-        return SliveTwitchSite.create();
+        return TwitchSite();
       default:
         throw ArgumentError.value(
           platformId,

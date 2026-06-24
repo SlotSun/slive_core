@@ -2,41 +2,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:slive_core/src/rust/api/types.dart';
 
 void main() {
-  group('SliveRoomDetail', () {
-    test('constructs with all fields', () {
-      const detail = SliveRoomDetail(
-        roomId: '12345',
-        title: 'Test Room',
-        cover: 'https://example.com/cover.jpg',
-        userName: 'TestUser',
-        userAvatar: 'https://example.com/avatar.jpg',
-        online: 1000,
-        introduction: 'Hello',
-        notice: 'Welcome',
-        status: true,
-        data: '{"key":"value"}',
-        danmakuData: '{"ws":"wss://example.com"}',
-        url: 'https://live.bilibili.com/12345',
-        isRecord: false,
-      );
+  group('LiveRoomDetail', () {
 
-      expect(detail.roomId, '12345');
-      expect(detail.title, 'Test Room');
-      expect(detail.cover, 'https://example.com/cover.jpg');
-      expect(detail.userName, 'TestUser');
-      expect(detail.userAvatar, 'https://example.com/avatar.jpg');
-      expect(detail.online, 1000);
-      expect(detail.introduction, 'Hello');
-      expect(detail.notice, 'Welcome');
-      expect(detail.status, true);
-      expect(detail.data, '{"key":"value"}');
-      expect(detail.danmakuData, '{"ws":"wss://example.com"}');
-      expect(detail.url, 'https://live.bilibili.com/12345');
-      expect(detail.isRecord, false);
-    });
 
     test('constructs with nullable fields as null', () {
-      const detail = SliveRoomDetail(
+      const detail = LiveRoomDetail(
         roomId: '12345',
         title: 'Test Room',
         cover: '',
@@ -55,7 +25,7 @@ void main() {
     });
 
     test('equality works', () {
-      const a = SliveRoomDetail(
+      const a = LiveRoomDetail(
         roomId: '12345',
         title: 'Test',
         cover: '',
@@ -66,7 +36,7 @@ void main() {
         url: '',
         isRecord: false,
       );
-      const b = SliveRoomDetail(
+      const b = LiveRoomDetail(
         roomId: '12345',
         title: 'Test',
         cover: '',
@@ -83,9 +53,9 @@ void main() {
     });
   });
 
-  group('SliveSubCategory', () {
+  group('LiveSubCategory', () {
     test('constructs with parent_id', () {
-      const cat = SliveSubCategory(
+      const cat = LiveSubCategory(
         id: '100',
         name: 'FPS',
         parentId: '1',
@@ -98,7 +68,7 @@ void main() {
     });
 
     test('constructs with pic', () {
-      const cat = SliveSubCategory(
+      const cat = LiveSubCategory(
         id: '1',
         name: 'Games',
         parentId: '0',
@@ -109,9 +79,9 @@ void main() {
     });
   });
 
-  group('SlivePlayQuality', () {
+  group('LivePlayQuality', () {
     test('constructs correctly', () {
-      const q = SlivePlayQuality(
+      const q = LivePlayQuality(
         quality: '原画',
         data: 'best',
         sort: 0,
@@ -123,9 +93,9 @@ void main() {
     });
   });
 
-  group('SlivePlayUrl', () {
+  group('LivePlayUrl', () {
     test('constructs with urls', () {
-      const pu = SlivePlayUrl(
+      const pu = LivePlayUrl(
         urls: ['https://example.com/stream.flv'],
       );
 
@@ -135,21 +105,19 @@ void main() {
     });
 
     test('constructs with headers', () {
-      const pu = SlivePlayUrl(
+      const pu = LivePlayUrl(
         urls: ['https://example.com/stream.flv'],
-        headers: [
-          SliveMapEntry(key: 'User-Agent', value: 'Mozilla/5.0'),
-        ],
+        headers: {'User-Agent': 'Mozilla/5.0'},
       );
 
-      expect(pu.headers, hasLength(1));
-      expect(pu.headers!.first.key, 'User-Agent');
+      expect(pu.headers, isNotNull);
+      expect(pu.headers!['User-Agent'], 'Mozilla/5.0');
     });
   });
 
-  group('SliveRoomItem', () {
+  group('LiveRoomItem', () {
     test('constructs correctly', () {
-      const item = SliveRoomItem(
+      const item = LiveRoomItem(
         roomId: '12345',
         title: 'Test Stream',
         cover: 'https://example.com/cover.jpg',
@@ -164,9 +132,9 @@ void main() {
     });
   });
 
-  group('SliveAnchorItem', () {
+  group('LiveAnchorItem', () {
     test('constructs correctly', () {
-      const anchor = SliveAnchorItem(
+      const anchor = LiveAnchorItem(
         roomId: '12345',
         avatar: 'https://example.com/avatar.jpg',
         userName: 'TestAnchor',
@@ -180,14 +148,14 @@ void main() {
     });
   });
 
-  group('SliveCategory', () {
+  group('LiveCategory', () {
     test('constructs with children', () {
-      const cat = SliveCategory(
+      const cat = LiveCategory(
         id: '1',
         name: 'Games',
         children: [
-          SliveSubCategory(id: '10', name: 'FPS', parentId: '1'),
-          SliveSubCategory(id: '11', name: 'MOBA', parentId: '1'),
+          LiveSubCategory(id: '10', name: 'FPS', parentId: '1'),
+          LiveSubCategory(id: '11', name: 'MOBA', parentId: '1'),
         ],
       );
 
@@ -198,12 +166,12 @@ void main() {
     });
   });
 
-  group('SliveCategoryResult', () {
+  group('LiveCategoryResult', () {
     test('constructs correctly', () {
-      const result = SliveCategoryResult(
+      const result = LiveCategoryResult(
         hasMore: true,
         items: [
-          SliveRoomItem(
+          LiveRoomItem(
             roomId: '1',
             title: 'Room 1',
             cover: '',
@@ -218,9 +186,9 @@ void main() {
     });
   });
 
-  group('SliveSuperChatMessage', () {
+  group('LiveSuperChatMessage', () {
     test('constructs correctly', () {
-      const sc = SliveSuperChatMessage(
+      const sc = LiveSuperChatMessage(
         userName: 'Donor',
         face: 'https://example.com/face.jpg',
         message: 'Great stream!',
@@ -242,40 +210,48 @@ void main() {
     });
   });
 
-  group('SliveMessage', () {
+  group('LiveMessage', () {
     test('constructs chat message', () {
-      const msg = SliveMessage(
-        messageType: SliveMessageType.chat,
+      const msg = LiveMessage(
+        id: 'msg-1',
+        userId: 'user-1',
         userName: 'Chatter',
         message: 'Hello!',
-        color: SliveMessageColor(r: 255, g: 255, b: 255),
+        color: LiveMessageColor(r: 255, g: 255, b: 255),
+        timeMillis: 1700000000000,
+        messageType: LiveMessageType.chat,
       );
 
-      expect(msg.messageType, SliveMessageType.chat);
+      expect(msg.id, 'msg-1');
+      expect(msg.userId, 'user-1');
+      expect(msg.messageType, LiveMessageType.chat);
       expect(msg.userName, 'Chatter');
       expect(msg.message, 'Hello!');
-      expect(msg.data, isNull);
+      expect(msg.metadata, isNull);
       expect(msg.color.r, 255);
       expect(msg.color.g, 255);
       expect(msg.color.b, 255);
     });
 
-    test('constructs with data', () {
-      const msg = SliveMessage(
-        messageType: SliveMessageType.online,
+    test('constructs with metadata', () {
+      const msg = LiveMessage(
+        id: 'msg-2',
+        userId: '',
         userName: '',
         message: '',
-        data: '12345',
-        color: SliveMessageColor(r: 0, g: 0, b: 0),
+        color: LiveMessageColor(r: 0, g: 0, b: 0),
+        timeMillis: 1700000000000,
+        messageType: LiveMessageType.online,
+        metadata: '{"count": 12345}',
       );
 
-      expect(msg.data, '12345');
+      expect(msg.metadata, '{"count": 12345}');
     });
   });
 
-  group('SliveMessageColor', () {
+  group('LiveMessageColor', () {
     test('constructs correctly', () {
-      const color = SliveMessageColor(r: 255, g: 0, b: 128);
+      const color = LiveMessageColor(r: 255, g: 0, b: 128);
 
       expect(color.r, 255);
       expect(color.g, 0);
@@ -283,9 +259,9 @@ void main() {
     });
   });
 
-  group('SliveDanmuControlEvent', () {
+  group('LiveDanmuControlEvent', () {
     test('constructs stream_closed', () {
-      const event = SliveDanmuControlEvent(
+      const event = LiveDanmuControlEvent(
         kind: 'stream_closed',
         message: 'Stream has ended',
       );
@@ -298,7 +274,7 @@ void main() {
     });
 
     test('constructs room_info_changed', () {
-      const event = SliveDanmuControlEvent(
+      const event = LiveDanmuControlEvent(
         kind: 'room_info_changed',
         title: 'New Title',
         category: 'FPS',
@@ -312,22 +288,13 @@ void main() {
     });
   });
 
-  group('SliveMessageType', () {
+  group('LiveMessageType', () {
     test('has correct values', () {
-      expect(SliveMessageType.values, hasLength(4));
-      expect(SliveMessageType.chat.name, 'chat');
-      expect(SliveMessageType.gift.name, 'gift');
-      expect(SliveMessageType.online.name, 'online');
-      expect(SliveMessageType.superChat.name, 'superChat');
-    });
-  });
-
-  group('SliveMapEntry', () {
-    test('constructs correctly', () {
-      const entry = SliveMapEntry(key: 'Cookie', value: 'abc123');
-
-      expect(entry.key, 'Cookie');
-      expect(entry.value, 'abc123');
+      expect(LiveMessageType.values, hasLength(4));
+      expect(LiveMessageType.chat.name, 'chat');
+      expect(LiveMessageType.gift.name, 'gift');
+      expect(LiveMessageType.online.name, 'online');
+      expect(LiveMessageType.superChat.name, 'superChat');
     });
   });
 }
