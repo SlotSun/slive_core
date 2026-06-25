@@ -364,13 +364,13 @@ impl From<ext::LiveSuperChatMessage> for LiveSuperChatMessage {
     fn from(m: ext::LiveSuperChatMessage) -> Self {
         Self {
             user_name: m.user_name,
-            face: String::new(),
-            message: m.content,
-            price: m.price as i32,
+            face: m.face,
+            message: m.message,
+            price: m.price,
             start_time: m.start_time,
-            end_time: 0,
-            background_color: String::new(),
-            background_bottom_color: String::new(),
+            end_time: m.end_time,
+            background_color: m.background_color,
+            background_bottom_color: m.background_bottom_color,
         }
     }
 }

@@ -2148,7 +2148,7 @@ checksum = "19f132c84eca552bf34cab8ec81f1c1dcc229b811638f9d283dceabe58c5569e"
 [[package]]
 name = "platforms-parser"
 version = "0.0.1"
-source = "git+https://github.com/SlotSun/slive-core-api-rust.git#c96e6bd5227cea5d737b4f500953684f53cbb251"
+source = "git+https://github.com/SlotSun/slive-core-api-rust.git#f714d00b4bcff8bc49d220155ab957035c2e0154"
 dependencies = [
  "async-trait",
  "base64 0.22.1",
@@ -3059,7 +3059,7 @@ dependencies = [
 [[package]]
 name = "tars-codec"
 version = "0.1.2"
-source = "git+https://github.com/SlotSun/slive-core-api-rust.git#c96e6bd5227cea5d737b4f500953684f53cbb251"
+source = "git+https://github.com/SlotSun/slive-core-api-rust.git#f714d00b4bcff8bc49d220155ab957035c2e0154"
 dependencies = [
  "bytes",
  "rustc-hash",
