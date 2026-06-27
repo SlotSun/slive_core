@@ -1,6 +1,14 @@
 import 'package:slive_core/src/rust/api/danmaku.dart' as frb_danmaku;
 import 'package:slive_core/src/rust/api/extractor.dart' as frb;
-import 'package:slive_core/src/rust/api/types.dart';
+import 'package:slive_core/src/rust/api/models/live_category.dart';
+import 'package:slive_core/src/rust/api/models/live_category_result.dart';
+import 'package:slive_core/src/rust/api/models/live_play_quality.dart';
+import 'package:slive_core/src/rust/api/models/live_play_url.dart';
+import 'package:slive_core/src/rust/api/models/live_room_detail.dart';
+import 'package:slive_core/src/rust/api/models/live_search_anchor_result.dart';
+import 'package:slive_core/src/rust/api/models/live_search_room_result.dart';
+import 'package:slive_core/src/rust/api/models/live_sub_category.dart';
+import 'package:slive_core/src/rust/api/models/live_super_chat_message.dart';
 import 'package:slive_core/src/slive_danmaku.dart';
 import 'package:slive_core/src/slive_site.dart';
 import 'package:slive_core/src/platforms/platform_common.dart';

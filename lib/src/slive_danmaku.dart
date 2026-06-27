@@ -1,5 +1,7 @@
 import 'package:slive_core/src/rust/api/danmaku.dart';
-import 'package:slive_core/src/rust/api/types.dart';
+import 'package:slive_core/src/rust/api/models/live_danmu_control_event.dart';
+import 'package:slive_core/src/rust/api/models/live_danmu_item.dart';
+import 'package:slive_core/src/rust/api/models/live_message.dart';
 
 /// Callback-based danmaku interface.
 ///

@@ -2,7 +2,7 @@
 //!
 //! frb cannot bridge `dyn LiveExtractor` directly, so each platform gets a concrete struct.
 
-use crate::api::types::*;
+use crate::api::models::*;
 use log::info;
 use platforms_parser::extractor::LiveExtractor as _;
 

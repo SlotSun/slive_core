@@ -1,6 +1,6 @@
 //! Concrete danmaku provider wrappers for each platform.
 
-use crate::api::types;
+use crate::api::models;
 use platforms_parser::danmaku::DanmuProvider as _;
 
 /// Opaque connection handle — wraps the inner DanmuConnection.
@@ -80,7 +80,7 @@ macro_rules! impl_danmu_provider {
             pub async fn receive(
                 &self,
                 connection: &LiveDanmuConnection,
-            ) -> anyhow::Result<Option<types::LiveDanmuItem>> {
+            ) -> anyhow::Result<Option<models::LiveDanmuItem>> {
                 let item = self.inner.receive(&connection.inner).await?;
                 Ok(item.map(Into::into))
             }

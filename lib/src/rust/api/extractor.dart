@@ -4,8 +4,18 @@
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
 import '../frb_generated.dart';
+import 'models/live_anchor_item.dart';
+import 'models/live_category.dart';
+import 'models/live_category_result.dart';
+import 'models/live_play_quality.dart';
+import 'models/live_play_url.dart';
+import 'models/live_room_detail.dart';
+import 'models/live_room_item.dart';
+import 'models/live_search_anchor_result.dart';
+import 'models/live_search_room_result.dart';
+import 'models/live_sub_category.dart';
+import 'models/live_super_chat_message.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
-import 'types.dart';
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveBilibiliExtractor>>
 abstract class LiveBilibiliExtractor implements RustOpaqueInterface {

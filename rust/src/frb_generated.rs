@@ -40,7 +40,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.12.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -1420616952;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 260393484;
 
 // Section: executor
 
@@ -556,7 +556,9 @@ fn wire__crate__api__extractor__LiveBilibiliExtractor_get_category_rooms_impl(
             let api_that = <RustOpaqueMoi<
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveBilibiliExtractor>,
             >>::sse_decode(&mut deserializer);
-            let api_category = <crate::api::types::LiveSubCategory>::sse_decode(&mut deserializer);
+            let api_category = <crate::api::models::live_sub_category::LiveSubCategory>::sse_decode(
+                &mut deserializer,
+            );
             let api_page = <i32>::sse_decode(&mut deserializer);
             deserializer.end();
             move |context| async move {
@@ -680,7 +682,9 @@ fn wire__crate__api__extractor__LiveBilibiliExtractor_get_play_qualities_impl(
             let api_that = <RustOpaqueMoi<
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveBilibiliExtractor>,
             >>::sse_decode(&mut deserializer);
-            let api_detail = <crate::api::types::LiveRoomDetail>::sse_decode(&mut deserializer);
+            let api_detail = <crate::api::models::live_room_detail::LiveRoomDetail>::sse_decode(
+                &mut deserializer,
+            );
             deserializer.end();
             move |context| async move {
                 transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
@@ -741,8 +745,12 @@ fn wire__crate__api__extractor__LiveBilibiliExtractor_get_play_urls_impl(
             let api_that = <RustOpaqueMoi<
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveBilibiliExtractor>,
             >>::sse_decode(&mut deserializer);
-            let api_detail = <crate::api::types::LiveRoomDetail>::sse_decode(&mut deserializer);
-            let api_quality = <crate::api::types::LivePlayQuality>::sse_decode(&mut deserializer);
+            let api_detail = <crate::api::models::live_room_detail::LiveRoomDetail>::sse_decode(
+                &mut deserializer,
+            );
+            let api_quality = <crate::api::models::live_play_quality::LivePlayQuality>::sse_decode(
+                &mut deserializer,
+            );
             deserializer.end();
             move |context| async move {
                 transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
@@ -1878,7 +1886,9 @@ fn wire__crate__api__extractor__LiveDouyinExtractor_get_category_rooms_impl(
             let api_that = <RustOpaqueMoi<
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDouyinExtractor>,
             >>::sse_decode(&mut deserializer);
-            let api_category = <crate::api::types::LiveSubCategory>::sse_decode(&mut deserializer);
+            let api_category = <crate::api::models::live_sub_category::LiveSubCategory>::sse_decode(
+                &mut deserializer,
+            );
             let api_page = <i32>::sse_decode(&mut deserializer);
             deserializer.end();
             move |context| async move {
@@ -2002,7 +2012,9 @@ fn wire__crate__api__extractor__LiveDouyinExtractor_get_play_qualities_impl(
             let api_that = <RustOpaqueMoi<
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDouyinExtractor>,
             >>::sse_decode(&mut deserializer);
-            let api_detail = <crate::api::types::LiveRoomDetail>::sse_decode(&mut deserializer);
+            let api_detail = <crate::api::models::live_room_detail::LiveRoomDetail>::sse_decode(
+                &mut deserializer,
+            );
             deserializer.end();
             move |context| async move {
                 transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
@@ -2063,8 +2075,12 @@ fn wire__crate__api__extractor__LiveDouyinExtractor_get_play_urls_impl(
             let api_that = <RustOpaqueMoi<
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDouyinExtractor>,
             >>::sse_decode(&mut deserializer);
-            let api_detail = <crate::api::types::LiveRoomDetail>::sse_decode(&mut deserializer);
-            let api_quality = <crate::api::types::LivePlayQuality>::sse_decode(&mut deserializer);
+            let api_detail = <crate::api::models::live_room_detail::LiveRoomDetail>::sse_decode(
+                &mut deserializer,
+            );
+            let api_quality = <crate::api::models::live_play_quality::LivePlayQuality>::sse_decode(
+                &mut deserializer,
+            );
             deserializer.end();
             move |context| async move {
                 transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
@@ -3045,7 +3061,9 @@ fn wire__crate__api__extractor__LiveDouyuExtractor_get_category_rooms_impl(
             let api_that = <RustOpaqueMoi<
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDouyuExtractor>,
             >>::sse_decode(&mut deserializer);
-            let api_category = <crate::api::types::LiveSubCategory>::sse_decode(&mut deserializer);
+            let api_category = <crate::api::models::live_sub_category::LiveSubCategory>::sse_decode(
+                &mut deserializer,
+            );
             let api_page = <i32>::sse_decode(&mut deserializer);
             deserializer.end();
             move |context| async move {
@@ -3168,7 +3186,9 @@ fn wire__crate__api__extractor__LiveDouyuExtractor_get_play_qualities_impl(
             let api_that = <RustOpaqueMoi<
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDouyuExtractor>,
             >>::sse_decode(&mut deserializer);
-            let api_detail = <crate::api::types::LiveRoomDetail>::sse_decode(&mut deserializer);
+            let api_detail = <crate::api::models::live_room_detail::LiveRoomDetail>::sse_decode(
+                &mut deserializer,
+            );
             deserializer.end();
             move |context| async move {
                 transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
@@ -3229,8 +3249,12 @@ fn wire__crate__api__extractor__LiveDouyuExtractor_get_play_urls_impl(
             let api_that = <RustOpaqueMoi<
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDouyuExtractor>,
             >>::sse_decode(&mut deserializer);
-            let api_detail = <crate::api::types::LiveRoomDetail>::sse_decode(&mut deserializer);
-            let api_quality = <crate::api::types::LivePlayQuality>::sse_decode(&mut deserializer);
+            let api_detail = <crate::api::models::live_room_detail::LiveRoomDetail>::sse_decode(
+                &mut deserializer,
+            );
+            let api_quality = <crate::api::models::live_play_quality::LivePlayQuality>::sse_decode(
+                &mut deserializer,
+            );
             deserializer.end();
             move |context| async move {
                 transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
@@ -4210,7 +4234,9 @@ fn wire__crate__api__extractor__LiveHuyaExtractor_get_category_rooms_impl(
             let api_that = <RustOpaqueMoi<
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveHuyaExtractor>,
             >>::sse_decode(&mut deserializer);
-            let api_category = <crate::api::types::LiveSubCategory>::sse_decode(&mut deserializer);
+            let api_category = <crate::api::models::live_sub_category::LiveSubCategory>::sse_decode(
+                &mut deserializer,
+            );
             let api_page = <i32>::sse_decode(&mut deserializer);
             deserializer.end();
             move |context| async move {
@@ -4333,7 +4359,9 @@ fn wire__crate__api__extractor__LiveHuyaExtractor_get_play_qualities_impl(
             let api_that = <RustOpaqueMoi<
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveHuyaExtractor>,
             >>::sse_decode(&mut deserializer);
-            let api_detail = <crate::api::types::LiveRoomDetail>::sse_decode(&mut deserializer);
+            let api_detail = <crate::api::models::live_room_detail::LiveRoomDetail>::sse_decode(
+                &mut deserializer,
+            );
             deserializer.end();
             move |context| async move {
                 transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
@@ -4394,8 +4422,12 @@ fn wire__crate__api__extractor__LiveHuyaExtractor_get_play_urls_impl(
             let api_that = <RustOpaqueMoi<
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveHuyaExtractor>,
             >>::sse_decode(&mut deserializer);
-            let api_detail = <crate::api::types::LiveRoomDetail>::sse_decode(&mut deserializer);
-            let api_quality = <crate::api::types::LivePlayQuality>::sse_decode(&mut deserializer);
+            let api_detail = <crate::api::models::live_room_detail::LiveRoomDetail>::sse_decode(
+                &mut deserializer,
+            );
+            let api_quality = <crate::api::models::live_play_quality::LivePlayQuality>::sse_decode(
+                &mut deserializer,
+            );
             deserializer.end();
             move |context| async move {
                 transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
@@ -5430,7 +5462,9 @@ fn wire__crate__api__extractor__LiveTwitchExtractor_get_category_rooms_impl(
             let api_that = <RustOpaqueMoi<
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveTwitchExtractor>,
             >>::sse_decode(&mut deserializer);
-            let api_category = <crate::api::types::LiveSubCategory>::sse_decode(&mut deserializer);
+            let api_category = <crate::api::models::live_sub_category::LiveSubCategory>::sse_decode(
+                &mut deserializer,
+            );
             let api_page = <i32>::sse_decode(&mut deserializer);
             deserializer.end();
             move |context| async move {
@@ -5554,7 +5588,9 @@ fn wire__crate__api__extractor__LiveTwitchExtractor_get_play_qualities_impl(
             let api_that = <RustOpaqueMoi<
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveTwitchExtractor>,
             >>::sse_decode(&mut deserializer);
-            let api_detail = <crate::api::types::LiveRoomDetail>::sse_decode(&mut deserializer);
+            let api_detail = <crate::api::models::live_room_detail::LiveRoomDetail>::sse_decode(
+                &mut deserializer,
+            );
             deserializer.end();
             move |context| async move {
                 transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
@@ -5615,8 +5651,12 @@ fn wire__crate__api__extractor__LiveTwitchExtractor_get_play_urls_impl(
             let api_that = <RustOpaqueMoi<
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveTwitchExtractor>,
             >>::sse_decode(&mut deserializer);
-            let api_detail = <crate::api::types::LiveRoomDetail>::sse_decode(&mut deserializer);
-            let api_quality = <crate::api::types::LivePlayQuality>::sse_decode(&mut deserializer);
+            let api_detail = <crate::api::models::live_room_detail::LiveRoomDetail>::sse_decode(
+                &mut deserializer,
+            );
+            let api_quality = <crate::api::models::live_play_quality::LivePlayQuality>::sse_decode(
+                &mut deserializer,
+            );
             deserializer.end();
             move |context| async move {
                 transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
@@ -6208,7 +6248,7 @@ fn wire__crate__api__simple__init_app_impl(
         },
     )
 }
-fn wire__crate__api__types__live_message_color_from_int_impl(
+fn wire__crate__api__models__live_message_color__live_message_color_from_int_impl(
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
     rust_vec_len_: i32,
     data_len_: i32,
@@ -6233,14 +6273,16 @@ fn wire__crate__api__types__live_message_color_from_int_impl(
             deserializer.end();
             transform_result_sse::<_, ()>((move || {
                 let output_ok = Result::<_, ()>::Ok(
-                    crate::api::types::LiveMessageColor::from_int(api_int_color),
+                    crate::api::models::live_message_color::LiveMessageColor::from_int(
+                        api_int_color,
+                    ),
                 )?;
                 Ok(output_ok)
             })())
         },
     )
 }
-fn wire__crate__api__types__live_message_color_to_hex_impl(
+fn wire__crate__api__models__live_message_color__live_message_color_to_hex_impl(
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
     rust_vec_len_: i32,
     data_len_: i32,
@@ -6261,17 +6303,20 @@ fn wire__crate__api__types__live_message_color_to_hex_impl(
             };
             let mut deserializer =
                 flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            let api_that = <crate::api::types::LiveMessageColor>::sse_decode(&mut deserializer);
+            let api_that = <crate::api::models::live_message_color::LiveMessageColor>::sse_decode(
+                &mut deserializer,
+            );
             deserializer.end();
             transform_result_sse::<_, ()>((move || {
-                let output_ok =
-                    Result::<_, ()>::Ok(crate::api::types::LiveMessageColor::to_hex(&api_that))?;
+                let output_ok = Result::<_, ()>::Ok(
+                    crate::api::models::live_message_color::LiveMessageColor::to_hex(&api_that),
+                )?;
                 Ok(output_ok)
             })())
         },
     )
 }
-fn wire__crate__api__types__live_message_color_white_impl(
+fn wire__crate__api__models__live_message_color__live_message_color_white_impl(
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
     rust_vec_len_: i32,
     data_len_: i32,
@@ -6294,7 +6339,9 @@ fn wire__crate__api__types__live_message_color_white_impl(
                 flutter_rust_bridge::for_generated::SseDeserializer::new(message);
             deserializer.end();
             transform_result_sse::<_, ()>((move || {
-                let output_ok = Result::<_, ()>::Ok(crate::api::types::LiveMessageColor::white())?;
+                let output_ok = Result::<_, ()>::Ok(
+                    crate::api::models::live_message_color::LiveMessageColor::white(),
+                )?;
                 Ok(output_ok)
             })())
         },
@@ -6771,81 +6818,83 @@ impl SseDecode for Vec<String> {
     }
 }
 
-impl SseDecode for Vec<crate::api::types::LiveAnchorItem> {
+impl SseDecode for Vec<crate::api::models::live_anchor_item::LiveAnchorItem> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut len_ = <i32>::sse_decode(deserializer);
         let mut ans_ = Vec::with_capacity(len_ as usize);
         for idx_ in 0..len_ {
-            ans_.push(<crate::api::types::LiveAnchorItem>::sse_decode(
-                deserializer,
-            ));
+            ans_.push(
+                <crate::api::models::live_anchor_item::LiveAnchorItem>::sse_decode(deserializer),
+            );
         }
         return ans_;
     }
 }
 
-impl SseDecode for Vec<crate::api::types::LiveCategory> {
+impl SseDecode for Vec<crate::api::models::live_category::LiveCategory> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut len_ = <i32>::sse_decode(deserializer);
         let mut ans_ = Vec::with_capacity(len_ as usize);
         for idx_ in 0..len_ {
-            ans_.push(<crate::api::types::LiveCategory>::sse_decode(deserializer));
+            ans_.push(<crate::api::models::live_category::LiveCategory>::sse_decode(deserializer));
         }
         return ans_;
     }
 }
 
-impl SseDecode for Vec<crate::api::types::LivePlayQuality> {
+impl SseDecode for Vec<crate::api::models::live_play_quality::LivePlayQuality> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut len_ = <i32>::sse_decode(deserializer);
         let mut ans_ = Vec::with_capacity(len_ as usize);
         for idx_ in 0..len_ {
-            ans_.push(<crate::api::types::LivePlayQuality>::sse_decode(
-                deserializer,
-            ));
+            ans_.push(
+                <crate::api::models::live_play_quality::LivePlayQuality>::sse_decode(deserializer),
+            );
         }
         return ans_;
     }
 }
 
-impl SseDecode for Vec<crate::api::types::LiveRoomItem> {
+impl SseDecode for Vec<crate::api::models::live_room_item::LiveRoomItem> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut len_ = <i32>::sse_decode(deserializer);
         let mut ans_ = Vec::with_capacity(len_ as usize);
         for idx_ in 0..len_ {
-            ans_.push(<crate::api::types::LiveRoomItem>::sse_decode(deserializer));
+            ans_.push(<crate::api::models::live_room_item::LiveRoomItem>::sse_decode(deserializer));
         }
         return ans_;
     }
 }
 
-impl SseDecode for Vec<crate::api::types::LiveSubCategory> {
+impl SseDecode for Vec<crate::api::models::live_sub_category::LiveSubCategory> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut len_ = <i32>::sse_decode(deserializer);
         let mut ans_ = Vec::with_capacity(len_ as usize);
         for idx_ in 0..len_ {
-            ans_.push(<crate::api::types::LiveSubCategory>::sse_decode(
-                deserializer,
-            ));
+            ans_.push(
+                <crate::api::models::live_sub_category::LiveSubCategory>::sse_decode(deserializer),
+            );
         }
         return ans_;
     }
 }
 
-impl SseDecode for Vec<crate::api::types::LiveSuperChatMessage> {
+impl SseDecode for Vec<crate::api::models::live_super_chat_message::LiveSuperChatMessage> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut len_ = <i32>::sse_decode(deserializer);
         let mut ans_ = Vec::with_capacity(len_ as usize);
         for idx_ in 0..len_ {
-            ans_.push(<crate::api::types::LiveSuperChatMessage>::sse_decode(
-                deserializer,
-            ));
+            ans_.push(
+                <crate::api::models::live_super_chat_message::LiveSuperChatMessage>::sse_decode(
+                    deserializer,
+                ),
+            );
         }
         return ans_;
     }
@@ -6875,14 +6924,14 @@ impl SseDecode for Vec<(String, String)> {
     }
 }
 
-impl SseDecode for crate::api::types::LiveAnchorItem {
+impl SseDecode for crate::api::models::live_anchor_item::LiveAnchorItem {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_roomId = <String>::sse_decode(deserializer);
         let mut var_avatar = <String>::sse_decode(deserializer);
         let mut var_userName = <String>::sse_decode(deserializer);
         let mut var_liveStatus = <bool>::sse_decode(deserializer);
-        return crate::api::types::LiveAnchorItem {
+        return crate::api::models::live_anchor_item::LiveAnchorItem {
             room_id: var_roomId,
             avatar: var_avatar,
             user_name: var_userName,
@@ -6891,13 +6940,14 @@ impl SseDecode for crate::api::types::LiveAnchorItem {
     }
 }
 
-impl SseDecode for crate::api::types::LiveCategory {
+impl SseDecode for crate::api::models::live_category::LiveCategory {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_id = <String>::sse_decode(deserializer);
         let mut var_name = <String>::sse_decode(deserializer);
-        let mut var_children = <Vec<crate::api::types::LiveSubCategory>>::sse_decode(deserializer);
-        return crate::api::types::LiveCategory {
+        let mut var_children =
+            <Vec<crate::api::models::live_sub_category::LiveSubCategory>>::sse_decode(deserializer);
+        return crate::api::models::live_category::LiveCategory {
             id: var_id,
             name: var_name,
             children: var_children,
@@ -6905,19 +6955,20 @@ impl SseDecode for crate::api::types::LiveCategory {
     }
 }
 
-impl SseDecode for crate::api::types::LiveCategoryResult {
+impl SseDecode for crate::api::models::live_category_result::LiveCategoryResult {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_hasMore = <bool>::sse_decode(deserializer);
-        let mut var_items = <Vec<crate::api::types::LiveRoomItem>>::sse_decode(deserializer);
-        return crate::api::types::LiveCategoryResult {
+        let mut var_items =
+            <Vec<crate::api::models::live_room_item::LiveRoomItem>>::sse_decode(deserializer);
+        return crate::api::models::live_category_result::LiveCategoryResult {
             has_more: var_hasMore,
             items: var_items,
         };
     }
 }
 
-impl SseDecode for crate::api::types::LiveDanmuControlEvent {
+impl SseDecode for crate::api::models::live_danmu_control_event::LiveDanmuControlEvent {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_kind = <String>::sse_decode(deserializer);
@@ -6925,7 +6976,7 @@ impl SseDecode for crate::api::types::LiveDanmuControlEvent {
         let mut var_title = <Option<String>>::sse_decode(deserializer);
         let mut var_category = <Option<String>>::sse_decode(deserializer);
         let mut var_parentCategory = <Option<String>>::sse_decode(deserializer);
-        return crate::api::types::LiveDanmuControlEvent {
+        return crate::api::models::live_danmu_control_event::LiveDanmuControlEvent {
             kind: var_kind,
             message: var_message,
             title: var_title,
@@ -6935,19 +6986,19 @@ impl SseDecode for crate::api::types::LiveDanmuControlEvent {
     }
 }
 
-impl SseDecode for crate::api::types::LiveDanmuItem {
+impl SseDecode for crate::api::models::live_danmu_item::LiveDanmuItem {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut tag_ = <i32>::sse_decode(deserializer);
         match tag_ {
             0 => {
-                let mut var_field0 = <crate::api::types::LiveMessage>::sse_decode(deserializer);
-                return crate::api::types::LiveDanmuItem::Message(var_field0);
+                let mut var_field0 =
+                    <crate::api::models::live_message::LiveMessage>::sse_decode(deserializer);
+                return crate::api::models::live_danmu_item::LiveDanmuItem::Message(var_field0);
             }
             1 => {
-                let mut var_field0 =
-                    <crate::api::types::LiveDanmuControlEvent>::sse_decode(deserializer);
-                return crate::api::types::LiveDanmuItem::Control(var_field0);
+                let mut var_field0 = <crate::api::models::live_danmu_control_event::LiveDanmuControlEvent>::sse_decode(deserializer);
+                return crate::api::models::live_danmu_item::LiveDanmuItem::Control(var_field0);
             }
             _ => {
                 unimplemented!("");
@@ -6956,18 +7007,20 @@ impl SseDecode for crate::api::types::LiveDanmuItem {
     }
 }
 
-impl SseDecode for crate::api::types::LiveMessage {
+impl SseDecode for crate::api::models::live_message::LiveMessage {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_id = <String>::sse_decode(deserializer);
         let mut var_userId = <String>::sse_decode(deserializer);
         let mut var_userName = <String>::sse_decode(deserializer);
         let mut var_message = <String>::sse_decode(deserializer);
-        let mut var_color = <crate::api::types::LiveMessageColor>::sse_decode(deserializer);
+        let mut var_color =
+            <crate::api::models::live_message_color::LiveMessageColor>::sse_decode(deserializer);
         let mut var_timeMillis = <i64>::sse_decode(deserializer);
-        let mut var_messageType = <crate::api::types::LiveMessageType>::sse_decode(deserializer);
+        let mut var_messageType =
+            <crate::api::models::live_message_type::LiveMessageType>::sse_decode(deserializer);
         let mut var_metadata = <Option<String>>::sse_decode(deserializer);
-        return crate::api::types::LiveMessage {
+        return crate::api::models::live_message::LiveMessage {
             id: var_id,
             user_id: var_userId,
             user_name: var_userName,
@@ -6980,13 +7033,13 @@ impl SseDecode for crate::api::types::LiveMessage {
     }
 }
 
-impl SseDecode for crate::api::types::LiveMessageColor {
+impl SseDecode for crate::api::models::live_message_color::LiveMessageColor {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_r = <i32>::sse_decode(deserializer);
         let mut var_g = <i32>::sse_decode(deserializer);
         let mut var_b = <i32>::sse_decode(deserializer);
-        return crate::api::types::LiveMessageColor {
+        return crate::api::models::live_message_color::LiveMessageColor {
             r: var_r,
             g: var_g,
             b: var_b,
@@ -6994,27 +7047,27 @@ impl SseDecode for crate::api::types::LiveMessageColor {
     }
 }
 
-impl SseDecode for crate::api::types::LiveMessageType {
+impl SseDecode for crate::api::models::live_message_type::LiveMessageType {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut inner = <i32>::sse_decode(deserializer);
         return match inner {
-            0 => crate::api::types::LiveMessageType::Chat,
-            1 => crate::api::types::LiveMessageType::Gift,
-            2 => crate::api::types::LiveMessageType::Online,
-            3 => crate::api::types::LiveMessageType::SuperChat,
+            0 => crate::api::models::live_message_type::LiveMessageType::Chat,
+            1 => crate::api::models::live_message_type::LiveMessageType::Gift,
+            2 => crate::api::models::live_message_type::LiveMessageType::Online,
+            3 => crate::api::models::live_message_type::LiveMessageType::SuperChat,
             _ => unreachable!("Invalid variant for LiveMessageType: {}", inner),
         };
     }
 }
 
-impl SseDecode for crate::api::types::LivePlayQuality {
+impl SseDecode for crate::api::models::live_play_quality::LivePlayQuality {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_quality = <String>::sse_decode(deserializer);
         let mut var_data = <String>::sse_decode(deserializer);
         let mut var_sort = <i32>::sse_decode(deserializer);
-        return crate::api::types::LivePlayQuality {
+        return crate::api::models::live_play_quality::LivePlayQuality {
             quality: var_quality,
             data: var_data,
             sort: var_sort,
@@ -7022,20 +7075,20 @@ impl SseDecode for crate::api::types::LivePlayQuality {
     }
 }
 
-impl SseDecode for crate::api::types::LivePlayUrl {
+impl SseDecode for crate::api::models::live_play_url::LivePlayUrl {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_urls = <Vec<String>>::sse_decode(deserializer);
         let mut var_headers =
             <Option<std::collections::HashMap<String, String>>>::sse_decode(deserializer);
-        return crate::api::types::LivePlayUrl {
+        return crate::api::models::live_play_url::LivePlayUrl {
             urls: var_urls,
             headers: var_headers,
         };
     }
 }
 
-impl SseDecode for crate::api::types::LiveRoomDetail {
+impl SseDecode for crate::api::models::live_room_detail::LiveRoomDetail {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_roomId = <String>::sse_decode(deserializer);
@@ -7051,7 +7104,7 @@ impl SseDecode for crate::api::types::LiveRoomDetail {
         let mut var_danmakuData = <Option<String>>::sse_decode(deserializer);
         let mut var_url = <String>::sse_decode(deserializer);
         let mut var_isRecord = <bool>::sse_decode(deserializer);
-        return crate::api::types::LiveRoomDetail {
+        return crate::api::models::live_room_detail::LiveRoomDetail {
             room_id: var_roomId,
             title: var_title,
             cover: var_cover,
@@ -7069,7 +7122,7 @@ impl SseDecode for crate::api::types::LiveRoomDetail {
     }
 }
 
-impl SseDecode for crate::api::types::LiveRoomItem {
+impl SseDecode for crate::api::models::live_room_item::LiveRoomItem {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_roomId = <String>::sse_decode(deserializer);
@@ -7077,7 +7130,7 @@ impl SseDecode for crate::api::types::LiveRoomItem {
         let mut var_cover = <String>::sse_decode(deserializer);
         let mut var_userName = <String>::sse_decode(deserializer);
         let mut var_online = <i64>::sse_decode(deserializer);
-        return crate::api::types::LiveRoomItem {
+        return crate::api::models::live_room_item::LiveRoomItem {
             room_id: var_roomId,
             title: var_title,
             cover: var_cover,
@@ -7087,38 +7140,40 @@ impl SseDecode for crate::api::types::LiveRoomItem {
     }
 }
 
-impl SseDecode for crate::api::types::LiveSearchAnchorResult {
+impl SseDecode for crate::api::models::live_search_anchor_result::LiveSearchAnchorResult {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_hasMore = <bool>::sse_decode(deserializer);
-        let mut var_items = <Vec<crate::api::types::LiveAnchorItem>>::sse_decode(deserializer);
-        return crate::api::types::LiveSearchAnchorResult {
+        let mut var_items =
+            <Vec<crate::api::models::live_anchor_item::LiveAnchorItem>>::sse_decode(deserializer);
+        return crate::api::models::live_search_anchor_result::LiveSearchAnchorResult {
             has_more: var_hasMore,
             items: var_items,
         };
     }
 }
 
-impl SseDecode for crate::api::types::LiveSearchRoomResult {
+impl SseDecode for crate::api::models::live_search_room_result::LiveSearchRoomResult {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_hasMore = <bool>::sse_decode(deserializer);
-        let mut var_items = <Vec<crate::api::types::LiveRoomItem>>::sse_decode(deserializer);
-        return crate::api::types::LiveSearchRoomResult {
+        let mut var_items =
+            <Vec<crate::api::models::live_room_item::LiveRoomItem>>::sse_decode(deserializer);
+        return crate::api::models::live_search_room_result::LiveSearchRoomResult {
             has_more: var_hasMore,
             items: var_items,
         };
     }
 }
 
-impl SseDecode for crate::api::types::LiveSubCategory {
+impl SseDecode for crate::api::models::live_sub_category::LiveSubCategory {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_id = <String>::sse_decode(deserializer);
         let mut var_name = <String>::sse_decode(deserializer);
         let mut var_parentId = <String>::sse_decode(deserializer);
         let mut var_pic = <Option<String>>::sse_decode(deserializer);
-        return crate::api::types::LiveSubCategory {
+        return crate::api::models::live_sub_category::LiveSubCategory {
             id: var_id,
             name: var_name,
             parent_id: var_parentId,
@@ -7127,7 +7182,7 @@ impl SseDecode for crate::api::types::LiveSubCategory {
     }
 }
 
-impl SseDecode for crate::api::types::LiveSuperChatMessage {
+impl SseDecode for crate::api::models::live_super_chat_message::LiveSuperChatMessage {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_userName = <String>::sse_decode(deserializer);
@@ -7138,7 +7193,7 @@ impl SseDecode for crate::api::types::LiveSuperChatMessage {
         let mut var_endTime = <i64>::sse_decode(deserializer);
         let mut var_backgroundColor = <String>::sse_decode(deserializer);
         let mut var_backgroundBottomColor = <String>::sse_decode(deserializer);
-        return crate::api::types::LiveSuperChatMessage {
+        return crate::api::models::live_super_chat_message::LiveSuperChatMessage {
             user_name: var_userName,
             face: var_face,
             message: var_message,
@@ -7191,11 +7246,13 @@ impl SseDecode for Option<String> {
     }
 }
 
-impl SseDecode for Option<crate::api::types::LiveDanmuItem> {
+impl SseDecode for Option<crate::api::models::live_danmu_item::LiveDanmuItem> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         if (<bool>::sse_decode(deserializer)) {
-            return Some(<crate::api::types::LiveDanmuItem>::sse_decode(deserializer));
+            return Some(
+                <crate::api::models::live_danmu_item::LiveDanmuItem>::sse_decode(deserializer),
+            );
         } else {
             return None;
         }
@@ -7886,11 +7943,21 @@ fn pde_ffi_dispatcher_sync_impl(
 ) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
     // Codec=Pde (Serialization + dispatch), see doc to use other codecs
     match func_id {
-        108 => {
-            wire__crate__api__types__live_message_color_from_int_impl(ptr, rust_vec_len, data_len)
-        }
-        109 => wire__crate__api__types__live_message_color_to_hex_impl(ptr, rust_vec_len, data_len),
-        110 => wire__crate__api__types__live_message_color_white_impl(ptr, rust_vec_len, data_len),
+        108 => wire__crate__api__models__live_message_color__live_message_color_from_int_impl(
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        109 => wire__crate__api__models__live_message_color__live_message_color_to_hex_impl(
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        110 => wire__crate__api__models__live_message_color__live_message_color_white_impl(
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
         _ => unreachable!(),
     }
 }
@@ -8129,7 +8196,7 @@ impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::log::Level>>
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::api::types::LiveAnchorItem {
+impl flutter_rust_bridge::IntoDart for crate::api::models::live_anchor_item::LiveAnchorItem {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
             self.room_id.into_into_dart().into_dart(),
@@ -8141,18 +8208,18 @@ impl flutter_rust_bridge::IntoDart for crate::api::types::LiveAnchorItem {
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::api::types::LiveAnchorItem
+    for crate::api::models::live_anchor_item::LiveAnchorItem
 {
 }
-impl flutter_rust_bridge::IntoIntoDart<crate::api::types::LiveAnchorItem>
-    for crate::api::types::LiveAnchorItem
+impl flutter_rust_bridge::IntoIntoDart<crate::api::models::live_anchor_item::LiveAnchorItem>
+    for crate::api::models::live_anchor_item::LiveAnchorItem
 {
-    fn into_into_dart(self) -> crate::api::types::LiveAnchorItem {
+    fn into_into_dart(self) -> crate::api::models::live_anchor_item::LiveAnchorItem {
         self
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::api::types::LiveCategory {
+impl flutter_rust_bridge::IntoDart for crate::api::models::live_category::LiveCategory {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
             self.id.into_into_dart().into_dart(),
@@ -8163,18 +8230,20 @@ impl flutter_rust_bridge::IntoDart for crate::api::types::LiveCategory {
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::api::types::LiveCategory
+    for crate::api::models::live_category::LiveCategory
 {
 }
-impl flutter_rust_bridge::IntoIntoDart<crate::api::types::LiveCategory>
-    for crate::api::types::LiveCategory
+impl flutter_rust_bridge::IntoIntoDart<crate::api::models::live_category::LiveCategory>
+    for crate::api::models::live_category::LiveCategory
 {
-    fn into_into_dart(self) -> crate::api::types::LiveCategory {
+    fn into_into_dart(self) -> crate::api::models::live_category::LiveCategory {
         self
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::api::types::LiveCategoryResult {
+impl flutter_rust_bridge::IntoDart
+    for crate::api::models::live_category_result::LiveCategoryResult
+{
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
             self.has_more.into_into_dart().into_dart(),
@@ -8184,18 +8253,20 @@ impl flutter_rust_bridge::IntoDart for crate::api::types::LiveCategoryResult {
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::api::types::LiveCategoryResult
+    for crate::api::models::live_category_result::LiveCategoryResult
 {
 }
-impl flutter_rust_bridge::IntoIntoDart<crate::api::types::LiveCategoryResult>
-    for crate::api::types::LiveCategoryResult
+impl flutter_rust_bridge::IntoIntoDart<crate::api::models::live_category_result::LiveCategoryResult>
+    for crate::api::models::live_category_result::LiveCategoryResult
 {
-    fn into_into_dart(self) -> crate::api::types::LiveCategoryResult {
+    fn into_into_dart(self) -> crate::api::models::live_category_result::LiveCategoryResult {
         self
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::api::types::LiveDanmuControlEvent {
+impl flutter_rust_bridge::IntoDart
+    for crate::api::models::live_danmu_control_event::LiveDanmuControlEvent
+{
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
             self.kind.into_into_dart().into_dart(),
@@ -8208,24 +8279,26 @@ impl flutter_rust_bridge::IntoDart for crate::api::types::LiveDanmuControlEvent 
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::api::types::LiveDanmuControlEvent
+    for crate::api::models::live_danmu_control_event::LiveDanmuControlEvent
 {
 }
-impl flutter_rust_bridge::IntoIntoDart<crate::api::types::LiveDanmuControlEvent>
-    for crate::api::types::LiveDanmuControlEvent
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::api::models::live_danmu_control_event::LiveDanmuControlEvent,
+    > for crate::api::models::live_danmu_control_event::LiveDanmuControlEvent
 {
-    fn into_into_dart(self) -> crate::api::types::LiveDanmuControlEvent {
+    fn into_into_dart(self) -> crate::api::models::live_danmu_control_event::LiveDanmuControlEvent {
         self
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::api::types::LiveDanmuItem {
+impl flutter_rust_bridge::IntoDart for crate::api::models::live_danmu_item::LiveDanmuItem {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         match self {
-            crate::api::types::LiveDanmuItem::Message(field0) => {
+            crate::api::models::live_danmu_item::LiveDanmuItem::Message(field0) => {
                 [0.into_dart(), field0.into_into_dart().into_dart()].into_dart()
             }
-            crate::api::types::LiveDanmuItem::Control(field0) => {
+            crate::api::models::live_danmu_item::LiveDanmuItem::Control(field0) => {
                 [1.into_dart(), field0.into_into_dart().into_dart()].into_dart()
             }
             _ => {
@@ -8235,18 +8308,18 @@ impl flutter_rust_bridge::IntoDart for crate::api::types::LiveDanmuItem {
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::api::types::LiveDanmuItem
+    for crate::api::models::live_danmu_item::LiveDanmuItem
 {
 }
-impl flutter_rust_bridge::IntoIntoDart<crate::api::types::LiveDanmuItem>
-    for crate::api::types::LiveDanmuItem
+impl flutter_rust_bridge::IntoIntoDart<crate::api::models::live_danmu_item::LiveDanmuItem>
+    for crate::api::models::live_danmu_item::LiveDanmuItem
 {
-    fn into_into_dart(self) -> crate::api::types::LiveDanmuItem {
+    fn into_into_dart(self) -> crate::api::models::live_danmu_item::LiveDanmuItem {
         self
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::api::types::LiveMessage {
+impl flutter_rust_bridge::IntoDart for crate::api::models::live_message::LiveMessage {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
             self.id.into_into_dart().into_dart(),
@@ -8262,18 +8335,18 @@ impl flutter_rust_bridge::IntoDart for crate::api::types::LiveMessage {
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::api::types::LiveMessage
+    for crate::api::models::live_message::LiveMessage
 {
 }
-impl flutter_rust_bridge::IntoIntoDart<crate::api::types::LiveMessage>
-    for crate::api::types::LiveMessage
+impl flutter_rust_bridge::IntoIntoDart<crate::api::models::live_message::LiveMessage>
+    for crate::api::models::live_message::LiveMessage
 {
-    fn into_into_dart(self) -> crate::api::types::LiveMessage {
+    fn into_into_dart(self) -> crate::api::models::live_message::LiveMessage {
         self
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::api::types::LiveMessageColor {
+impl flutter_rust_bridge::IntoDart for crate::api::models::live_message_color::LiveMessageColor {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
             self.r.into_into_dart().into_dart(),
@@ -8284,18 +8357,18 @@ impl flutter_rust_bridge::IntoDart for crate::api::types::LiveMessageColor {
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::api::types::LiveMessageColor
+    for crate::api::models::live_message_color::LiveMessageColor
 {
 }
-impl flutter_rust_bridge::IntoIntoDart<crate::api::types::LiveMessageColor>
-    for crate::api::types::LiveMessageColor
+impl flutter_rust_bridge::IntoIntoDart<crate::api::models::live_message_color::LiveMessageColor>
+    for crate::api::models::live_message_color::LiveMessageColor
 {
-    fn into_into_dart(self) -> crate::api::types::LiveMessageColor {
+    fn into_into_dart(self) -> crate::api::models::live_message_color::LiveMessageColor {
         self
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::api::types::LiveMessageType {
+impl flutter_rust_bridge::IntoDart for crate::api::models::live_message_type::LiveMessageType {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         match self {
             Self::Chat => 0.into_dart(),
@@ -8307,18 +8380,18 @@ impl flutter_rust_bridge::IntoDart for crate::api::types::LiveMessageType {
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::api::types::LiveMessageType
+    for crate::api::models::live_message_type::LiveMessageType
 {
 }
-impl flutter_rust_bridge::IntoIntoDart<crate::api::types::LiveMessageType>
-    for crate::api::types::LiveMessageType
+impl flutter_rust_bridge::IntoIntoDart<crate::api::models::live_message_type::LiveMessageType>
+    for crate::api::models::live_message_type::LiveMessageType
 {
-    fn into_into_dart(self) -> crate::api::types::LiveMessageType {
+    fn into_into_dart(self) -> crate::api::models::live_message_type::LiveMessageType {
         self
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::api::types::LivePlayQuality {
+impl flutter_rust_bridge::IntoDart for crate::api::models::live_play_quality::LivePlayQuality {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
             self.quality.into_into_dart().into_dart(),
@@ -8329,18 +8402,18 @@ impl flutter_rust_bridge::IntoDart for crate::api::types::LivePlayQuality {
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::api::types::LivePlayQuality
+    for crate::api::models::live_play_quality::LivePlayQuality
 {
 }
-impl flutter_rust_bridge::IntoIntoDart<crate::api::types::LivePlayQuality>
-    for crate::api::types::LivePlayQuality
+impl flutter_rust_bridge::IntoIntoDart<crate::api::models::live_play_quality::LivePlayQuality>
+    for crate::api::models::live_play_quality::LivePlayQuality
 {
-    fn into_into_dart(self) -> crate::api::types::LivePlayQuality {
+    fn into_into_dart(self) -> crate::api::models::live_play_quality::LivePlayQuality {
         self
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::api::types::LivePlayUrl {
+impl flutter_rust_bridge::IntoDart for crate::api::models::live_play_url::LivePlayUrl {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
             self.urls.into_into_dart().into_dart(),
@@ -8350,18 +8423,18 @@ impl flutter_rust_bridge::IntoDart for crate::api::types::LivePlayUrl {
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::api::types::LivePlayUrl
+    for crate::api::models::live_play_url::LivePlayUrl
 {
 }
-impl flutter_rust_bridge::IntoIntoDart<crate::api::types::LivePlayUrl>
-    for crate::api::types::LivePlayUrl
+impl flutter_rust_bridge::IntoIntoDart<crate::api::models::live_play_url::LivePlayUrl>
+    for crate::api::models::live_play_url::LivePlayUrl
 {
-    fn into_into_dart(self) -> crate::api::types::LivePlayUrl {
+    fn into_into_dart(self) -> crate::api::models::live_play_url::LivePlayUrl {
         self
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::api::types::LiveRoomDetail {
+impl flutter_rust_bridge::IntoDart for crate::api::models::live_room_detail::LiveRoomDetail {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
             self.room_id.into_into_dart().into_dart(),
@@ -8382,18 +8455,18 @@ impl flutter_rust_bridge::IntoDart for crate::api::types::LiveRoomDetail {
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::api::types::LiveRoomDetail
+    for crate::api::models::live_room_detail::LiveRoomDetail
 {
 }
-impl flutter_rust_bridge::IntoIntoDart<crate::api::types::LiveRoomDetail>
-    for crate::api::types::LiveRoomDetail
+impl flutter_rust_bridge::IntoIntoDart<crate::api::models::live_room_detail::LiveRoomDetail>
+    for crate::api::models::live_room_detail::LiveRoomDetail
 {
-    fn into_into_dart(self) -> crate::api::types::LiveRoomDetail {
+    fn into_into_dart(self) -> crate::api::models::live_room_detail::LiveRoomDetail {
         self
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::api::types::LiveRoomItem {
+impl flutter_rust_bridge::IntoDart for crate::api::models::live_room_item::LiveRoomItem {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
             self.room_id.into_into_dart().into_dart(),
@@ -8406,18 +8479,20 @@ impl flutter_rust_bridge::IntoDart for crate::api::types::LiveRoomItem {
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::api::types::LiveRoomItem
+    for crate::api::models::live_room_item::LiveRoomItem
 {
 }
-impl flutter_rust_bridge::IntoIntoDart<crate::api::types::LiveRoomItem>
-    for crate::api::types::LiveRoomItem
+impl flutter_rust_bridge::IntoIntoDart<crate::api::models::live_room_item::LiveRoomItem>
+    for crate::api::models::live_room_item::LiveRoomItem
 {
-    fn into_into_dart(self) -> crate::api::types::LiveRoomItem {
+    fn into_into_dart(self) -> crate::api::models::live_room_item::LiveRoomItem {
         self
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::api::types::LiveSearchAnchorResult {
+impl flutter_rust_bridge::IntoDart
+    for crate::api::models::live_search_anchor_result::LiveSearchAnchorResult
+{
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
             self.has_more.into_into_dart().into_dart(),
@@ -8427,18 +8502,24 @@ impl flutter_rust_bridge::IntoDart for crate::api::types::LiveSearchAnchorResult
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::api::types::LiveSearchAnchorResult
+    for crate::api::models::live_search_anchor_result::LiveSearchAnchorResult
 {
 }
-impl flutter_rust_bridge::IntoIntoDart<crate::api::types::LiveSearchAnchorResult>
-    for crate::api::types::LiveSearchAnchorResult
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::api::models::live_search_anchor_result::LiveSearchAnchorResult,
+    > for crate::api::models::live_search_anchor_result::LiveSearchAnchorResult
 {
-    fn into_into_dart(self) -> crate::api::types::LiveSearchAnchorResult {
+    fn into_into_dart(
+        self,
+    ) -> crate::api::models::live_search_anchor_result::LiveSearchAnchorResult {
         self
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::api::types::LiveSearchRoomResult {
+impl flutter_rust_bridge::IntoDart
+    for crate::api::models::live_search_room_result::LiveSearchRoomResult
+{
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
             self.has_more.into_into_dart().into_dart(),
@@ -8448,18 +8529,20 @@ impl flutter_rust_bridge::IntoDart for crate::api::types::LiveSearchRoomResult {
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::api::types::LiveSearchRoomResult
+    for crate::api::models::live_search_room_result::LiveSearchRoomResult
 {
 }
-impl flutter_rust_bridge::IntoIntoDart<crate::api::types::LiveSearchRoomResult>
-    for crate::api::types::LiveSearchRoomResult
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::api::models::live_search_room_result::LiveSearchRoomResult,
+    > for crate::api::models::live_search_room_result::LiveSearchRoomResult
 {
-    fn into_into_dart(self) -> crate::api::types::LiveSearchRoomResult {
+    fn into_into_dart(self) -> crate::api::models::live_search_room_result::LiveSearchRoomResult {
         self
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::api::types::LiveSubCategory {
+impl flutter_rust_bridge::IntoDart for crate::api::models::live_sub_category::LiveSubCategory {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
             self.id.into_into_dart().into_dart(),
@@ -8471,18 +8554,20 @@ impl flutter_rust_bridge::IntoDart for crate::api::types::LiveSubCategory {
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::api::types::LiveSubCategory
+    for crate::api::models::live_sub_category::LiveSubCategory
 {
 }
-impl flutter_rust_bridge::IntoIntoDart<crate::api::types::LiveSubCategory>
-    for crate::api::types::LiveSubCategory
+impl flutter_rust_bridge::IntoIntoDart<crate::api::models::live_sub_category::LiveSubCategory>
+    for crate::api::models::live_sub_category::LiveSubCategory
 {
-    fn into_into_dart(self) -> crate::api::types::LiveSubCategory {
+    fn into_into_dart(self) -> crate::api::models::live_sub_category::LiveSubCategory {
         self
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::api::types::LiveSuperChatMessage {
+impl flutter_rust_bridge::IntoDart
+    for crate::api::models::live_super_chat_message::LiveSuperChatMessage
+{
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
             self.user_name.into_into_dart().into_dart(),
@@ -8498,13 +8583,15 @@ impl flutter_rust_bridge::IntoDart for crate::api::types::LiveSuperChatMessage {
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::api::types::LiveSuperChatMessage
+    for crate::api::models::live_super_chat_message::LiveSuperChatMessage
 {
 }
-impl flutter_rust_bridge::IntoIntoDart<crate::api::types::LiveSuperChatMessage>
-    for crate::api::types::LiveSuperChatMessage
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::api::models::live_super_chat_message::LiveSuperChatMessage,
+    > for crate::api::models::live_super_chat_message::LiveSuperChatMessage
 {
-    fn into_into_dart(self) -> crate::api::types::LiveSuperChatMessage {
+    fn into_into_dart(self) -> crate::api::models::live_super_chat_message::LiveSuperChatMessage {
         self
     }
 }
@@ -8852,62 +8939,64 @@ impl SseEncode for Vec<String> {
     }
 }
 
-impl SseEncode for Vec<crate::api::types::LiveAnchorItem> {
+impl SseEncode for Vec<crate::api::models::live_anchor_item::LiveAnchorItem> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i32>::sse_encode(self.len() as _, serializer);
         for item in self {
-            <crate::api::types::LiveAnchorItem>::sse_encode(item, serializer);
+            <crate::api::models::live_anchor_item::LiveAnchorItem>::sse_encode(item, serializer);
         }
     }
 }
 
-impl SseEncode for Vec<crate::api::types::LiveCategory> {
+impl SseEncode for Vec<crate::api::models::live_category::LiveCategory> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i32>::sse_encode(self.len() as _, serializer);
         for item in self {
-            <crate::api::types::LiveCategory>::sse_encode(item, serializer);
+            <crate::api::models::live_category::LiveCategory>::sse_encode(item, serializer);
         }
     }
 }
 
-impl SseEncode for Vec<crate::api::types::LivePlayQuality> {
+impl SseEncode for Vec<crate::api::models::live_play_quality::LivePlayQuality> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i32>::sse_encode(self.len() as _, serializer);
         for item in self {
-            <crate::api::types::LivePlayQuality>::sse_encode(item, serializer);
+            <crate::api::models::live_play_quality::LivePlayQuality>::sse_encode(item, serializer);
         }
     }
 }
 
-impl SseEncode for Vec<crate::api::types::LiveRoomItem> {
+impl SseEncode for Vec<crate::api::models::live_room_item::LiveRoomItem> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i32>::sse_encode(self.len() as _, serializer);
         for item in self {
-            <crate::api::types::LiveRoomItem>::sse_encode(item, serializer);
+            <crate::api::models::live_room_item::LiveRoomItem>::sse_encode(item, serializer);
         }
     }
 }
 
-impl SseEncode for Vec<crate::api::types::LiveSubCategory> {
+impl SseEncode for Vec<crate::api::models::live_sub_category::LiveSubCategory> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i32>::sse_encode(self.len() as _, serializer);
         for item in self {
-            <crate::api::types::LiveSubCategory>::sse_encode(item, serializer);
+            <crate::api::models::live_sub_category::LiveSubCategory>::sse_encode(item, serializer);
         }
     }
 }
 
-impl SseEncode for Vec<crate::api::types::LiveSuperChatMessage> {
+impl SseEncode for Vec<crate::api::models::live_super_chat_message::LiveSuperChatMessage> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i32>::sse_encode(self.len() as _, serializer);
         for item in self {
-            <crate::api::types::LiveSuperChatMessage>::sse_encode(item, serializer);
+            <crate::api::models::live_super_chat_message::LiveSuperChatMessage>::sse_encode(
+                item, serializer,
+            );
         }
     }
 }
@@ -8932,7 +9021,7 @@ impl SseEncode for Vec<(String, String)> {
     }
 }
 
-impl SseEncode for crate::api::types::LiveAnchorItem {
+impl SseEncode for crate::api::models::live_anchor_item::LiveAnchorItem {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <String>::sse_encode(self.room_id, serializer);
@@ -8942,24 +9031,27 @@ impl SseEncode for crate::api::types::LiveAnchorItem {
     }
 }
 
-impl SseEncode for crate::api::types::LiveCategory {
+impl SseEncode for crate::api::models::live_category::LiveCategory {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <String>::sse_encode(self.id, serializer);
         <String>::sse_encode(self.name, serializer);
-        <Vec<crate::api::types::LiveSubCategory>>::sse_encode(self.children, serializer);
+        <Vec<crate::api::models::live_sub_category::LiveSubCategory>>::sse_encode(
+            self.children,
+            serializer,
+        );
     }
 }
 
-impl SseEncode for crate::api::types::LiveCategoryResult {
+impl SseEncode for crate::api::models::live_category_result::LiveCategoryResult {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <bool>::sse_encode(self.has_more, serializer);
-        <Vec<crate::api::types::LiveRoomItem>>::sse_encode(self.items, serializer);
+        <Vec<crate::api::models::live_room_item::LiveRoomItem>>::sse_encode(self.items, serializer);
     }
 }
 
-impl SseEncode for crate::api::types::LiveDanmuControlEvent {
+impl SseEncode for crate::api::models::live_danmu_control_event::LiveDanmuControlEvent {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <String>::sse_encode(self.kind, serializer);
@@ -8970,17 +9062,19 @@ impl SseEncode for crate::api::types::LiveDanmuControlEvent {
     }
 }
 
-impl SseEncode for crate::api::types::LiveDanmuItem {
+impl SseEncode for crate::api::models::live_danmu_item::LiveDanmuItem {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         match self {
-            crate::api::types::LiveDanmuItem::Message(field0) => {
+            crate::api::models::live_danmu_item::LiveDanmuItem::Message(field0) => {
                 <i32>::sse_encode(0, serializer);
-                <crate::api::types::LiveMessage>::sse_encode(field0, serializer);
+                <crate::api::models::live_message::LiveMessage>::sse_encode(field0, serializer);
             }
-            crate::api::types::LiveDanmuItem::Control(field0) => {
+            crate::api::models::live_danmu_item::LiveDanmuItem::Control(field0) => {
                 <i32>::sse_encode(1, serializer);
-                <crate::api::types::LiveDanmuControlEvent>::sse_encode(field0, serializer);
+                <crate::api::models::live_danmu_control_event::LiveDanmuControlEvent>::sse_encode(
+                    field0, serializer,
+                );
             }
             _ => {
                 unimplemented!("");
@@ -8989,21 +9083,26 @@ impl SseEncode for crate::api::types::LiveDanmuItem {
     }
 }
 
-impl SseEncode for crate::api::types::LiveMessage {
+impl SseEncode for crate::api::models::live_message::LiveMessage {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <String>::sse_encode(self.id, serializer);
         <String>::sse_encode(self.user_id, serializer);
         <String>::sse_encode(self.user_name, serializer);
         <String>::sse_encode(self.message, serializer);
-        <crate::api::types::LiveMessageColor>::sse_encode(self.color, serializer);
+        <crate::api::models::live_message_color::LiveMessageColor>::sse_encode(
+            self.color, serializer,
+        );
         <i64>::sse_encode(self.time_millis, serializer);
-        <crate::api::types::LiveMessageType>::sse_encode(self.message_type, serializer);
+        <crate::api::models::live_message_type::LiveMessageType>::sse_encode(
+            self.message_type,
+            serializer,
+        );
         <Option<String>>::sse_encode(self.metadata, serializer);
     }
 }
 
-impl SseEncode for crate::api::types::LiveMessageColor {
+impl SseEncode for crate::api::models::live_message_color::LiveMessageColor {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i32>::sse_encode(self.r, serializer);
@@ -9012,15 +9111,15 @@ impl SseEncode for crate::api::types::LiveMessageColor {
     }
 }
 
-impl SseEncode for crate::api::types::LiveMessageType {
+impl SseEncode for crate::api::models::live_message_type::LiveMessageType {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i32>::sse_encode(
             match self {
-                crate::api::types::LiveMessageType::Chat => 0,
-                crate::api::types::LiveMessageType::Gift => 1,
-                crate::api::types::LiveMessageType::Online => 2,
-                crate::api::types::LiveMessageType::SuperChat => 3,
+                crate::api::models::live_message_type::LiveMessageType::Chat => 0,
+                crate::api::models::live_message_type::LiveMessageType::Gift => 1,
+                crate::api::models::live_message_type::LiveMessageType::Online => 2,
+                crate::api::models::live_message_type::LiveMessageType::SuperChat => 3,
                 _ => {
                     unimplemented!("");
                 }
@@ -9030,7 +9129,7 @@ impl SseEncode for crate::api::types::LiveMessageType {
     }
 }
 
-impl SseEncode for crate::api::types::LivePlayQuality {
+impl SseEncode for crate::api::models::live_play_quality::LivePlayQuality {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <String>::sse_encode(self.quality, serializer);
@@ -9039,7 +9138,7 @@ impl SseEncode for crate::api::types::LivePlayQuality {
     }
 }
 
-impl SseEncode for crate::api::types::LivePlayUrl {
+impl SseEncode for crate::api::models::live_play_url::LivePlayUrl {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <Vec<String>>::sse_encode(self.urls, serializer);
@@ -9047,7 +9146,7 @@ impl SseEncode for crate::api::types::LivePlayUrl {
     }
 }
 
-impl SseEncode for crate::api::types::LiveRoomDetail {
+impl SseEncode for crate::api::models::live_room_detail::LiveRoomDetail {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <String>::sse_encode(self.room_id, serializer);
@@ -9066,7 +9165,7 @@ impl SseEncode for crate::api::types::LiveRoomDetail {
     }
 }
 
-impl SseEncode for crate::api::types::LiveRoomItem {
+impl SseEncode for crate::api::models::live_room_item::LiveRoomItem {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <String>::sse_encode(self.room_id, serializer);
@@ -9077,23 +9176,25 @@ impl SseEncode for crate::api::types::LiveRoomItem {
     }
 }
 
-impl SseEncode for crate::api::types::LiveSearchAnchorResult {
+impl SseEncode for crate::api::models::live_search_anchor_result::LiveSearchAnchorResult {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <bool>::sse_encode(self.has_more, serializer);
-        <Vec<crate::api::types::LiveAnchorItem>>::sse_encode(self.items, serializer);
+        <Vec<crate::api::models::live_anchor_item::LiveAnchorItem>>::sse_encode(
+            self.items, serializer,
+        );
     }
 }
 
-impl SseEncode for crate::api::types::LiveSearchRoomResult {
+impl SseEncode for crate::api::models::live_search_room_result::LiveSearchRoomResult {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <bool>::sse_encode(self.has_more, serializer);
-        <Vec<crate::api::types::LiveRoomItem>>::sse_encode(self.items, serializer);
+        <Vec<crate::api::models::live_room_item::LiveRoomItem>>::sse_encode(self.items, serializer);
     }
 }
 
-impl SseEncode for crate::api::types::LiveSubCategory {
+impl SseEncode for crate::api::models::live_sub_category::LiveSubCategory {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <String>::sse_encode(self.id, serializer);
@@ -9103,7 +9204,7 @@ impl SseEncode for crate::api::types::LiveSubCategory {
     }
 }
 
-impl SseEncode for crate::api::types::LiveSuperChatMessage {
+impl SseEncode for crate::api::models::live_super_chat_message::LiveSuperChatMessage {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <String>::sse_encode(self.user_name, serializer);
@@ -9147,12 +9248,12 @@ impl SseEncode for Option<String> {
     }
 }
 
-impl SseEncode for Option<crate::api::types::LiveDanmuItem> {
+impl SseEncode for Option<crate::api::models::live_danmu_item::LiveDanmuItem> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <bool>::sse_encode(self.is_some(), serializer);
         if let Some(value) = self {
-            <crate::api::types::LiveDanmuItem>::sse_encode(value, serializer);
+            <crate::api::models::live_danmu_item::LiveDanmuItem>::sse_encode(value, serializer);
         }
     }
 }

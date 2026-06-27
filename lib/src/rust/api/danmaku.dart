@@ -4,8 +4,12 @@
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
 import '../frb_generated.dart';
+import 'models/live_danmu_control_event.dart';
+import 'models/live_danmu_item.dart';
+import 'models/live_message.dart';
+import 'models/live_message_color.dart';
+import 'models/live_message_type.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
-import 'types.dart';
 
 /// Diagnostic: test Douyu danmaku connection end-to-end from the Rust side.
 /// Returns a log of what happened during the test.

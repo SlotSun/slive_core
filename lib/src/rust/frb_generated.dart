@@ -6,8 +6,23 @@
 import 'api/danmaku.dart';
 import 'api/extractor.dart';
 import 'api/log.dart';
+import 'api/models/live_anchor_item.dart';
+import 'api/models/live_category.dart';
+import 'api/models/live_category_result.dart';
+import 'api/models/live_danmu_control_event.dart';
+import 'api/models/live_danmu_item.dart';
+import 'api/models/live_message.dart';
+import 'api/models/live_message_color.dart';
+import 'api/models/live_message_type.dart';
+import 'api/models/live_play_quality.dart';
+import 'api/models/live_play_url.dart';
+import 'api/models/live_room_detail.dart';
+import 'api/models/live_room_item.dart';
+import 'api/models/live_search_anchor_result.dart';
+import 'api/models/live_search_room_result.dart';
+import 'api/models/live_sub_category.dart';
+import 'api/models/live_super_chat_message.dart';
 import 'api/simple.dart';
-import 'api/types.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'frb_generated.dart';
@@ -70,7 +85,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.12.0';
 
   @override
-  int get rustContentHash => -1420616952;
+  int get rustContentHash => 260393484;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -633,13 +648,15 @@ abstract class RustLibApi extends BaseApi {
 
   Future<void> crateApiSimpleInitApp();
 
-  LiveMessageColor crateApiTypesLiveMessageColorFromInt({
+  LiveMessageColor crateApiModelsLiveMessageColorLiveMessageColorFromInt({
     required int intColor,
   });
 
-  String crateApiTypesLiveMessageColorToHex({required LiveMessageColor that});
+  String crateApiModelsLiveMessageColorLiveMessageColorToHex({
+    required LiveMessageColor that,
+  });
 
-  LiveMessageColor crateApiTypesLiveMessageColorWhite();
+  LiveMessageColor crateApiModelsLiveMessageColorLiveMessageColorWhite();
 
   Stream<LogEntry> crateApiLogSetupLogStream();
 
@@ -4915,7 +4932,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "init_app", argNames: []);
 
   @override
-  LiveMessageColor crateApiTypesLiveMessageColorFromInt({
+  LiveMessageColor crateApiModelsLiveMessageColorLiveMessageColorFromInt({
     required int intColor,
   }) {
     return handler.executeSync(
@@ -4933,21 +4950,25 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeSuccessData: sse_decode_live_message_color,
           decodeErrorData: null,
         ),
-        constMeta: kCrateApiTypesLiveMessageColorFromIntConstMeta,
+        constMeta:
+            kCrateApiModelsLiveMessageColorLiveMessageColorFromIntConstMeta,
         argValues: [intColor],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateApiTypesLiveMessageColorFromIntConstMeta =>
+  TaskConstMeta
+  get kCrateApiModelsLiveMessageColorLiveMessageColorFromIntConstMeta =>
       const TaskConstMeta(
         debugName: "live_message_color_from_int",
         argNames: ["intColor"],
       );
 
   @override
-  String crateApiTypesLiveMessageColorToHex({required LiveMessageColor that}) {
+  String crateApiModelsLiveMessageColorLiveMessageColorToHex({
+    required LiveMessageColor that,
+  }) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
@@ -4963,21 +4984,23 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeSuccessData: sse_decode_String,
           decodeErrorData: null,
         ),
-        constMeta: kCrateApiTypesLiveMessageColorToHexConstMeta,
+        constMeta:
+            kCrateApiModelsLiveMessageColorLiveMessageColorToHexConstMeta,
         argValues: [that],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateApiTypesLiveMessageColorToHexConstMeta =>
+  TaskConstMeta
+  get kCrateApiModelsLiveMessageColorLiveMessageColorToHexConstMeta =>
       const TaskConstMeta(
         debugName: "live_message_color_to_hex",
         argNames: ["that"],
       );
 
   @override
-  LiveMessageColor crateApiTypesLiveMessageColorWhite() {
+  LiveMessageColor crateApiModelsLiveMessageColorLiveMessageColorWhite() {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
@@ -4992,14 +5015,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeSuccessData: sse_decode_live_message_color,
           decodeErrorData: null,
         ),
-        constMeta: kCrateApiTypesLiveMessageColorWhiteConstMeta,
+        constMeta:
+            kCrateApiModelsLiveMessageColorLiveMessageColorWhiteConstMeta,
         argValues: [],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateApiTypesLiveMessageColorWhiteConstMeta =>
+  TaskConstMeta
+  get kCrateApiModelsLiveMessageColorLiveMessageColorWhiteConstMeta =>
       const TaskConstMeta(debugName: "live_message_color_white", argNames: []);
 
   @override
