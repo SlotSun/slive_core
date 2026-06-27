@@ -76,7 +76,8 @@ void testSite(LiveSite site) async {
 
   LiveRoomDetail? roomDetail;
   test('getRoomDetail', () async {
-    roomDetail = await site.getRoomDetail(roomId: '7777');
+    final roomId = site is TwitchSite ? 'valorant_northamerica' : '7777';
+    roomDetail = await site.getRoomDetail(roomId: roomId);
     expect(roomDetail, isNotNull);
     expect(roomDetail?.roomId, isNotEmpty);
     print(roomDetail);
