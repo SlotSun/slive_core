@@ -11,6 +11,8 @@ import 'api/models/live_category.dart';
 import 'api/models/live_category_result.dart';
 import 'api/models/live_danmu_control_event.dart';
 import 'api/models/live_danmu_item.dart';
+import 'api/models/live_mask_config.dart';
+import 'api/models/live_mask_stats.dart';
 import 'api/models/live_message.dart';
 import 'api/models/live_message_color.dart';
 import 'api/models/live_message_type.dart';
@@ -85,7 +87,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.12.0';
 
   @override
-  int get rustContentHash => 260393484;
+  int get rustContentHash => 1668244035;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -97,12 +99,18 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
 }
 
 abstract class RustLibApi extends BaseApi {
+  Future<void> crateApiDanmakuLiveBilibiliDanmakuProviderClearMask({
+    required LiveBilibiliDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  });
+
   Future<LiveDanmuConnection>
   crateApiDanmakuLiveBilibiliDanmakuProviderConnect({
     required LiveBilibiliDanmakuProvider that,
     required String roomId,
     String? cookies,
     String? danmakuData,
+    LiveMaskConfig? maskConfig,
   });
 
   Future<void> crateApiDanmakuLiveBilibiliDanmakuProviderDisconnect({
@@ -115,10 +123,20 @@ abstract class RustLibApi extends BaseApi {
     required String url,
   });
 
+  Future<LiveMaskStats> crateApiDanmakuLiveBilibiliDanmakuProviderGetMaskStats({
+    required LiveBilibiliDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  });
+
   Future<LiveBilibiliDanmakuProvider>
   crateApiDanmakuLiveBilibiliDanmakuProviderNew();
 
   Future<LiveDanmuItem?> crateApiDanmakuLiveBilibiliDanmakuProviderReceive({
+    required LiveBilibiliDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  });
+
+  Future<void> crateApiDanmakuLiveBilibiliDanmakuProviderResetMaskStats({
     required LiveBilibiliDanmakuProvider that,
     required LiveDanmuConnection connection,
   });
@@ -205,6 +223,10 @@ abstract class RustLibApi extends BaseApi {
     required String url,
   });
 
+  Future<String> crateApiDanmakuLiveDanmuConnectionId({
+    required LiveDanmuConnection that,
+  });
+
   Future<bool> crateApiDanmakuLiveDanmuConnectionIsConnected({
     required LiveDanmuConnection that,
   });
@@ -217,11 +239,17 @@ abstract class RustLibApi extends BaseApi {
     required LiveDanmuConnection that,
   });
 
+  Future<void> crateApiDanmakuLiveDouyinDanmakuProviderClearMask({
+    required LiveDouyinDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  });
+
   Future<LiveDanmuConnection> crateApiDanmakuLiveDouyinDanmakuProviderConnect({
     required LiveDouyinDanmakuProvider that,
     required String roomId,
     String? cookies,
     String? danmakuData,
+    LiveMaskConfig? maskConfig,
   });
 
   Future<void> crateApiDanmakuLiveDouyinDanmakuProviderDisconnect({
@@ -234,10 +262,20 @@ abstract class RustLibApi extends BaseApi {
     required String url,
   });
 
+  Future<LiveMaskStats> crateApiDanmakuLiveDouyinDanmakuProviderGetMaskStats({
+    required LiveDouyinDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  });
+
   Future<LiveDouyinDanmakuProvider>
   crateApiDanmakuLiveDouyinDanmakuProviderNew();
 
   Future<LiveDanmuItem?> crateApiDanmakuLiveDouyinDanmakuProviderReceive({
+    required LiveDouyinDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  });
+
+  Future<void> crateApiDanmakuLiveDouyinDanmakuProviderResetMaskStats({
     required LiveDouyinDanmakuProvider that,
     required LiveDanmuConnection connection,
   });
@@ -322,11 +360,17 @@ abstract class RustLibApi extends BaseApi {
     required String url,
   });
 
+  Future<void> crateApiDanmakuLiveDouyuDanmakuProviderClearMask({
+    required LiveDouyuDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  });
+
   Future<LiveDanmuConnection> crateApiDanmakuLiveDouyuDanmakuProviderConnect({
     required LiveDouyuDanmakuProvider that,
     required String roomId,
     String? cookies,
     String? danmakuData,
+    LiveMaskConfig? maskConfig,
   });
 
   Future<void> crateApiDanmakuLiveDouyuDanmakuProviderDisconnect({
@@ -339,9 +383,19 @@ abstract class RustLibApi extends BaseApi {
     required String url,
   });
 
+  Future<LiveMaskStats> crateApiDanmakuLiveDouyuDanmakuProviderGetMaskStats({
+    required LiveDouyuDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  });
+
   Future<LiveDouyuDanmakuProvider> crateApiDanmakuLiveDouyuDanmakuProviderNew();
 
   Future<LiveDanmuItem?> crateApiDanmakuLiveDouyuDanmakuProviderReceive({
+    required LiveDouyuDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  });
+
+  Future<void> crateApiDanmakuLiveDouyuDanmakuProviderResetMaskStats({
     required LiveDouyuDanmakuProvider that,
     required LiveDanmuConnection connection,
   });
@@ -426,11 +480,17 @@ abstract class RustLibApi extends BaseApi {
     required String url,
   });
 
+  Future<void> crateApiDanmakuLiveHuyaDanmakuProviderClearMask({
+    required LiveHuyaDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  });
+
   Future<LiveDanmuConnection> crateApiDanmakuLiveHuyaDanmakuProviderConnect({
     required LiveHuyaDanmakuProvider that,
     required String roomId,
     String? cookies,
     String? danmakuData,
+    LiveMaskConfig? maskConfig,
   });
 
   Future<void> crateApiDanmakuLiveHuyaDanmakuProviderDisconnect({
@@ -443,9 +503,19 @@ abstract class RustLibApi extends BaseApi {
     required String url,
   });
 
+  Future<LiveMaskStats> crateApiDanmakuLiveHuyaDanmakuProviderGetMaskStats({
+    required LiveHuyaDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  });
+
   Future<LiveHuyaDanmakuProvider> crateApiDanmakuLiveHuyaDanmakuProviderNew();
 
   Future<LiveDanmuItem?> crateApiDanmakuLiveHuyaDanmakuProviderReceive({
+    required LiveHuyaDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  });
+
+  Future<void> crateApiDanmakuLiveHuyaDanmakuProviderResetMaskStats({
     required LiveHuyaDanmakuProvider that,
     required LiveDanmuConnection connection,
   });
@@ -535,11 +605,17 @@ abstract class RustLibApi extends BaseApi {
     required String url,
   });
 
+  Future<void> crateApiDanmakuLiveTwitchDanmakuProviderClearMask({
+    required LiveTwitchDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  });
+
   Future<LiveDanmuConnection> crateApiDanmakuLiveTwitchDanmakuProviderConnect({
     required LiveTwitchDanmakuProvider that,
     required String roomId,
     String? cookies,
     String? danmakuData,
+    LiveMaskConfig? maskConfig,
   });
 
   Future<void> crateApiDanmakuLiveTwitchDanmakuProviderDisconnect({
@@ -552,10 +628,20 @@ abstract class RustLibApi extends BaseApi {
     required String url,
   });
 
+  Future<LiveMaskStats> crateApiDanmakuLiveTwitchDanmakuProviderGetMaskStats({
+    required LiveTwitchDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  });
+
   Future<LiveTwitchDanmakuProvider>
   crateApiDanmakuLiveTwitchDanmakuProviderNew();
 
   Future<LiveDanmuItem?> crateApiDanmakuLiveTwitchDanmakuProviderReceive({
+    required LiveTwitchDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  });
+
+  Future<void> crateApiDanmakuLiveTwitchDanmakuProviderResetMaskStats({
     required LiveTwitchDanmakuProvider that,
     required LiveDanmuConnection connection,
   });
@@ -773,12 +859,56 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   });
 
   @override
+  Future<void> crateApiDanmakuLiveBilibiliDanmakuProviderClearMask({
+    required LiveBilibiliDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveBilibiliDanmakuProvider(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveDanmuConnection(
+            connection,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 1,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiDanmakuLiveBilibiliDanmakuProviderClearMaskConstMeta,
+        argValues: [that, connection],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiDanmakuLiveBilibiliDanmakuProviderClearMaskConstMeta =>
+      const TaskConstMeta(
+        debugName: "LiveBilibiliDanmakuProvider_clear_mask",
+        argNames: ["that", "connection"],
+      );
+
+  @override
   Future<LiveDanmuConnection>
   crateApiDanmakuLiveBilibiliDanmakuProviderConnect({
     required LiveBilibiliDanmakuProvider that,
     required String roomId,
     String? cookies,
     String? danmakuData,
+    LiveMaskConfig? maskConfig,
   }) {
     return handler.executeNormal(
       NormalTask(
@@ -791,10 +921,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           sse_encode_String(roomId, serializer);
           sse_encode_opt_String(cookies, serializer);
           sse_encode_opt_String(danmakuData, serializer);
+          sse_encode_opt_box_autoadd_live_mask_config(maskConfig, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 1,
+            funcId: 2,
             port: port_,
           );
         },
@@ -804,7 +935,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeErrorData: sse_decode_AnyhowException,
         ),
         constMeta: kCrateApiDanmakuLiveBilibiliDanmakuProviderConnectConstMeta,
-        argValues: [that, roomId, cookies, danmakuData],
+        argValues: [that, roomId, cookies, danmakuData, maskConfig],
         apiImpl: this,
       ),
     );
@@ -814,7 +945,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   get kCrateApiDanmakuLiveBilibiliDanmakuProviderConnectConstMeta =>
       const TaskConstMeta(
         debugName: "LiveBilibiliDanmakuProvider_connect",
-        argNames: ["that", "roomId", "cookies", "danmakuData"],
+        argNames: ["that", "roomId", "cookies", "danmakuData", "maskConfig"],
       );
 
   @override
@@ -837,7 +968,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 2,
+            funcId: 3,
             port: port_,
           );
         },
@@ -877,7 +1008,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 3,
+            funcId: 4,
             port: port_,
           );
         },
@@ -901,6 +1032,49 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<LiveMaskStats> crateApiDanmakuLiveBilibiliDanmakuProviderGetMaskStats({
+    required LiveBilibiliDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveBilibiliDanmakuProvider(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveDanmuConnection(
+            connection,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 5,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_live_mask_stats,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiDanmakuLiveBilibiliDanmakuProviderGetMaskStatsConstMeta,
+        argValues: [that, connection],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiDanmakuLiveBilibiliDanmakuProviderGetMaskStatsConstMeta =>
+      const TaskConstMeta(
+        debugName: "LiveBilibiliDanmakuProvider_get_mask_stats",
+        argNames: ["that", "connection"],
+      );
+
+  @override
   Future<LiveBilibiliDanmakuProvider>
   crateApiDanmakuLiveBilibiliDanmakuProviderNew() {
     return handler.executeNormal(
@@ -910,7 +1084,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 4,
+            funcId: 6,
             port: port_,
           );
         },
@@ -952,7 +1126,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 5,
+            funcId: 7,
             port: port_,
           );
         },
@@ -975,6 +1149,49 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<void> crateApiDanmakuLiveBilibiliDanmakuProviderResetMaskStats({
+    required LiveBilibiliDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveBilibiliDanmakuProvider(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveDanmuConnection(
+            connection,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 8,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiDanmakuLiveBilibiliDanmakuProviderResetMaskStatsConstMeta,
+        argValues: [that, connection],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiDanmakuLiveBilibiliDanmakuProviderResetMaskStatsConstMeta =>
+      const TaskConstMeta(
+        debugName: "LiveBilibiliDanmakuProvider_reset_mask_stats",
+        argNames: ["that", "connection"],
+      );
+
+  @override
   Future<bool> crateApiDanmakuLiveBilibiliDanmakuProviderSupportsUrl({
     required LiveBilibiliDanmakuProvider that,
     required String url,
@@ -991,7 +1208,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 6,
+            funcId: 9,
             port: port_,
           );
         },
@@ -1031,7 +1248,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 7,
+            funcId: 10,
             port: port_,
           );
         },
@@ -1070,7 +1287,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 8,
+            funcId: 11,
             port: port_,
           );
         },
@@ -1113,7 +1330,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 9,
+            funcId: 12,
             port: port_,
           );
         },
@@ -1153,7 +1370,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 10,
+            funcId: 13,
             port: port_,
           );
         },
@@ -1194,7 +1411,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 11,
+            funcId: 14,
             port: port_,
           );
         },
@@ -1236,7 +1453,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 12,
+            funcId: 15,
             port: port_,
           );
         },
@@ -1276,7 +1493,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 13,
+            funcId: 16,
             port: port_,
           );
         },
@@ -1316,7 +1533,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 14,
+            funcId: 17,
             port: port_,
           );
         },
@@ -1357,7 +1574,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 15,
+            funcId: 18,
             port: port_,
           );
         },
@@ -1389,7 +1606,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 16,
+            funcId: 19,
             port: port_,
           );
         },
@@ -1428,7 +1645,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 17,
+            funcId: 20,
             port: port_,
           );
         },
@@ -1471,7 +1688,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 18,
+            funcId: 21,
             port: port_,
           );
         },
@@ -1510,7 +1727,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 19,
+            funcId: 22,
             port: port_,
           );
         },
@@ -1549,7 +1766,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 20,
+            funcId: 23,
             port: port_,
           );
         },
@@ -1572,6 +1789,42 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<String> crateApiDanmakuLiveDanmuConnectionId({
+    required LiveDanmuConnection that,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveDanmuConnection(
+            that,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 24,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_String,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiDanmakuLiveDanmuConnectionIdConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiDanmakuLiveDanmuConnectionIdConstMeta =>
+      const TaskConstMeta(
+        debugName: "LiveDanmuConnection_id",
+        argNames: ["that"],
+      );
+
+  @override
   Future<bool> crateApiDanmakuLiveDanmuConnectionIsConnected({
     required LiveDanmuConnection that,
   }) {
@@ -1586,7 +1839,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 21,
+            funcId: 25,
             port: port_,
           );
         },
@@ -1622,7 +1875,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 22,
+            funcId: 26,
             port: port_,
           );
         },
@@ -1658,7 +1911,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 23,
+            funcId: 27,
             port: port_,
           );
         },
@@ -1680,11 +1933,54 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<void> crateApiDanmakuLiveDouyinDanmakuProviderClearMask({
+    required LiveDouyinDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveDouyinDanmakuProvider(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveDanmuConnection(
+            connection,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 28,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiDanmakuLiveDouyinDanmakuProviderClearMaskConstMeta,
+        argValues: [that, connection],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiDanmakuLiveDouyinDanmakuProviderClearMaskConstMeta =>
+      const TaskConstMeta(
+        debugName: "LiveDouyinDanmakuProvider_clear_mask",
+        argNames: ["that", "connection"],
+      );
+
+  @override
   Future<LiveDanmuConnection> crateApiDanmakuLiveDouyinDanmakuProviderConnect({
     required LiveDouyinDanmakuProvider that,
     required String roomId,
     String? cookies,
     String? danmakuData,
+    LiveMaskConfig? maskConfig,
   }) {
     return handler.executeNormal(
       NormalTask(
@@ -1697,10 +1993,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           sse_encode_String(roomId, serializer);
           sse_encode_opt_String(cookies, serializer);
           sse_encode_opt_String(danmakuData, serializer);
+          sse_encode_opt_box_autoadd_live_mask_config(maskConfig, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 24,
+            funcId: 29,
             port: port_,
           );
         },
@@ -1710,7 +2007,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeErrorData: sse_decode_AnyhowException,
         ),
         constMeta: kCrateApiDanmakuLiveDouyinDanmakuProviderConnectConstMeta,
-        argValues: [that, roomId, cookies, danmakuData],
+        argValues: [that, roomId, cookies, danmakuData, maskConfig],
         apiImpl: this,
       ),
     );
@@ -1719,7 +2016,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   TaskConstMeta get kCrateApiDanmakuLiveDouyinDanmakuProviderConnectConstMeta =>
       const TaskConstMeta(
         debugName: "LiveDouyinDanmakuProvider_connect",
-        argNames: ["that", "roomId", "cookies", "danmakuData"],
+        argNames: ["that", "roomId", "cookies", "danmakuData", "maskConfig"],
       );
 
   @override
@@ -1742,7 +2039,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 25,
+            funcId: 30,
             port: port_,
           );
         },
@@ -1781,7 +2078,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 26,
+            funcId: 31,
             port: port_,
           );
         },
@@ -1805,6 +2102,49 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<LiveMaskStats> crateApiDanmakuLiveDouyinDanmakuProviderGetMaskStats({
+    required LiveDouyinDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveDouyinDanmakuProvider(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveDanmuConnection(
+            connection,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 32,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_live_mask_stats,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiDanmakuLiveDouyinDanmakuProviderGetMaskStatsConstMeta,
+        argValues: [that, connection],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiDanmakuLiveDouyinDanmakuProviderGetMaskStatsConstMeta =>
+      const TaskConstMeta(
+        debugName: "LiveDouyinDanmakuProvider_get_mask_stats",
+        argNames: ["that", "connection"],
+      );
+
+  @override
   Future<LiveDouyinDanmakuProvider>
   crateApiDanmakuLiveDouyinDanmakuProviderNew() {
     return handler.executeNormal(
@@ -1814,7 +2154,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 27,
+            funcId: 33,
             port: port_,
           );
         },
@@ -1856,7 +2196,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 28,
+            funcId: 34,
             port: port_,
           );
         },
@@ -1878,6 +2218,49 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<void> crateApiDanmakuLiveDouyinDanmakuProviderResetMaskStats({
+    required LiveDouyinDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveDouyinDanmakuProvider(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveDanmuConnection(
+            connection,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 35,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiDanmakuLiveDouyinDanmakuProviderResetMaskStatsConstMeta,
+        argValues: [that, connection],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiDanmakuLiveDouyinDanmakuProviderResetMaskStatsConstMeta =>
+      const TaskConstMeta(
+        debugName: "LiveDouyinDanmakuProvider_reset_mask_stats",
+        argNames: ["that", "connection"],
+      );
+
+  @override
   Future<bool> crateApiDanmakuLiveDouyinDanmakuProviderSupportsUrl({
     required LiveDouyinDanmakuProvider that,
     required String url,
@@ -1894,7 +2277,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 29,
+            funcId: 36,
             port: port_,
           );
         },
@@ -1934,7 +2317,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 30,
+            funcId: 37,
             port: port_,
           );
         },
@@ -1971,7 +2354,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 31,
+            funcId: 38,
             port: port_,
           );
         },
@@ -2013,7 +2396,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 32,
+            funcId: 39,
             port: port_,
           );
         },
@@ -2053,7 +2436,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 33,
+            funcId: 40,
             port: port_,
           );
         },
@@ -2093,7 +2476,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 34,
+            funcId: 41,
             port: port_,
           );
         },
@@ -2135,7 +2518,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 35,
+            funcId: 42,
             port: port_,
           );
         },
@@ -2174,7 +2557,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 36,
+            funcId: 43,
             port: port_,
           );
         },
@@ -2214,7 +2597,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 37,
+            funcId: 44,
             port: port_,
           );
         },
@@ -2254,7 +2637,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 38,
+            funcId: 45,
             port: port_,
           );
         },
@@ -2286,7 +2669,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 39,
+            funcId: 46,
             port: port_,
           );
         },
@@ -2325,7 +2708,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 40,
+            funcId: 47,
             port: port_,
           );
         },
@@ -2366,7 +2749,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 41,
+            funcId: 48,
             port: port_,
           );
         },
@@ -2404,7 +2787,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 42,
+            funcId: 49,
             port: port_,
           );
         },
@@ -2442,7 +2825,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 43,
+            funcId: 50,
             port: port_,
           );
         },
@@ -2464,11 +2847,54 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<void> crateApiDanmakuLiveDouyuDanmakuProviderClearMask({
+    required LiveDouyuDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveDouyuDanmakuProvider(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveDanmuConnection(
+            connection,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 51,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiDanmakuLiveDouyuDanmakuProviderClearMaskConstMeta,
+        argValues: [that, connection],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiDanmakuLiveDouyuDanmakuProviderClearMaskConstMeta =>
+      const TaskConstMeta(
+        debugName: "LiveDouyuDanmakuProvider_clear_mask",
+        argNames: ["that", "connection"],
+      );
+
+  @override
   Future<LiveDanmuConnection> crateApiDanmakuLiveDouyuDanmakuProviderConnect({
     required LiveDouyuDanmakuProvider that,
     required String roomId,
     String? cookies,
     String? danmakuData,
+    LiveMaskConfig? maskConfig,
   }) {
     return handler.executeNormal(
       NormalTask(
@@ -2481,10 +2907,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           sse_encode_String(roomId, serializer);
           sse_encode_opt_String(cookies, serializer);
           sse_encode_opt_String(danmakuData, serializer);
+          sse_encode_opt_box_autoadd_live_mask_config(maskConfig, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 44,
+            funcId: 52,
             port: port_,
           );
         },
@@ -2494,7 +2921,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeErrorData: sse_decode_AnyhowException,
         ),
         constMeta: kCrateApiDanmakuLiveDouyuDanmakuProviderConnectConstMeta,
-        argValues: [that, roomId, cookies, danmakuData],
+        argValues: [that, roomId, cookies, danmakuData, maskConfig],
         apiImpl: this,
       ),
     );
@@ -2503,7 +2930,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   TaskConstMeta get kCrateApiDanmakuLiveDouyuDanmakuProviderConnectConstMeta =>
       const TaskConstMeta(
         debugName: "LiveDouyuDanmakuProvider_connect",
-        argNames: ["that", "roomId", "cookies", "danmakuData"],
+        argNames: ["that", "roomId", "cookies", "danmakuData", "maskConfig"],
       );
 
   @override
@@ -2526,7 +2953,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 45,
+            funcId: 53,
             port: port_,
           );
         },
@@ -2565,7 +2992,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 46,
+            funcId: 54,
             port: port_,
           );
         },
@@ -2589,6 +3016,49 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<LiveMaskStats> crateApiDanmakuLiveDouyuDanmakuProviderGetMaskStats({
+    required LiveDouyuDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveDouyuDanmakuProvider(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveDanmuConnection(
+            connection,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 55,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_live_mask_stats,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiDanmakuLiveDouyuDanmakuProviderGetMaskStatsConstMeta,
+        argValues: [that, connection],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiDanmakuLiveDouyuDanmakuProviderGetMaskStatsConstMeta =>
+      const TaskConstMeta(
+        debugName: "LiveDouyuDanmakuProvider_get_mask_stats",
+        argNames: ["that", "connection"],
+      );
+
+  @override
   Future<LiveDouyuDanmakuProvider>
   crateApiDanmakuLiveDouyuDanmakuProviderNew() {
     return handler.executeNormal(
@@ -2598,7 +3068,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 47,
+            funcId: 56,
             port: port_,
           );
         },
@@ -2640,7 +3110,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 48,
+            funcId: 57,
             port: port_,
           );
         },
@@ -2662,6 +3132,49 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<void> crateApiDanmakuLiveDouyuDanmakuProviderResetMaskStats({
+    required LiveDouyuDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveDouyuDanmakuProvider(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveDanmuConnection(
+            connection,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 58,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiDanmakuLiveDouyuDanmakuProviderResetMaskStatsConstMeta,
+        argValues: [that, connection],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiDanmakuLiveDouyuDanmakuProviderResetMaskStatsConstMeta =>
+      const TaskConstMeta(
+        debugName: "LiveDouyuDanmakuProvider_reset_mask_stats",
+        argNames: ["that", "connection"],
+      );
+
+  @override
   Future<bool> crateApiDanmakuLiveDouyuDanmakuProviderSupportsUrl({
     required LiveDouyuDanmakuProvider that,
     required String url,
@@ -2678,7 +3191,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 49,
+            funcId: 59,
             port: port_,
           );
         },
@@ -2717,7 +3230,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 50,
+            funcId: 60,
             port: port_,
           );
         },
@@ -2754,7 +3267,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 51,
+            funcId: 61,
             port: port_,
           );
         },
@@ -2796,7 +3309,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 52,
+            funcId: 62,
             port: port_,
           );
         },
@@ -2836,7 +3349,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 53,
+            funcId: 63,
             port: port_,
           );
         },
@@ -2876,7 +3389,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 54,
+            funcId: 64,
             port: port_,
           );
         },
@@ -2918,7 +3431,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 55,
+            funcId: 65,
             port: port_,
           );
         },
@@ -2957,7 +3470,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 56,
+            funcId: 66,
             port: port_,
           );
         },
@@ -2997,7 +3510,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 57,
+            funcId: 67,
             port: port_,
           );
         },
@@ -3037,7 +3550,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 58,
+            funcId: 68,
             port: port_,
           );
         },
@@ -3069,7 +3582,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 59,
+            funcId: 69,
             port: port_,
           );
         },
@@ -3108,7 +3621,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 60,
+            funcId: 70,
             port: port_,
           );
         },
@@ -3149,7 +3662,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 61,
+            funcId: 71,
             port: port_,
           );
         },
@@ -3187,7 +3700,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 62,
+            funcId: 72,
             port: port_,
           );
         },
@@ -3225,7 +3738,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 63,
+            funcId: 73,
             port: port_,
           );
         },
@@ -3247,11 +3760,53 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<void> crateApiDanmakuLiveHuyaDanmakuProviderClearMask({
+    required LiveHuyaDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveHuyaDanmakuProvider(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveDanmuConnection(
+            connection,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 74,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiDanmakuLiveHuyaDanmakuProviderClearMaskConstMeta,
+        argValues: [that, connection],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiDanmakuLiveHuyaDanmakuProviderClearMaskConstMeta =>
+      const TaskConstMeta(
+        debugName: "LiveHuyaDanmakuProvider_clear_mask",
+        argNames: ["that", "connection"],
+      );
+
+  @override
   Future<LiveDanmuConnection> crateApiDanmakuLiveHuyaDanmakuProviderConnect({
     required LiveHuyaDanmakuProvider that,
     required String roomId,
     String? cookies,
     String? danmakuData,
+    LiveMaskConfig? maskConfig,
   }) {
     return handler.executeNormal(
       NormalTask(
@@ -3264,10 +3819,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           sse_encode_String(roomId, serializer);
           sse_encode_opt_String(cookies, serializer);
           sse_encode_opt_String(danmakuData, serializer);
+          sse_encode_opt_box_autoadd_live_mask_config(maskConfig, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 64,
+            funcId: 75,
             port: port_,
           );
         },
@@ -3277,7 +3833,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeErrorData: sse_decode_AnyhowException,
         ),
         constMeta: kCrateApiDanmakuLiveHuyaDanmakuProviderConnectConstMeta,
-        argValues: [that, roomId, cookies, danmakuData],
+        argValues: [that, roomId, cookies, danmakuData, maskConfig],
         apiImpl: this,
       ),
     );
@@ -3286,7 +3842,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   TaskConstMeta get kCrateApiDanmakuLiveHuyaDanmakuProviderConnectConstMeta =>
       const TaskConstMeta(
         debugName: "LiveHuyaDanmakuProvider_connect",
-        argNames: ["that", "roomId", "cookies", "danmakuData"],
+        argNames: ["that", "roomId", "cookies", "danmakuData", "maskConfig"],
       );
 
   @override
@@ -3309,7 +3865,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 65,
+            funcId: 76,
             port: port_,
           );
         },
@@ -3348,7 +3904,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 66,
+            funcId: 77,
             port: port_,
           );
         },
@@ -3372,6 +3928,48 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<LiveMaskStats> crateApiDanmakuLiveHuyaDanmakuProviderGetMaskStats({
+    required LiveHuyaDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveHuyaDanmakuProvider(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveDanmuConnection(
+            connection,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 78,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_live_mask_stats,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiDanmakuLiveHuyaDanmakuProviderGetMaskStatsConstMeta,
+        argValues: [that, connection],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiDanmakuLiveHuyaDanmakuProviderGetMaskStatsConstMeta =>
+      const TaskConstMeta(
+        debugName: "LiveHuyaDanmakuProvider_get_mask_stats",
+        argNames: ["that", "connection"],
+      );
+
+  @override
   Future<LiveHuyaDanmakuProvider> crateApiDanmakuLiveHuyaDanmakuProviderNew() {
     return handler.executeNormal(
       NormalTask(
@@ -3380,7 +3978,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 67,
+            funcId: 79,
             port: port_,
           );
         },
@@ -3422,7 +4020,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 68,
+            funcId: 80,
             port: port_,
           );
         },
@@ -3444,6 +4042,49 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<void> crateApiDanmakuLiveHuyaDanmakuProviderResetMaskStats({
+    required LiveHuyaDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveHuyaDanmakuProvider(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveDanmuConnection(
+            connection,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 81,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiDanmakuLiveHuyaDanmakuProviderResetMaskStatsConstMeta,
+        argValues: [that, connection],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiDanmakuLiveHuyaDanmakuProviderResetMaskStatsConstMeta =>
+      const TaskConstMeta(
+        debugName: "LiveHuyaDanmakuProvider_reset_mask_stats",
+        argNames: ["that", "connection"],
+      );
+
+  @override
   Future<bool> crateApiDanmakuLiveHuyaDanmakuProviderSupportsUrl({
     required LiveHuyaDanmakuProvider that,
     required String url,
@@ -3460,7 +4101,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 69,
+            funcId: 82,
             port: port_,
           );
         },
@@ -3499,7 +4140,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 70,
+            funcId: 83,
             port: port_,
           );
         },
@@ -3535,7 +4176,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 71,
+            funcId: 84,
             port: port_,
           );
         },
@@ -3576,7 +4217,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 72,
+            funcId: 85,
             port: port_,
           );
         },
@@ -3615,7 +4256,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 73,
+            funcId: 86,
             port: port_,
           );
         },
@@ -3654,7 +4295,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 74,
+            funcId: 87,
             port: port_,
           );
         },
@@ -3695,7 +4336,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 75,
+            funcId: 88,
             port: port_,
           );
         },
@@ -3734,7 +4375,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 76,
+            funcId: 89,
             port: port_,
           );
         },
@@ -3774,7 +4415,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 77,
+            funcId: 90,
             port: port_,
           );
         },
@@ -3813,7 +4454,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 78,
+            funcId: 91,
             port: port_,
           );
         },
@@ -3845,7 +4486,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 79,
+            funcId: 92,
             port: port_,
           );
         },
@@ -3884,7 +4525,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 80,
+            funcId: 93,
             port: port_,
           );
         },
@@ -3924,7 +4565,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 81,
+            funcId: 94,
             port: port_,
           );
         },
@@ -3962,7 +4603,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 82,
+            funcId: 95,
             port: port_,
           );
         },
@@ -4000,7 +4641,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 83,
+            funcId: 96,
             port: port_,
           );
         },
@@ -4038,7 +4679,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 84,
+            funcId: 97,
             port: port_,
           );
         },
@@ -4060,11 +4701,54 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<void> crateApiDanmakuLiveTwitchDanmakuProviderClearMask({
+    required LiveTwitchDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveTwitchDanmakuProvider(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveDanmuConnection(
+            connection,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 98,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiDanmakuLiveTwitchDanmakuProviderClearMaskConstMeta,
+        argValues: [that, connection],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiDanmakuLiveTwitchDanmakuProviderClearMaskConstMeta =>
+      const TaskConstMeta(
+        debugName: "LiveTwitchDanmakuProvider_clear_mask",
+        argNames: ["that", "connection"],
+      );
+
+  @override
   Future<LiveDanmuConnection> crateApiDanmakuLiveTwitchDanmakuProviderConnect({
     required LiveTwitchDanmakuProvider that,
     required String roomId,
     String? cookies,
     String? danmakuData,
+    LiveMaskConfig? maskConfig,
   }) {
     return handler.executeNormal(
       NormalTask(
@@ -4077,10 +4761,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           sse_encode_String(roomId, serializer);
           sse_encode_opt_String(cookies, serializer);
           sse_encode_opt_String(danmakuData, serializer);
+          sse_encode_opt_box_autoadd_live_mask_config(maskConfig, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 85,
+            funcId: 99,
             port: port_,
           );
         },
@@ -4090,7 +4775,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeErrorData: sse_decode_AnyhowException,
         ),
         constMeta: kCrateApiDanmakuLiveTwitchDanmakuProviderConnectConstMeta,
-        argValues: [that, roomId, cookies, danmakuData],
+        argValues: [that, roomId, cookies, danmakuData, maskConfig],
         apiImpl: this,
       ),
     );
@@ -4099,7 +4784,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   TaskConstMeta get kCrateApiDanmakuLiveTwitchDanmakuProviderConnectConstMeta =>
       const TaskConstMeta(
         debugName: "LiveTwitchDanmakuProvider_connect",
-        argNames: ["that", "roomId", "cookies", "danmakuData"],
+        argNames: ["that", "roomId", "cookies", "danmakuData", "maskConfig"],
       );
 
   @override
@@ -4122,7 +4807,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 86,
+            funcId: 100,
             port: port_,
           );
         },
@@ -4161,7 +4846,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 87,
+            funcId: 101,
             port: port_,
           );
         },
@@ -4185,6 +4870,49 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<LiveMaskStats> crateApiDanmakuLiveTwitchDanmakuProviderGetMaskStats({
+    required LiveTwitchDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveTwitchDanmakuProvider(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveDanmuConnection(
+            connection,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 102,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_live_mask_stats,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiDanmakuLiveTwitchDanmakuProviderGetMaskStatsConstMeta,
+        argValues: [that, connection],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiDanmakuLiveTwitchDanmakuProviderGetMaskStatsConstMeta =>
+      const TaskConstMeta(
+        debugName: "LiveTwitchDanmakuProvider_get_mask_stats",
+        argNames: ["that", "connection"],
+      );
+
+  @override
   Future<LiveTwitchDanmakuProvider>
   crateApiDanmakuLiveTwitchDanmakuProviderNew() {
     return handler.executeNormal(
@@ -4194,7 +4922,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 88,
+            funcId: 103,
             port: port_,
           );
         },
@@ -4236,7 +4964,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 89,
+            funcId: 104,
             port: port_,
           );
         },
@@ -4258,6 +4986,49 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<void> crateApiDanmakuLiveTwitchDanmakuProviderResetMaskStats({
+    required LiveTwitchDanmakuProvider that,
+    required LiveDanmuConnection connection,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveTwitchDanmakuProvider(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLiveDanmuConnection(
+            connection,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 105,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiDanmakuLiveTwitchDanmakuProviderResetMaskStatsConstMeta,
+        argValues: [that, connection],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiDanmakuLiveTwitchDanmakuProviderResetMaskStatsConstMeta =>
+      const TaskConstMeta(
+        debugName: "LiveTwitchDanmakuProvider_reset_mask_stats",
+        argNames: ["that", "connection"],
+      );
+
+  @override
   Future<bool> crateApiDanmakuLiveTwitchDanmakuProviderSupportsUrl({
     required LiveTwitchDanmakuProvider that,
     required String url,
@@ -4274,7 +5045,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 90,
+            funcId: 106,
             port: port_,
           );
         },
@@ -4314,7 +5085,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 91,
+            funcId: 107,
             port: port_,
           );
         },
@@ -4351,7 +5122,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 92,
+            funcId: 108,
             port: port_,
           );
         },
@@ -4393,7 +5164,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 93,
+            funcId: 109,
             port: port_,
           );
         },
@@ -4433,7 +5204,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 94,
+            funcId: 110,
             port: port_,
           );
         },
@@ -4473,7 +5244,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 95,
+            funcId: 111,
             port: port_,
           );
         },
@@ -4515,7 +5286,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 96,
+            funcId: 112,
             port: port_,
           );
         },
@@ -4554,7 +5325,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 97,
+            funcId: 113,
             port: port_,
           );
         },
@@ -4594,7 +5365,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 98,
+            funcId: 114,
             port: port_,
           );
         },
@@ -4634,7 +5405,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 99,
+            funcId: 115,
             port: port_,
           );
         },
@@ -4666,7 +5437,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 100,
+            funcId: 116,
             port: port_,
           );
         },
@@ -4705,7 +5476,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 101,
+            funcId: 117,
             port: port_,
           );
         },
@@ -4746,7 +5517,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 102,
+            funcId: 118,
             port: port_,
           );
         },
@@ -4784,7 +5555,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 103,
+            funcId: 119,
             port: port_,
           );
         },
@@ -4822,7 +5593,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 104,
+            funcId: 120,
             port: port_,
           );
         },
@@ -4853,7 +5624,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 105,
+            funcId: 121,
             port: port_,
           );
         },
@@ -4883,7 +5654,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 106,
+            funcId: 122,
             port: port_,
           );
         },
@@ -4913,7 +5684,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 107,
+            funcId: 123,
             port: port_,
           );
         },
@@ -4943,7 +5714,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 108,
+            funcId: 124,
           )!;
         },
         codec: SseCodec(
@@ -4977,7 +5748,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 109,
+            funcId: 125,
           )!;
         },
         codec: SseCodec(
@@ -5008,7 +5779,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 110,
+            funcId: 126,
           )!;
         },
         codec: SseCodec(
@@ -5039,7 +5810,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 111,
+              funcId: 127,
               port: port_,
             );
           },
@@ -5068,7 +5839,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 112,
+            funcId: 128,
             port: port_,
           );
         },
@@ -5096,7 +5867,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 113,
+            funcId: 129,
             port: port_,
           );
         },
@@ -5444,6 +6215,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  int dco_decode_CastedPrimitive_u_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    throw UnimplementedError(
+      'Not implemented in this codec, please use the other one',
+    );
+  }
+
+  @protected
   Map<String, String> dco_decode_Map_String_String_None(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Map.fromEntries(
@@ -5592,6 +6371,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   LiveDanmuItem dco_decode_box_autoadd_live_danmu_item(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_live_danmu_item(raw);
+  }
+
+  @protected
+  LiveFrequencyConfig dco_decode_box_autoadd_live_frequency_config(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_live_frequency_config(raw);
+  }
+
+  @protected
+  LiveMaskConfig dco_decode_box_autoadd_live_mask_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_live_mask_config(raw);
   }
 
   @protected
@@ -5769,6 +6562,45 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       default:
         throw Exception("unreachable");
     }
+  }
+
+  @protected
+  LiveFrequencyConfig dco_decode_live_frequency_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 4)
+      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    return LiveFrequencyConfig(
+      baseWindowMs: dco_decode_u_32(arr[0]),
+      bucketCount: dco_decode_u_16(arr[1]),
+      useNormalization: dco_decode_bool(arr[2]),
+      maxFrequency: dco_decode_u_16(arr[3]),
+    );
+  }
+
+  @protected
+  LiveMaskConfig dco_decode_live_mask_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return LiveMaskConfig(
+      frequency: dco_decode_opt_box_autoadd_live_frequency_config(arr[0]),
+      blacklistWords: dco_decode_opt_list_String(arr[1]),
+    );
+  }
+
+  @protected
+  LiveMaskStats dco_decode_live_mask_stats(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 3)
+      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
+    return LiveMaskStats(
+      totalReceived: dco_decode_CastedPrimitive_u_64(arr[0]),
+      passed: dco_decode_CastedPrimitive_u_64(arr[1]),
+      blocked: dco_decode_CastedPrimitive_u_64(arr[2]),
+    );
   }
 
   @protected
@@ -5960,6 +6792,28 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  LiveFrequencyConfig? dco_decode_opt_box_autoadd_live_frequency_config(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null
+        ? null
+        : dco_decode_box_autoadd_live_frequency_config(raw);
+  }
+
+  @protected
+  LiveMaskConfig? dco_decode_opt_box_autoadd_live_mask_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_live_mask_config(raw);
+  }
+
+  @protected
+  List<String>? dco_decode_opt_list_String(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_list_String(raw);
+  }
+
+  @protected
   (String, String) dco_decode_record_string_string(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -5967,6 +6821,24 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       throw Exception('Expected 2 elements, got ${arr.length}');
     }
     return (dco_decode_String(arr[0]), dco_decode_String(arr[1]));
+  }
+
+  @protected
+  int dco_decode_u_16(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as int;
+  }
+
+  @protected
+  int dco_decode_u_32(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as int;
+  }
+
+  @protected
+  BigInt dco_decode_u_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dcoDecodeU64(raw);
   }
 
   @protected
@@ -6278,6 +7150,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  int sse_decode_CastedPrimitive_u_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_u_64(deserializer);
+    return inner.toInt();
+  }
+
+  @protected
   Map<String, String> sse_decode_Map_String_String_None(
     SseDeserializer deserializer,
   ) {
@@ -6453,6 +7332,22 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_live_danmu_item(deserializer));
+  }
+
+  @protected
+  LiveFrequencyConfig sse_decode_box_autoadd_live_frequency_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_live_frequency_config(deserializer));
+  }
+
+  @protected
+  LiveMaskConfig sse_decode_box_autoadd_live_mask_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_live_mask_config(deserializer));
   }
 
   @protected
@@ -6704,6 +7599,49 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  LiveFrequencyConfig sse_decode_live_frequency_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_baseWindowMs = sse_decode_u_32(deserializer);
+    var var_bucketCount = sse_decode_u_16(deserializer);
+    var var_useNormalization = sse_decode_bool(deserializer);
+    var var_maxFrequency = sse_decode_u_16(deserializer);
+    return LiveFrequencyConfig(
+      baseWindowMs: var_baseWindowMs,
+      bucketCount: var_bucketCount,
+      useNormalization: var_useNormalization,
+      maxFrequency: var_maxFrequency,
+    );
+  }
+
+  @protected
+  LiveMaskConfig sse_decode_live_mask_config(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_frequency = sse_decode_opt_box_autoadd_live_frequency_config(
+      deserializer,
+    );
+    var var_blacklistWords = sse_decode_opt_list_String(deserializer);
+    return LiveMaskConfig(
+      frequency: var_frequency,
+      blacklistWords: var_blacklistWords,
+    );
+  }
+
+  @protected
+  LiveMaskStats sse_decode_live_mask_stats(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_totalReceived = sse_decode_CastedPrimitive_u_64(deserializer);
+    var var_passed = sse_decode_CastedPrimitive_u_64(deserializer);
+    var var_blocked = sse_decode_CastedPrimitive_u_64(deserializer);
+    return LiveMaskStats(
+      totalReceived: var_totalReceived,
+      passed: var_passed,
+      blocked: var_blocked,
+    );
+  }
+
+  @protected
   LiveMessage sse_decode_live_message(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_id = sse_decode_String(deserializer);
@@ -6926,6 +7864,43 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  LiveFrequencyConfig? sse_decode_opt_box_autoadd_live_frequency_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_live_frequency_config(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  LiveMaskConfig? sse_decode_opt_box_autoadd_live_mask_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_live_mask_config(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  List<String>? sse_decode_opt_list_String(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_list_String(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
   (String, String) sse_decode_record_string_string(
     SseDeserializer deserializer,
   ) {
@@ -6933,6 +7908,24 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_field0 = sse_decode_String(deserializer);
     var var_field1 = sse_decode_String(deserializer);
     return (var_field0, var_field1);
+  }
+
+  @protected
+  int sse_decode_u_16(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getUint16();
+  }
+
+  @protected
+  int sse_decode_u_32(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getUint32();
+  }
+
+  @protected
+  BigInt sse_decode_u_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getBigUint64();
   }
 
   @protected
@@ -7271,6 +8264,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_CastedPrimitive_u_64(int self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_64(sseEncodeCastedPrimitiveU64(self), serializer);
+  }
+
+  @protected
   void sse_encode_Map_String_String_None(
     Map<String, String> self,
     SseSerializer serializer,
@@ -7472,6 +8471,24 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_live_danmu_item(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_live_frequency_config(
+    LiveFrequencyConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_live_frequency_config(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_live_mask_config(
+    LiveMaskConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_live_mask_config(self, serializer);
   }
 
   @protected
@@ -7700,6 +8717,42 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_live_frequency_config(
+    LiveFrequencyConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_32(self.baseWindowMs, serializer);
+    sse_encode_u_16(self.bucketCount, serializer);
+    sse_encode_bool(self.useNormalization, serializer);
+    sse_encode_u_16(self.maxFrequency, serializer);
+  }
+
+  @protected
+  void sse_encode_live_mask_config(
+    LiveMaskConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_opt_box_autoadd_live_frequency_config(
+      self.frequency,
+      serializer,
+    );
+    sse_encode_opt_list_String(self.blacklistWords, serializer);
+  }
+
+  @protected
+  void sse_encode_live_mask_stats(
+    LiveMaskStats self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_CastedPrimitive_u_64(self.totalReceived, serializer);
+    sse_encode_CastedPrimitive_u_64(self.passed, serializer);
+    sse_encode_CastedPrimitive_u_64(self.blocked, serializer);
+  }
+
+  @protected
   void sse_encode_live_message(LiveMessage self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_String(self.id, serializer);
@@ -7875,6 +8928,45 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_opt_box_autoadd_live_frequency_config(
+    LiveFrequencyConfig? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_live_frequency_config(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_live_mask_config(
+    LiveMaskConfig? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_live_mask_config(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_list_String(
+    List<String>? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_list_String(self, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_record_string_string(
     (String, String) self,
     SseSerializer serializer,
@@ -7882,6 +8974,24 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_String(self.$1, serializer);
     sse_encode_String(self.$2, serializer);
+  }
+
+  @protected
+  void sse_encode_u_16(int self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putUint16(self);
+  }
+
+  @protected
+  void sse_encode_u_32(int self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putUint32(self);
+  }
+
+  @protected
+  void sse_encode_u_64(BigInt self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putBigUint64(self);
   }
 
   @protected
@@ -7930,15 +9040,23 @@ class LiveBilibiliDanmakuProviderImpl extends RustOpaque
         .rust_arc_decrement_strong_count_LiveBilibiliDanmakuProviderPtr,
   );
 
+  Future<void> clearMask({required LiveDanmuConnection connection}) =>
+      RustLib.instance.api.crateApiDanmakuLiveBilibiliDanmakuProviderClearMask(
+        that: this,
+        connection: connection,
+      );
+
   Future<LiveDanmuConnection> connect({
     required String roomId,
     String? cookies,
     String? danmakuData,
+    LiveMaskConfig? maskConfig,
   }) => RustLib.instance.api.crateApiDanmakuLiveBilibiliDanmakuProviderConnect(
     that: this,
     roomId: roomId,
     cookies: cookies,
     danmakuData: danmakuData,
+    maskConfig: maskConfig,
   );
 
   Future<void> disconnect({required LiveDanmuConnection connection}) =>
@@ -7953,11 +9071,26 @@ class LiveBilibiliDanmakuProviderImpl extends RustOpaque
         url: url,
       );
 
+  Future<LiveMaskStats> getMaskStats({
+    required LiveDanmuConnection connection,
+  }) => RustLib.instance.api
+      .crateApiDanmakuLiveBilibiliDanmakuProviderGetMaskStats(
+        that: this,
+        connection: connection,
+      );
+
   Future<LiveDanmuItem?> receive({required LiveDanmuConnection connection}) =>
       RustLib.instance.api.crateApiDanmakuLiveBilibiliDanmakuProviderReceive(
         that: this,
         connection: connection,
       );
+
+  Future<void> resetMaskStats({required LiveDanmuConnection connection}) =>
+      RustLib.instance.api
+          .crateApiDanmakuLiveBilibiliDanmakuProviderResetMaskStats(
+            that: this,
+            connection: connection,
+          );
 
   Future<bool> supportsUrl({required String url}) => RustLib.instance.api
       .crateApiDanmakuLiveBilibiliDanmakuProviderSupportsUrl(
@@ -8115,6 +9248,9 @@ class LiveDanmuConnectionImpl extends RustOpaque
         .rust_arc_decrement_strong_count_LiveDanmuConnectionPtr,
   );
 
+  Future<String> id() =>
+      RustLib.instance.api.crateApiDanmakuLiveDanmuConnectionId(that: this);
+
   Future<bool> isConnected() => RustLib.instance.api
       .crateApiDanmakuLiveDanmuConnectionIsConnected(that: this);
 
@@ -8153,15 +9289,23 @@ class LiveDouyinDanmakuProviderImpl extends RustOpaque
         .rust_arc_decrement_strong_count_LiveDouyinDanmakuProviderPtr,
   );
 
+  Future<void> clearMask({required LiveDanmuConnection connection}) =>
+      RustLib.instance.api.crateApiDanmakuLiveDouyinDanmakuProviderClearMask(
+        that: this,
+        connection: connection,
+      );
+
   Future<LiveDanmuConnection> connect({
     required String roomId,
     String? cookies,
     String? danmakuData,
+    LiveMaskConfig? maskConfig,
   }) => RustLib.instance.api.crateApiDanmakuLiveDouyinDanmakuProviderConnect(
     that: this,
     roomId: roomId,
     cookies: cookies,
     danmakuData: danmakuData,
+    maskConfig: maskConfig,
   );
 
   Future<void> disconnect({required LiveDanmuConnection connection}) =>
@@ -8176,11 +9320,26 @@ class LiveDouyinDanmakuProviderImpl extends RustOpaque
         url: url,
       );
 
+  Future<LiveMaskStats> getMaskStats({
+    required LiveDanmuConnection connection,
+  }) =>
+      RustLib.instance.api.crateApiDanmakuLiveDouyinDanmakuProviderGetMaskStats(
+        that: this,
+        connection: connection,
+      );
+
   Future<LiveDanmuItem?> receive({required LiveDanmuConnection connection}) =>
       RustLib.instance.api.crateApiDanmakuLiveDouyinDanmakuProviderReceive(
         that: this,
         connection: connection,
       );
+
+  Future<void> resetMaskStats({required LiveDanmuConnection connection}) =>
+      RustLib.instance.api
+          .crateApiDanmakuLiveDouyinDanmakuProviderResetMaskStats(
+            that: this,
+            connection: connection,
+          );
 
   Future<bool> supportsUrl({required String url}) =>
       RustLib.instance.api.crateApiDanmakuLiveDouyinDanmakuProviderSupportsUrl(
@@ -8334,15 +9493,23 @@ class LiveDouyuDanmakuProviderImpl extends RustOpaque
         .rust_arc_decrement_strong_count_LiveDouyuDanmakuProviderPtr,
   );
 
+  Future<void> clearMask({required LiveDanmuConnection connection}) =>
+      RustLib.instance.api.crateApiDanmakuLiveDouyuDanmakuProviderClearMask(
+        that: this,
+        connection: connection,
+      );
+
   Future<LiveDanmuConnection> connect({
     required String roomId,
     String? cookies,
     String? danmakuData,
+    LiveMaskConfig? maskConfig,
   }) => RustLib.instance.api.crateApiDanmakuLiveDouyuDanmakuProviderConnect(
     that: this,
     roomId: roomId,
     cookies: cookies,
     danmakuData: danmakuData,
+    maskConfig: maskConfig,
   );
 
   Future<void> disconnect({required LiveDanmuConnection connection}) =>
@@ -8357,11 +9524,26 @@ class LiveDouyuDanmakuProviderImpl extends RustOpaque
         url: url,
       );
 
+  Future<LiveMaskStats> getMaskStats({
+    required LiveDanmuConnection connection,
+  }) =>
+      RustLib.instance.api.crateApiDanmakuLiveDouyuDanmakuProviderGetMaskStats(
+        that: this,
+        connection: connection,
+      );
+
   Future<LiveDanmuItem?> receive({required LiveDanmuConnection connection}) =>
       RustLib.instance.api.crateApiDanmakuLiveDouyuDanmakuProviderReceive(
         that: this,
         connection: connection,
       );
+
+  Future<void> resetMaskStats({required LiveDanmuConnection connection}) =>
+      RustLib.instance.api
+          .crateApiDanmakuLiveDouyuDanmakuProviderResetMaskStats(
+            that: this,
+            connection: connection,
+          );
 
   Future<bool> supportsUrl({required String url}) => RustLib.instance.api
       .crateApiDanmakuLiveDouyuDanmakuProviderSupportsUrl(that: this, url: url);
@@ -8505,15 +9687,23 @@ class LiveHuyaDanmakuProviderImpl extends RustOpaque
         .rust_arc_decrement_strong_count_LiveHuyaDanmakuProviderPtr,
   );
 
+  Future<void> clearMask({required LiveDanmuConnection connection}) =>
+      RustLib.instance.api.crateApiDanmakuLiveHuyaDanmakuProviderClearMask(
+        that: this,
+        connection: connection,
+      );
+
   Future<LiveDanmuConnection> connect({
     required String roomId,
     String? cookies,
     String? danmakuData,
+    LiveMaskConfig? maskConfig,
   }) => RustLib.instance.api.crateApiDanmakuLiveHuyaDanmakuProviderConnect(
     that: this,
     roomId: roomId,
     cookies: cookies,
     danmakuData: danmakuData,
+    maskConfig: maskConfig,
   );
 
   Future<void> disconnect({required LiveDanmuConnection connection}) =>
@@ -8528,8 +9718,21 @@ class LiveHuyaDanmakuProviderImpl extends RustOpaque
         url: url,
       );
 
+  Future<LiveMaskStats> getMaskStats({
+    required LiveDanmuConnection connection,
+  }) => RustLib.instance.api.crateApiDanmakuLiveHuyaDanmakuProviderGetMaskStats(
+    that: this,
+    connection: connection,
+  );
+
   Future<LiveDanmuItem?> receive({required LiveDanmuConnection connection}) =>
       RustLib.instance.api.crateApiDanmakuLiveHuyaDanmakuProviderReceive(
+        that: this,
+        connection: connection,
+      );
+
+  Future<void> resetMaskStats({required LiveDanmuConnection connection}) =>
+      RustLib.instance.api.crateApiDanmakuLiveHuyaDanmakuProviderResetMaskStats(
         that: this,
         connection: connection,
       );
@@ -8678,15 +9881,23 @@ class LiveTwitchDanmakuProviderImpl extends RustOpaque
         .rust_arc_decrement_strong_count_LiveTwitchDanmakuProviderPtr,
   );
 
+  Future<void> clearMask({required LiveDanmuConnection connection}) =>
+      RustLib.instance.api.crateApiDanmakuLiveTwitchDanmakuProviderClearMask(
+        that: this,
+        connection: connection,
+      );
+
   Future<LiveDanmuConnection> connect({
     required String roomId,
     String? cookies,
     String? danmakuData,
+    LiveMaskConfig? maskConfig,
   }) => RustLib.instance.api.crateApiDanmakuLiveTwitchDanmakuProviderConnect(
     that: this,
     roomId: roomId,
     cookies: cookies,
     danmakuData: danmakuData,
+    maskConfig: maskConfig,
   );
 
   Future<void> disconnect({required LiveDanmuConnection connection}) =>
@@ -8701,11 +9912,26 @@ class LiveTwitchDanmakuProviderImpl extends RustOpaque
         url: url,
       );
 
+  Future<LiveMaskStats> getMaskStats({
+    required LiveDanmuConnection connection,
+  }) =>
+      RustLib.instance.api.crateApiDanmakuLiveTwitchDanmakuProviderGetMaskStats(
+        that: this,
+        connection: connection,
+      );
+
   Future<LiveDanmuItem?> receive({required LiveDanmuConnection connection}) =>
       RustLib.instance.api.crateApiDanmakuLiveTwitchDanmakuProviderReceive(
         that: this,
         connection: connection,
       );
+
+  Future<void> resetMaskStats({required LiveDanmuConnection connection}) =>
+      RustLib.instance.api
+          .crateApiDanmakuLiveTwitchDanmakuProviderResetMaskStats(
+            that: this,
+            connection: connection,
+          );
 
   Future<bool> supportsUrl({required String url}) =>
       RustLib.instance.api.crateApiDanmakuLiveTwitchDanmakuProviderSupportsUrl(

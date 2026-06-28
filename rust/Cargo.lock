@@ -2085,7 +2085,7 @@ checksum = "19f132c84eca552bf34cab8ec81f1c1dcc229b811638f9d283dceabe58c5569e"
 [[package]]
 name = "platforms-parser"
 version = "0.0.1"
-source = "git+https://github.com/SlotSun/slive-core-api-rust.git#f714d00b4bcff8bc49d220155ab957035c2e0154"
+source = "git+https://github.com/SlotSun/slive-core-api-rust.git#8121c17057a96383b15c55e654fee78b16263efa"
 dependencies = [
  "async-trait",
  "base64 0.22.1",
@@ -2120,6 +2120,7 @@ dependencies = [
  "tracing-subscriber",
  "url",
  "uuid",
+ "xxhash-rust",
 ]
 
 [[package]]
@@ -2986,7 +2987,7 @@ dependencies = [
 [[package]]
 name = "tars-codec"
 version = "0.1.2"
-source = "git+https://github.com/SlotSun/slive-core-api-rust.git#f714d00b4bcff8bc49d220155ab957035c2e0154"
+source = "git+https://github.com/SlotSun/slive-core-api-rust.git#8121c17057a96383b15c55e654fee78b16263efa"
 dependencies = [
  "bytes",
  "rustc-hash",
@@ -3817,6 +3818,12 @@ name = "writeable"
 version = "0.6.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1ffae5123b2d3fc086436f8834ae3ab053a283cfac8fe0a0b8eaae044768a4c4"
+
+[[package]]
+name = "xxhash-rust"
+version = "0.8.15"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fdd20c5420375476fbd4394763288da7eb0cc0b8c11deed431a91562af7335d3"
 
 [[package]]
 name = "yasna"

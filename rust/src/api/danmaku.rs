@@ -1,15 +1,20 @@
 //! Concrete danmaku provider wrappers for each platform.
 
 use crate::api::models;
-use platforms_parser::danmaku::DanmuProvider as _;
+use platforms_parser::danmaku::DanmakuProvider as _;
+use platforms_parser::danmaku_mask::mask_provider::MaskedDanmakuProvider;
 
-/// Opaque connection handle — wraps the inner DanmuConnection.
+/// Opaque connection handle — wraps the inner DanmakuConnection.
 #[flutter_rust_bridge::frb(opaque)]
 pub struct LiveDanmuConnection {
-    inner: platforms_parser::danmaku::DanmuConnection,
+    inner: platforms_parser::danmaku::DanmakuConnection,
 }
 
 impl LiveDanmuConnection {
+    pub fn id(&self) -> String {
+        self.inner.id.clone()
+    }
+
     pub fn is_connected(&self) -> bool {
         self.inner.is_connected
     }
@@ -27,13 +32,13 @@ impl LiveDanmuConnection {
 macro_rules! impl_danmu_provider {
     ($name:ident, $inner:ty, $platform_id:expr) => {
         pub struct $name {
-            pub(crate) inner: $inner,
+            pub(crate) inner: MaskedDanmakuProvider<$inner>,
         }
 
         impl $name {
             pub fn new() -> Self {
                 Self {
-                    inner: <$inner>::new(),
+                    inner: MaskedDanmakuProvider::new(<$inner>::new()),
                 }
             }
 
@@ -50,6 +55,7 @@ macro_rules! impl_danmu_provider {
                 room_id: String,
                 cookies: Option<String>,
                 danmaku_data: Option<String>,
+                mask_config: Option<models::LiveMaskConfig>,
             ) -> anyhow::Result<LiveDanmuConnection> {
                 let extras = danmaku_data.and_then(|data| {
                     serde_json::from_str::<
@@ -72,6 +78,7 @@ macro_rules! impl_danmu_provider {
                     cookies,
                     websocket: None,
                     extras,
+                    mask_config: mask_config.map(Into::into),
                 };
                 let conn = self.inner.connect(&room_id, config).await?;
                 Ok(LiveDanmuConnection { inner: conn })
@@ -92,41 +99,62 @@ macro_rules! impl_danmu_provider {
                 self.inner.disconnect(&mut connection.inner).await?;
                 Ok(())
             }
+
+            pub async fn get_mask_stats(
+                &self,
+                connection: &LiveDanmuConnection,
+            ) -> models::LiveMaskStats {
+                self.inner.stats(&connection.id()).await.into()
+            }
+
+            pub async fn reset_mask_stats(
+                &self,
+                connection: &LiveDanmuConnection,
+            ) {
+                self.inner.reset_stats(&connection.id()).await;
+            }
+
+            pub async fn clear_mask(
+                &self,
+                connection: &LiveDanmuConnection,
+            ) {
+                self.inner.clear_mask(&connection.id()).await;
+            }
         }
     };
 }
 
 impl_danmu_provider!(
     LiveBilibiliDanmakuProvider,
-    platforms_parser::extractor::platforms::bilibili::danmaku::BilibiliDanmuProvider,
+    platforms_parser::extractor::platforms::bilibili::danmaku::BilibiliDanmakuProvider,
     "bilibili"
 );
 impl_danmu_provider!(
     LiveDouyinDanmakuProvider,
-    platforms_parser::extractor::platforms::douyin::danmaku::DouyinDanmuProvider,
+    platforms_parser::extractor::platforms::douyin::danmaku::DouyinDanmakuProvider,
     "douyin"
 );
 impl_danmu_provider!(
     LiveDouyuDanmakuProvider,
-    platforms_parser::extractor::platforms::douyu::danmaku::DouyuDanmuProvider,
+    platforms_parser::extractor::platforms::douyu::danmaku::DouyuDanmakuProvider,
     "douyu"
 );
 impl_danmu_provider!(
     LiveHuyaDanmakuProvider,
-    platforms_parser::extractor::platforms::huya::danmaku::HuyaDanmuProvider,
+    platforms_parser::extractor::platforms::huya::danmaku::HuyaDanmakuProvider,
     "huya"
 );
 
 impl_danmu_provider!(
     LiveTwitchDanmakuProvider,
-    platforms_parser::extractor::platforms::twitch::danmaku::TwitchDanmuProvider,
+    platforms_parser::extractor::platforms::twitch::danmaku::TwitchDanmakuProvider,
     "twitch"
 );
 
 /// Diagnostic: test Douyu danmaku connection end-to-end from the Rust side.
 /// Returns a log of what happened during the test.
 pub async fn douyu_danmaku_diagnostic(room_id: String) -> String {
-    use platforms_parser::danmaku::DanmuProvider;
+    use platforms_parser::danmaku::DanmakuProvider;
     use std::fmt::Write;
 
     let mut log = String::new();
@@ -135,7 +163,7 @@ pub async fn douyu_danmaku_diagnostic(room_id: String) -> String {
 
     // 1. Create provider
     let provider =
-        platforms_parser::extractor::platforms::douyu::danmaku::DouyuDanmuProvider::new();
+        platforms_parser::extractor::platforms::douyu::danmaku::DouyuDanmakuProvider::new();
     let _ = writeln!(log, "Provider created");
 
     // 2. Connect

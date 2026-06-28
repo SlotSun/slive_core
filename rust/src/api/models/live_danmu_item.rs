@@ -8,11 +8,11 @@ pub enum LiveDanmuItem {
     Control(LiveDanmuControlEvent),
 }
 
-impl From<event::DanmuItem> for LiveDanmuItem {
-    fn from(item: event::DanmuItem) -> Self {
+impl From<event::DanmakuItem> for LiveDanmuItem {
+    fn from(item: event::DanmakuItem) -> Self {
         match item {
-            event::DanmuItem::Message(m) => LiveDanmuItem::Message(m.into()),
-            event::DanmuItem::Control(e) => LiveDanmuItem::Control(e.into()),
+            event::DanmakuItem::Message(m) => LiveDanmuItem::Message(m.into()),
+            event::DanmakuItem::Control(e) => LiveDanmuItem::Control(e.into()),
         }
     }
 }

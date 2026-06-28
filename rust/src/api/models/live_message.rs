@@ -19,16 +19,16 @@ pub struct LiveMessage {
     pub metadata: Option<String>,
 }
 
-fn danmu_type_to_message_type(t: danmu::DanmuType) -> LiveMessageType {
+fn danmu_type_to_message_type(t: danmu::DanmakuType) -> LiveMessageType {
     match t {
-        danmu::DanmuType::Chat => LiveMessageType::Chat,
-        danmu::DanmuType::Gift => LiveMessageType::Gift,
-        danmu::DanmuType::SuperChat => LiveMessageType::SuperChat,
-        danmu::DanmuType::System => LiveMessageType::Chat,
-        danmu::DanmuType::UserJoin => LiveMessageType::Chat,
-        danmu::DanmuType::Follow => LiveMessageType::Chat,
-        danmu::DanmuType::Subscription => LiveMessageType::Chat,
-        danmu::DanmuType::Other => LiveMessageType::Chat,
+        danmu::DanmakuType::Chat => LiveMessageType::Chat,
+        danmu::DanmakuType::Gift => LiveMessageType::Gift,
+        danmu::DanmakuType::SuperChat => LiveMessageType::SuperChat,
+        danmu::DanmakuType::System => LiveMessageType::Chat,
+        danmu::DanmakuType::UserJoin => LiveMessageType::Chat,
+        danmu::DanmakuType::Follow => LiveMessageType::Chat,
+        danmu::DanmakuType::Subscription => LiveMessageType::Chat,
+        danmu::DanmakuType::Other => LiveMessageType::Chat,
     }
 }
 
@@ -48,8 +48,8 @@ fn parse_hex_color(hex: &str) -> LiveMessageColor {
     }
 }
 
-impl From<danmu::DanmuMessage> for LiveMessage {
-    fn from(m: danmu::DanmuMessage) -> Self {
+impl From<danmu::DanmakuMessage> for LiveMessage {
+    fn from(m: danmu::DanmakuMessage) -> Self {
         Self {
             id: m.id,
             user_id: m.user_id,

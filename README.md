@@ -70,6 +70,53 @@ await danmaku.start(detail.roomId, cookies: '...', danmakuData: detail.danmakuDa
 await danmaku.stop();
 ```
 
+## 弹幕过滤 (Danmaku Mask)
+
+支持两种过滤策略，可组合使用：
+
+### 频控过滤 (Frequency)
+
+相同内容的弹幕在时间窗口内超过 `maxFrequency` 次后自动拦截，支持归一化（忽略大小写、空格、标点）。
+
+### 黑名单过滤 (Word Blacklist)
+
+包含指定关键词的弹幕会被拦截，支持普通文本和正则表达式（用 `/pattern/` 包裹）。
+
+### 使用
+
+```dart
+final danmaku = site.getDanmaku();
+
+// 连接时传入 mask 配置
+await danmaku.start(
+  detail.roomId,
+  danmakuData: detail.danmakuData,
+  maskConfig: LiveMaskConfig(
+    frequency: const LiveFrequencyConfig(
+      baseWindowMs: 10000,   // 时间窗口 10 秒
+      bucketCount: 5,        // 滑动窗口桶数
+      useNormalization: true,// 归一化（忽略大小写/空格/标点）
+      maxFrequency: 3,       // 同一条弹幕最多出现 3 次
+    ),
+    blacklistWords: [
+      '广告',            // 普通文本匹配
+      '代练',
+      '/加[微V]信/',     // 正则表达式
+    ],
+  ),
+);
+
+// 获取过滤统计
+final stats = await danmaku.getMaskStats();
+print('总接收: ${stats.totalReceived}');  // 过滤前总数
+print('已放行: ${stats.passed}');
+print('已拦截: ${stats.blocked}');
+
+// 运行时清除/重置
+await danmaku.clearMask();       // 移除过滤
+await danmaku.resetMaskStats();  // 重置统计数据
+```
+
 ## License
 
 [MIT](LICENSE)

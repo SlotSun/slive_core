@@ -13,6 +13,8 @@ export 'src/rust/api/models/live_category.dart';
 export 'src/rust/api/models/live_category_result.dart';
 export 'src/rust/api/models/live_danmu_control_event.dart';
 export 'src/rust/api/models/live_danmu_item.dart';
+export 'src/rust/api/models/live_mask_config.dart';
+export 'src/rust/api/models/live_mask_stats.dart';
 export 'src/rust/api/models/live_message.dart';
 export 'src/rust/api/models/live_message_color.dart';
 export 'src/rust/api/models/live_message_type.dart';

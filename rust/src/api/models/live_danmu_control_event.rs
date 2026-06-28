@@ -11,17 +11,17 @@ pub struct LiveDanmuControlEvent {
     pub parent_category: Option<String>,
 }
 
-impl From<event::DanmuControlEvent> for LiveDanmuControlEvent {
-    fn from(e: event::DanmuControlEvent) -> Self {
+impl From<event::DanmakuControlEvent> for LiveDanmuControlEvent {
+    fn from(e: event::DanmakuControlEvent) -> Self {
         match e {
-            event::DanmuControlEvent::StreamClosed { message, .. } => Self {
+            event::DanmakuControlEvent::StreamClosed { message, .. } => Self {
                 kind: "stream_closed".to_string(),
                 message,
                 title: None,
                 category: None,
                 parent_category: None,
             },
-            event::DanmuControlEvent::RoomInfoChanged {
+            event::DanmakuControlEvent::RoomInfoChanged {
                 title,
                 category,
                 parent_category,
@@ -32,7 +32,7 @@ impl From<event::DanmuControlEvent> for LiveDanmuControlEvent {
                 category,
                 parent_category,
             },
-            event::DanmuControlEvent::Other {
+            event::DanmakuControlEvent::Other {
                 kind, message, ..
             } => Self {
                 kind,

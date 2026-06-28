@@ -40,7 +40,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.12.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 260393484;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 1668244035;
 
 // Section: executor
 
@@ -48,6 +48,85 @@ flutter_rust_bridge::frb_generated_default_handler!();
 
 // Section: wire_funcs
 
+fn wire__crate__api__danmaku__LiveBilibiliDanmakuProvider_clear_mask_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "LiveBilibiliDanmakuProvider_clear_mask",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<
+                    LiveBilibiliDanmakuProvider,
+                >,
+            >>::sse_decode(&mut deserializer);
+            let api_connection = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDanmuConnection>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, ()>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let mut api_connection_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_that, 0, false,
+                                    ),
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_connection,
+                                        1,
+                                        false,
+                                    ),
+                                ],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                1 => {
+                                    api_connection_guard =
+                                        Some(api_connection.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let api_connection_guard = api_connection_guard.unwrap();
+                        let output_ok = Result::<_, ()>::Ok({
+                            crate::api::danmaku::LiveBilibiliDanmakuProvider::clear_mask(
+                                &*api_that_guard,
+                                &*api_connection_guard,
+                            )
+                            .await;
+                        })?;
+                        Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
 fn wire__crate__api__danmaku__LiveBilibiliDanmakuProvider_connect_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -78,6 +157,10 @@ fn wire__crate__api__danmaku__LiveBilibiliDanmakuProvider_connect_impl(
             let api_room_id = <String>::sse_decode(&mut deserializer);
             let api_cookies = <Option<String>>::sse_decode(&mut deserializer);
             let api_danmaku_data = <Option<String>>::sse_decode(&mut deserializer);
+            let api_mask_config =
+                <Option<crate::api::models::live_mask_config::LiveMaskConfig>>::sse_decode(
+                    &mut deserializer,
+                );
             deserializer.end();
             move |context| async move {
                 transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
@@ -104,6 +187,7 @@ fn wire__crate__api__danmaku__LiveBilibiliDanmakuProvider_connect_impl(
                             api_room_id,
                             api_cookies,
                             api_danmaku_data,
+                            api_mask_config,
                         )
                         .await?;
                         Ok(output_ok)
@@ -249,6 +333,85 @@ fn wire__crate__api__danmaku__LiveBilibiliDanmakuProvider_extract_room_id_impl(
         },
     )
 }
+fn wire__crate__api__danmaku__LiveBilibiliDanmakuProvider_get_mask_stats_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "LiveBilibiliDanmakuProvider_get_mask_stats",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<
+                    LiveBilibiliDanmakuProvider,
+                >,
+            >>::sse_decode(&mut deserializer);
+            let api_connection = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDanmuConnection>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, ()>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let mut api_connection_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_that, 0, false,
+                                    ),
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_connection,
+                                        1,
+                                        false,
+                                    ),
+                                ],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                1 => {
+                                    api_connection_guard =
+                                        Some(api_connection.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let api_connection_guard = api_connection_guard.unwrap();
+                        let output_ok = Result::<_, ()>::Ok(
+                            crate::api::danmaku::LiveBilibiliDanmakuProvider::get_mask_stats(
+                                &*api_that_guard,
+                                &*api_connection_guard,
+                            )
+                            .await,
+                        )?;
+                        Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
 fn wire__crate__api__danmaku__LiveBilibiliDanmakuProvider_new_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -352,6 +515,85 @@ fn wire__crate__api__danmaku__LiveBilibiliDanmakuProvider_receive_impl(
                             &*api_connection_guard,
                         )
                         .await?;
+                        Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
+fn wire__crate__api__danmaku__LiveBilibiliDanmakuProvider_reset_mask_stats_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "LiveBilibiliDanmakuProvider_reset_mask_stats",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<
+                    LiveBilibiliDanmakuProvider,
+                >,
+            >>::sse_decode(&mut deserializer);
+            let api_connection = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDanmuConnection>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, ()>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let mut api_connection_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_that, 0, false,
+                                    ),
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_connection,
+                                        1,
+                                        false,
+                                    ),
+                                ],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                1 => {
+                                    api_connection_guard =
+                                        Some(api_connection.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let api_connection_guard = api_connection_guard.unwrap();
+                        let output_ok = Result::<_, ()>::Ok({
+                            crate::api::danmaku::LiveBilibiliDanmakuProvider::reset_mask_stats(
+                                &*api_that_guard,
+                                &*api_connection_guard,
+                            )
+                            .await;
+                        })?;
                         Ok(output_ok)
                     })()
                     .await,
@@ -1238,6 +1480,57 @@ fn wire__crate__api__extractor__LiveBilibiliExtractor_supports_url_impl(
         },
     )
 }
+fn wire__crate__api__danmaku__LiveDanmuConnection_id_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "LiveDanmuConnection_id",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDanmuConnection>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let mut api_that_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, false,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let api_that_guard = api_that_guard.unwrap();
+                    let output_ok = Result::<_, ()>::Ok(
+                        crate::api::danmaku::LiveDanmuConnection::id(&*api_that_guard),
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
 fn wire__crate__api__danmaku__LiveDanmuConnection_is_connected_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -1391,6 +1684,83 @@ fn wire__crate__api__danmaku__LiveDanmuConnection_room_id_impl(
         },
     )
 }
+fn wire__crate__api__danmaku__LiveDouyinDanmakuProvider_clear_mask_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "LiveDouyinDanmakuProvider_clear_mask",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDouyinDanmakuProvider>,
+            >>::sse_decode(&mut deserializer);
+            let api_connection = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDanmuConnection>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, ()>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let mut api_connection_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_that, 0, false,
+                                    ),
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_connection,
+                                        1,
+                                        false,
+                                    ),
+                                ],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                1 => {
+                                    api_connection_guard =
+                                        Some(api_connection.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let api_connection_guard = api_connection_guard.unwrap();
+                        let output_ok = Result::<_, ()>::Ok({
+                            crate::api::danmaku::LiveDouyinDanmakuProvider::clear_mask(
+                                &*api_that_guard,
+                                &*api_connection_guard,
+                            )
+                            .await;
+                        })?;
+                        Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
 fn wire__crate__api__danmaku__LiveDouyinDanmakuProvider_connect_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -1419,6 +1789,10 @@ fn wire__crate__api__danmaku__LiveDouyinDanmakuProvider_connect_impl(
             let api_room_id = <String>::sse_decode(&mut deserializer);
             let api_cookies = <Option<String>>::sse_decode(&mut deserializer);
             let api_danmaku_data = <Option<String>>::sse_decode(&mut deserializer);
+            let api_mask_config =
+                <Option<crate::api::models::live_mask_config::LiveMaskConfig>>::sse_decode(
+                    &mut deserializer,
+                );
             deserializer.end();
             move |context| async move {
                 transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
@@ -1445,6 +1819,7 @@ fn wire__crate__api__danmaku__LiveDouyinDanmakuProvider_connect_impl(
                             api_room_id,
                             api_cookies,
                             api_danmaku_data,
+                            api_mask_config,
                         )
                         .await?;
                         Ok(output_ok)
@@ -1585,6 +1960,83 @@ fn wire__crate__api__danmaku__LiveDouyinDanmakuProvider_extract_room_id_impl(
         },
     )
 }
+fn wire__crate__api__danmaku__LiveDouyinDanmakuProvider_get_mask_stats_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "LiveDouyinDanmakuProvider_get_mask_stats",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDouyinDanmakuProvider>,
+            >>::sse_decode(&mut deserializer);
+            let api_connection = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDanmuConnection>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, ()>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let mut api_connection_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_that, 0, false,
+                                    ),
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_connection,
+                                        1,
+                                        false,
+                                    ),
+                                ],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                1 => {
+                                    api_connection_guard =
+                                        Some(api_connection.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let api_connection_guard = api_connection_guard.unwrap();
+                        let output_ok = Result::<_, ()>::Ok(
+                            crate::api::danmaku::LiveDouyinDanmakuProvider::get_mask_stats(
+                                &*api_that_guard,
+                                &*api_connection_guard,
+                            )
+                            .await,
+                        )?;
+                        Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
 fn wire__crate__api__danmaku__LiveDouyinDanmakuProvider_new_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -1685,6 +2137,83 @@ fn wire__crate__api__danmaku__LiveDouyinDanmakuProvider_receive_impl(
                             &*api_connection_guard,
                         )
                         .await?;
+                        Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
+fn wire__crate__api__danmaku__LiveDouyinDanmakuProvider_reset_mask_stats_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "LiveDouyinDanmakuProvider_reset_mask_stats",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDouyinDanmakuProvider>,
+            >>::sse_decode(&mut deserializer);
+            let api_connection = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDanmuConnection>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, ()>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let mut api_connection_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_that, 0, false,
+                                    ),
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_connection,
+                                        1,
+                                        false,
+                                    ),
+                                ],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                1 => {
+                                    api_connection_guard =
+                                        Some(api_connection.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let api_connection_guard = api_connection_guard.unwrap();
+                        let output_ok = Result::<_, ()>::Ok({
+                            crate::api::danmaku::LiveDouyinDanmakuProvider::reset_mask_stats(
+                                &*api_that_guard,
+                                &*api_connection_guard,
+                            )
+                            .await;
+                        })?;
                         Ok(output_ok)
                     })()
                     .await,
@@ -2566,6 +3095,83 @@ fn wire__crate__api__extractor__LiveDouyinExtractor_supports_url_impl(
         },
     )
 }
+fn wire__crate__api__danmaku__LiveDouyuDanmakuProvider_clear_mask_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "LiveDouyuDanmakuProvider_clear_mask",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDouyuDanmakuProvider>,
+            >>::sse_decode(&mut deserializer);
+            let api_connection = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDanmuConnection>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, ()>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let mut api_connection_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_that, 0, false,
+                                    ),
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_connection,
+                                        1,
+                                        false,
+                                    ),
+                                ],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                1 => {
+                                    api_connection_guard =
+                                        Some(api_connection.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let api_connection_guard = api_connection_guard.unwrap();
+                        let output_ok = Result::<_, ()>::Ok({
+                            crate::api::danmaku::LiveDouyuDanmakuProvider::clear_mask(
+                                &*api_that_guard,
+                                &*api_connection_guard,
+                            )
+                            .await;
+                        })?;
+                        Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
 fn wire__crate__api__danmaku__LiveDouyuDanmakuProvider_connect_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -2594,6 +3200,10 @@ fn wire__crate__api__danmaku__LiveDouyuDanmakuProvider_connect_impl(
             let api_room_id = <String>::sse_decode(&mut deserializer);
             let api_cookies = <Option<String>>::sse_decode(&mut deserializer);
             let api_danmaku_data = <Option<String>>::sse_decode(&mut deserializer);
+            let api_mask_config =
+                <Option<crate::api::models::live_mask_config::LiveMaskConfig>>::sse_decode(
+                    &mut deserializer,
+                );
             deserializer.end();
             move |context| async move {
                 transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
@@ -2620,6 +3230,7 @@ fn wire__crate__api__danmaku__LiveDouyuDanmakuProvider_connect_impl(
                             api_room_id,
                             api_cookies,
                             api_danmaku_data,
+                            api_mask_config,
                         )
                         .await?;
                         Ok(output_ok)
@@ -2760,6 +3371,83 @@ fn wire__crate__api__danmaku__LiveDouyuDanmakuProvider_extract_room_id_impl(
         },
     )
 }
+fn wire__crate__api__danmaku__LiveDouyuDanmakuProvider_get_mask_stats_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "LiveDouyuDanmakuProvider_get_mask_stats",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDouyuDanmakuProvider>,
+            >>::sse_decode(&mut deserializer);
+            let api_connection = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDanmuConnection>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, ()>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let mut api_connection_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_that, 0, false,
+                                    ),
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_connection,
+                                        1,
+                                        false,
+                                    ),
+                                ],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                1 => {
+                                    api_connection_guard =
+                                        Some(api_connection.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let api_connection_guard = api_connection_guard.unwrap();
+                        let output_ok = Result::<_, ()>::Ok(
+                            crate::api::danmaku::LiveDouyuDanmakuProvider::get_mask_stats(
+                                &*api_that_guard,
+                                &*api_connection_guard,
+                            )
+                            .await,
+                        )?;
+                        Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
 fn wire__crate__api__danmaku__LiveDouyuDanmakuProvider_new_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -2860,6 +3548,83 @@ fn wire__crate__api__danmaku__LiveDouyuDanmakuProvider_receive_impl(
                             &*api_connection_guard,
                         )
                         .await?;
+                        Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
+fn wire__crate__api__danmaku__LiveDouyuDanmakuProvider_reset_mask_stats_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "LiveDouyuDanmakuProvider_reset_mask_stats",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDouyuDanmakuProvider>,
+            >>::sse_decode(&mut deserializer);
+            let api_connection = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDanmuConnection>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, ()>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let mut api_connection_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_that, 0, false,
+                                    ),
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_connection,
+                                        1,
+                                        false,
+                                    ),
+                                ],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                1 => {
+                                    api_connection_guard =
+                                        Some(api_connection.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let api_connection_guard = api_connection_guard.unwrap();
+                        let output_ok = Result::<_, ()>::Ok({
+                            crate::api::danmaku::LiveDouyuDanmakuProvider::reset_mask_stats(
+                                &*api_that_guard,
+                                &*api_connection_guard,
+                            )
+                            .await;
+                        })?;
                         Ok(output_ok)
                     })()
                     .await,
@@ -3739,6 +4504,83 @@ fn wire__crate__api__extractor__LiveDouyuExtractor_supports_url_impl(
         },
     )
 }
+fn wire__crate__api__danmaku__LiveHuyaDanmakuProvider_clear_mask_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "LiveHuyaDanmakuProvider_clear_mask",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveHuyaDanmakuProvider>,
+            >>::sse_decode(&mut deserializer);
+            let api_connection = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDanmuConnection>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, ()>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let mut api_connection_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_that, 0, false,
+                                    ),
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_connection,
+                                        1,
+                                        false,
+                                    ),
+                                ],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                1 => {
+                                    api_connection_guard =
+                                        Some(api_connection.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let api_connection_guard = api_connection_guard.unwrap();
+                        let output_ok = Result::<_, ()>::Ok({
+                            crate::api::danmaku::LiveHuyaDanmakuProvider::clear_mask(
+                                &*api_that_guard,
+                                &*api_connection_guard,
+                            )
+                            .await;
+                        })?;
+                        Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
 fn wire__crate__api__danmaku__LiveHuyaDanmakuProvider_connect_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -3767,6 +4609,10 @@ fn wire__crate__api__danmaku__LiveHuyaDanmakuProvider_connect_impl(
             let api_room_id = <String>::sse_decode(&mut deserializer);
             let api_cookies = <Option<String>>::sse_decode(&mut deserializer);
             let api_danmaku_data = <Option<String>>::sse_decode(&mut deserializer);
+            let api_mask_config =
+                <Option<crate::api::models::live_mask_config::LiveMaskConfig>>::sse_decode(
+                    &mut deserializer,
+                );
             deserializer.end();
             move |context| async move {
                 transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
@@ -3793,6 +4639,7 @@ fn wire__crate__api__danmaku__LiveHuyaDanmakuProvider_connect_impl(
                             api_room_id,
                             api_cookies,
                             api_danmaku_data,
+                            api_mask_config,
                         )
                         .await?;
                         Ok(output_ok)
@@ -3933,6 +4780,83 @@ fn wire__crate__api__danmaku__LiveHuyaDanmakuProvider_extract_room_id_impl(
         },
     )
 }
+fn wire__crate__api__danmaku__LiveHuyaDanmakuProvider_get_mask_stats_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "LiveHuyaDanmakuProvider_get_mask_stats",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveHuyaDanmakuProvider>,
+            >>::sse_decode(&mut deserializer);
+            let api_connection = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDanmuConnection>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, ()>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let mut api_connection_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_that, 0, false,
+                                    ),
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_connection,
+                                        1,
+                                        false,
+                                    ),
+                                ],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                1 => {
+                                    api_connection_guard =
+                                        Some(api_connection.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let api_connection_guard = api_connection_guard.unwrap();
+                        let output_ok = Result::<_, ()>::Ok(
+                            crate::api::danmaku::LiveHuyaDanmakuProvider::get_mask_stats(
+                                &*api_that_guard,
+                                &*api_connection_guard,
+                            )
+                            .await,
+                        )?;
+                        Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
 fn wire__crate__api__danmaku__LiveHuyaDanmakuProvider_new_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -4033,6 +4957,83 @@ fn wire__crate__api__danmaku__LiveHuyaDanmakuProvider_receive_impl(
                             &*api_connection_guard,
                         )
                         .await?;
+                        Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
+fn wire__crate__api__danmaku__LiveHuyaDanmakuProvider_reset_mask_stats_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "LiveHuyaDanmakuProvider_reset_mask_stats",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveHuyaDanmakuProvider>,
+            >>::sse_decode(&mut deserializer);
+            let api_connection = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDanmuConnection>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, ()>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let mut api_connection_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_that, 0, false,
+                                    ),
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_connection,
+                                        1,
+                                        false,
+                                    ),
+                                ],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                1 => {
+                                    api_connection_guard =
+                                        Some(api_connection.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let api_connection_guard = api_connection_guard.unwrap();
+                        let output_ok = Result::<_, ()>::Ok({
+                            crate::api::danmaku::LiveHuyaDanmakuProvider::reset_mask_stats(
+                                &*api_that_guard,
+                                &*api_connection_guard,
+                            )
+                            .await;
+                        })?;
                         Ok(output_ok)
                     })()
                     .await,
@@ -4967,6 +5968,83 @@ fn wire__crate__api__extractor__LiveHuyaExtractor_supports_url_impl(
         },
     )
 }
+fn wire__crate__api__danmaku__LiveTwitchDanmakuProvider_clear_mask_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "LiveTwitchDanmakuProvider_clear_mask",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveTwitchDanmakuProvider>,
+            >>::sse_decode(&mut deserializer);
+            let api_connection = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDanmuConnection>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, ()>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let mut api_connection_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_that, 0, false,
+                                    ),
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_connection,
+                                        1,
+                                        false,
+                                    ),
+                                ],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                1 => {
+                                    api_connection_guard =
+                                        Some(api_connection.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let api_connection_guard = api_connection_guard.unwrap();
+                        let output_ok = Result::<_, ()>::Ok({
+                            crate::api::danmaku::LiveTwitchDanmakuProvider::clear_mask(
+                                &*api_that_guard,
+                                &*api_connection_guard,
+                            )
+                            .await;
+                        })?;
+                        Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
 fn wire__crate__api__danmaku__LiveTwitchDanmakuProvider_connect_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -4995,6 +6073,10 @@ fn wire__crate__api__danmaku__LiveTwitchDanmakuProvider_connect_impl(
             let api_room_id = <String>::sse_decode(&mut deserializer);
             let api_cookies = <Option<String>>::sse_decode(&mut deserializer);
             let api_danmaku_data = <Option<String>>::sse_decode(&mut deserializer);
+            let api_mask_config =
+                <Option<crate::api::models::live_mask_config::LiveMaskConfig>>::sse_decode(
+                    &mut deserializer,
+                );
             deserializer.end();
             move |context| async move {
                 transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
@@ -5021,6 +6103,7 @@ fn wire__crate__api__danmaku__LiveTwitchDanmakuProvider_connect_impl(
                             api_room_id,
                             api_cookies,
                             api_danmaku_data,
+                            api_mask_config,
                         )
                         .await?;
                         Ok(output_ok)
@@ -5161,6 +6244,83 @@ fn wire__crate__api__danmaku__LiveTwitchDanmakuProvider_extract_room_id_impl(
         },
     )
 }
+fn wire__crate__api__danmaku__LiveTwitchDanmakuProvider_get_mask_stats_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "LiveTwitchDanmakuProvider_get_mask_stats",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveTwitchDanmakuProvider>,
+            >>::sse_decode(&mut deserializer);
+            let api_connection = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDanmuConnection>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, ()>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let mut api_connection_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_that, 0, false,
+                                    ),
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_connection,
+                                        1,
+                                        false,
+                                    ),
+                                ],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                1 => {
+                                    api_connection_guard =
+                                        Some(api_connection.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let api_connection_guard = api_connection_guard.unwrap();
+                        let output_ok = Result::<_, ()>::Ok(
+                            crate::api::danmaku::LiveTwitchDanmakuProvider::get_mask_stats(
+                                &*api_that_guard,
+                                &*api_connection_guard,
+                            )
+                            .await,
+                        )?;
+                        Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
 fn wire__crate__api__danmaku__LiveTwitchDanmakuProvider_new_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -5261,6 +6421,83 @@ fn wire__crate__api__danmaku__LiveTwitchDanmakuProvider_receive_impl(
                             &*api_connection_guard,
                         )
                         .await?;
+                        Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
+fn wire__crate__api__danmaku__LiveTwitchDanmakuProvider_reset_mask_stats_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "LiveTwitchDanmakuProvider_reset_mask_stats",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveTwitchDanmakuProvider>,
+            >>::sse_decode(&mut deserializer);
+            let api_connection = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDanmuConnection>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, ()>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let mut api_connection_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_that, 0, false,
+                                    ),
+                                    flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                        &api_connection,
+                                        1,
+                                        false,
+                                    ),
+                                ],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                1 => {
+                                    api_connection_guard =
+                                        Some(api_connection.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let api_connection_guard = api_connection_guard.unwrap();
+                        let output_ok = Result::<_, ()>::Ok({
+                            crate::api::danmaku::LiveTwitchDanmakuProvider::reset_mask_stats(
+                                &*api_that_guard,
+                                &*api_connection_guard,
+                            )
+                            .await;
+                        })?;
                         Ok(output_ok)
                     })()
                     .await,
@@ -7007,6 +8244,51 @@ impl SseDecode for crate::api::models::live_danmu_item::LiveDanmuItem {
     }
 }
 
+impl SseDecode for crate::api::models::live_mask_config::LiveFrequencyConfig {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_baseWindowMs = <u32>::sse_decode(deserializer);
+        let mut var_bucketCount = <u16>::sse_decode(deserializer);
+        let mut var_useNormalization = <bool>::sse_decode(deserializer);
+        let mut var_maxFrequency = <u16>::sse_decode(deserializer);
+        return crate::api::models::live_mask_config::LiveFrequencyConfig {
+            base_window_ms: var_baseWindowMs,
+            bucket_count: var_bucketCount,
+            use_normalization: var_useNormalization,
+            max_frequency: var_maxFrequency,
+        };
+    }
+}
+
+impl SseDecode for crate::api::models::live_mask_config::LiveMaskConfig {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_frequency =
+            <Option<crate::api::models::live_mask_config::LiveFrequencyConfig>>::sse_decode(
+                deserializer,
+            );
+        let mut var_blacklistWords = <Option<Vec<String>>>::sse_decode(deserializer);
+        return crate::api::models::live_mask_config::LiveMaskConfig {
+            frequency: var_frequency,
+            blacklist_words: var_blacklistWords,
+        };
+    }
+}
+
+impl SseDecode for crate::api::models::live_mask_stats::LiveMaskStats {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_totalReceived = <u64>::sse_decode(deserializer);
+        let mut var_passed = <u64>::sse_decode(deserializer);
+        let mut var_blocked = <u64>::sse_decode(deserializer);
+        return crate::api::models::live_mask_stats::LiveMaskStats {
+            total_received: var_totalReceived,
+            passed: var_passed,
+            blocked: var_blocked,
+        };
+    }
+}
+
 impl SseDecode for crate::api::models::live_message::LiveMessage {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -7259,12 +8541,72 @@ impl SseDecode for Option<crate::api::models::live_danmu_item::LiveDanmuItem> {
     }
 }
 
+impl SseDecode for Option<crate::api::models::live_mask_config::LiveFrequencyConfig> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::api::models::live_mask_config::LiveFrequencyConfig>::sse_decode(
+                    deserializer,
+                ),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::api::models::live_mask_config::LiveMaskConfig> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::api::models::live_mask_config::LiveMaskConfig>::sse_decode(deserializer),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<Vec<String>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<Vec<String>>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
 impl SseDecode for (String, String) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_field0 = <String>::sse_decode(deserializer);
         let mut var_field1 = <String>::sse_decode(deserializer);
         return (var_field0, var_field1);
+    }
+}
+
+impl SseDecode for u16 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_u16::<NativeEndian>().unwrap()
+    }
+}
+
+impl SseDecode for u32 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_u32::<NativeEndian>().unwrap()
+    }
+}
+
+impl SseDecode for u64 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_u64::<NativeEndian>().unwrap()
     }
 }
 
@@ -7296,641 +8638,737 @@ fn pde_ffi_dispatcher_primary_impl(
 ) {
     // Codec=Pde (Serialization + dispatch), see doc to use other codecs
     match func_id {
-        1 => wire__crate__api__danmaku__LiveBilibiliDanmakuProvider_connect_impl(
+        1 => wire__crate__api__danmaku__LiveBilibiliDanmakuProvider_clear_mask_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        2 => wire__crate__api__danmaku__LiveBilibiliDanmakuProvider_disconnect_impl(
+        2 => wire__crate__api__danmaku__LiveBilibiliDanmakuProvider_connect_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        3 => wire__crate__api__danmaku__LiveBilibiliDanmakuProvider_extract_room_id_impl(
+        3 => wire__crate__api__danmaku__LiveBilibiliDanmakuProvider_disconnect_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        4 => wire__crate__api__danmaku__LiveBilibiliDanmakuProvider_new_impl(
+        4 => wire__crate__api__danmaku__LiveBilibiliDanmakuProvider_extract_room_id_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        5 => wire__crate__api__danmaku__LiveBilibiliDanmakuProvider_receive_impl(
+        5 => wire__crate__api__danmaku__LiveBilibiliDanmakuProvider_get_mask_stats_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        6 => wire__crate__api__danmaku__LiveBilibiliDanmakuProvider_supports_url_impl(
+        6 => wire__crate__api__danmaku__LiveBilibiliDanmakuProvider_new_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        7 => wire__crate__api__extractor__LiveBilibiliExtractor_extract_room_id_impl(
+        7 => wire__crate__api__danmaku__LiveBilibiliDanmakuProvider_receive_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        8 => wire__crate__api__extractor__LiveBilibiliExtractor_get_categories_impl(
+        8 => wire__crate__api__danmaku__LiveBilibiliDanmakuProvider_reset_mask_stats_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        9 => wire__crate__api__extractor__LiveBilibiliExtractor_get_category_rooms_impl(
+        9 => wire__crate__api__danmaku__LiveBilibiliDanmakuProvider_supports_url_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        10 => wire__crate__api__extractor__LiveBilibiliExtractor_get_live_status_impl(
+        10 => wire__crate__api__extractor__LiveBilibiliExtractor_extract_room_id_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        11 => wire__crate__api__extractor__LiveBilibiliExtractor_get_play_qualities_impl(
+        11 => wire__crate__api__extractor__LiveBilibiliExtractor_get_categories_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        12 => wire__crate__api__extractor__LiveBilibiliExtractor_get_play_urls_impl(
+        12 => wire__crate__api__extractor__LiveBilibiliExtractor_get_category_rooms_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        13 => wire__crate__api__extractor__LiveBilibiliExtractor_get_recommend_rooms_impl(
+        13 => wire__crate__api__extractor__LiveBilibiliExtractor_get_live_status_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        14 => wire__crate__api__extractor__LiveBilibiliExtractor_get_room_detail_impl(
+        14 => wire__crate__api__extractor__LiveBilibiliExtractor_get_play_qualities_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        15 => wire__crate__api__extractor__LiveBilibiliExtractor_get_super_chat_messages_impl(
+        15 => wire__crate__api__extractor__LiveBilibiliExtractor_get_play_urls_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        16 => wire__crate__api__extractor__LiveBilibiliExtractor_new_impl(
+        16 => wire__crate__api__extractor__LiveBilibiliExtractor_get_recommend_rooms_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        17 => wire__crate__api__extractor__LiveBilibiliExtractor_search_anchors_impl(
+        17 => wire__crate__api__extractor__LiveBilibiliExtractor_get_room_detail_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        18 => wire__crate__api__extractor__LiveBilibiliExtractor_search_rooms_impl(
+        18 => wire__crate__api__extractor__LiveBilibiliExtractor_get_super_chat_messages_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        19 => wire__crate__api__extractor__LiveBilibiliExtractor_set_cookies_impl(
+        19 => wire__crate__api__extractor__LiveBilibiliExtractor_new_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        20 => wire__crate__api__extractor__LiveBilibiliExtractor_supports_url_impl(
+        20 => wire__crate__api__extractor__LiveBilibiliExtractor_search_anchors_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        21 => wire__crate__api__danmaku__LiveDanmuConnection_is_connected_impl(
+        21 => wire__crate__api__extractor__LiveBilibiliExtractor_search_rooms_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        22 => wire__crate__api__danmaku__LiveDanmuConnection_platform_impl(
+        22 => wire__crate__api__extractor__LiveBilibiliExtractor_set_cookies_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        23 => wire__crate__api__danmaku__LiveDanmuConnection_room_id_impl(
+        23 => wire__crate__api__extractor__LiveBilibiliExtractor_supports_url_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        24 => wire__crate__api__danmaku__LiveDouyinDanmakuProvider_connect_impl(
+        24 => wire__crate__api__danmaku__LiveDanmuConnection_id_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        25 => wire__crate__api__danmaku__LiveDouyinDanmakuProvider_disconnect_impl(
+        25 => wire__crate__api__danmaku__LiveDanmuConnection_is_connected_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        26 => wire__crate__api__danmaku__LiveDouyinDanmakuProvider_extract_room_id_impl(
+        26 => wire__crate__api__danmaku__LiveDanmuConnection_platform_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        27 => wire__crate__api__danmaku__LiveDouyinDanmakuProvider_new_impl(
+        27 => wire__crate__api__danmaku__LiveDanmuConnection_room_id_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        28 => wire__crate__api__danmaku__LiveDouyinDanmakuProvider_receive_impl(
+        28 => wire__crate__api__danmaku__LiveDouyinDanmakuProvider_clear_mask_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        29 => wire__crate__api__danmaku__LiveDouyinDanmakuProvider_supports_url_impl(
+        29 => wire__crate__api__danmaku__LiveDouyinDanmakuProvider_connect_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        30 => wire__crate__api__extractor__LiveDouyinExtractor_extract_room_id_impl(
+        30 => wire__crate__api__danmaku__LiveDouyinDanmakuProvider_disconnect_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        31 => wire__crate__api__extractor__LiveDouyinExtractor_get_categories_impl(
+        31 => wire__crate__api__danmaku__LiveDouyinDanmakuProvider_extract_room_id_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        32 => wire__crate__api__extractor__LiveDouyinExtractor_get_category_rooms_impl(
+        32 => wire__crate__api__danmaku__LiveDouyinDanmakuProvider_get_mask_stats_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        33 => wire__crate__api__extractor__LiveDouyinExtractor_get_live_status_impl(
+        33 => wire__crate__api__danmaku__LiveDouyinDanmakuProvider_new_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        34 => wire__crate__api__extractor__LiveDouyinExtractor_get_play_qualities_impl(
+        34 => wire__crate__api__danmaku__LiveDouyinDanmakuProvider_receive_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        35 => wire__crate__api__extractor__LiveDouyinExtractor_get_play_urls_impl(
+        35 => wire__crate__api__danmaku__LiveDouyinDanmakuProvider_reset_mask_stats_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        36 => wire__crate__api__extractor__LiveDouyinExtractor_get_recommend_rooms_impl(
+        36 => wire__crate__api__danmaku__LiveDouyinDanmakuProvider_supports_url_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        37 => wire__crate__api__extractor__LiveDouyinExtractor_get_room_detail_impl(
+        37 => wire__crate__api__extractor__LiveDouyinExtractor_extract_room_id_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        38 => wire__crate__api__extractor__LiveDouyinExtractor_get_super_chat_messages_impl(
+        38 => wire__crate__api__extractor__LiveDouyinExtractor_get_categories_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        39 => wire__crate__api__extractor__LiveDouyinExtractor_new_impl(
+        39 => wire__crate__api__extractor__LiveDouyinExtractor_get_category_rooms_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        40 => wire__crate__api__extractor__LiveDouyinExtractor_search_anchors_impl(
+        40 => wire__crate__api__extractor__LiveDouyinExtractor_get_live_status_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        41 => wire__crate__api__extractor__LiveDouyinExtractor_search_rooms_impl(
+        41 => wire__crate__api__extractor__LiveDouyinExtractor_get_play_qualities_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        42 => wire__crate__api__extractor__LiveDouyinExtractor_set_cookies_impl(
+        42 => wire__crate__api__extractor__LiveDouyinExtractor_get_play_urls_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        43 => wire__crate__api__extractor__LiveDouyinExtractor_supports_url_impl(
+        43 => wire__crate__api__extractor__LiveDouyinExtractor_get_recommend_rooms_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        44 => wire__crate__api__danmaku__LiveDouyuDanmakuProvider_connect_impl(
+        44 => wire__crate__api__extractor__LiveDouyinExtractor_get_room_detail_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        45 => wire__crate__api__danmaku__LiveDouyuDanmakuProvider_disconnect_impl(
+        45 => wire__crate__api__extractor__LiveDouyinExtractor_get_super_chat_messages_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        46 => wire__crate__api__danmaku__LiveDouyuDanmakuProvider_extract_room_id_impl(
+        46 => wire__crate__api__extractor__LiveDouyinExtractor_new_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        47 => wire__crate__api__danmaku__LiveDouyuDanmakuProvider_new_impl(
+        47 => wire__crate__api__extractor__LiveDouyinExtractor_search_anchors_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        48 => wire__crate__api__danmaku__LiveDouyuDanmakuProvider_receive_impl(
+        48 => wire__crate__api__extractor__LiveDouyinExtractor_search_rooms_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        49 => wire__crate__api__danmaku__LiveDouyuDanmakuProvider_supports_url_impl(
+        49 => wire__crate__api__extractor__LiveDouyinExtractor_set_cookies_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        50 => wire__crate__api__extractor__LiveDouyuExtractor_extract_room_id_impl(
+        50 => wire__crate__api__extractor__LiveDouyinExtractor_supports_url_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        51 => wire__crate__api__extractor__LiveDouyuExtractor_get_categories_impl(
+        51 => wire__crate__api__danmaku__LiveDouyuDanmakuProvider_clear_mask_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        52 => wire__crate__api__extractor__LiveDouyuExtractor_get_category_rooms_impl(
+        52 => wire__crate__api__danmaku__LiveDouyuDanmakuProvider_connect_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        53 => wire__crate__api__extractor__LiveDouyuExtractor_get_live_status_impl(
+        53 => wire__crate__api__danmaku__LiveDouyuDanmakuProvider_disconnect_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        54 => wire__crate__api__extractor__LiveDouyuExtractor_get_play_qualities_impl(
+        54 => wire__crate__api__danmaku__LiveDouyuDanmakuProvider_extract_room_id_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        55 => wire__crate__api__extractor__LiveDouyuExtractor_get_play_urls_impl(
+        55 => wire__crate__api__danmaku__LiveDouyuDanmakuProvider_get_mask_stats_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        56 => wire__crate__api__extractor__LiveDouyuExtractor_get_recommend_rooms_impl(
+        56 => wire__crate__api__danmaku__LiveDouyuDanmakuProvider_new_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        57 => wire__crate__api__extractor__LiveDouyuExtractor_get_room_detail_impl(
+        57 => wire__crate__api__danmaku__LiveDouyuDanmakuProvider_receive_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        58 => wire__crate__api__extractor__LiveDouyuExtractor_get_super_chat_messages_impl(
+        58 => wire__crate__api__danmaku__LiveDouyuDanmakuProvider_reset_mask_stats_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        59 => wire__crate__api__extractor__LiveDouyuExtractor_new_impl(
+        59 => wire__crate__api__danmaku__LiveDouyuDanmakuProvider_supports_url_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        60 => wire__crate__api__extractor__LiveDouyuExtractor_search_anchors_impl(
+        60 => wire__crate__api__extractor__LiveDouyuExtractor_extract_room_id_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        61 => wire__crate__api__extractor__LiveDouyuExtractor_search_rooms_impl(
+        61 => wire__crate__api__extractor__LiveDouyuExtractor_get_categories_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        62 => wire__crate__api__extractor__LiveDouyuExtractor_set_cookies_impl(
+        62 => wire__crate__api__extractor__LiveDouyuExtractor_get_category_rooms_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        63 => wire__crate__api__extractor__LiveDouyuExtractor_supports_url_impl(
+        63 => wire__crate__api__extractor__LiveDouyuExtractor_get_live_status_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        64 => wire__crate__api__danmaku__LiveHuyaDanmakuProvider_connect_impl(
+        64 => wire__crate__api__extractor__LiveDouyuExtractor_get_play_qualities_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        65 => wire__crate__api__danmaku__LiveHuyaDanmakuProvider_disconnect_impl(
+        65 => wire__crate__api__extractor__LiveDouyuExtractor_get_play_urls_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        66 => wire__crate__api__danmaku__LiveHuyaDanmakuProvider_extract_room_id_impl(
+        66 => wire__crate__api__extractor__LiveDouyuExtractor_get_recommend_rooms_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        67 => wire__crate__api__danmaku__LiveHuyaDanmakuProvider_new_impl(
+        67 => wire__crate__api__extractor__LiveDouyuExtractor_get_room_detail_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        68 => wire__crate__api__danmaku__LiveHuyaDanmakuProvider_receive_impl(
+        68 => wire__crate__api__extractor__LiveDouyuExtractor_get_super_chat_messages_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        69 => wire__crate__api__danmaku__LiveHuyaDanmakuProvider_supports_url_impl(
+        69 => wire__crate__api__extractor__LiveDouyuExtractor_new_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        70 => wire__crate__api__extractor__LiveHuyaExtractor_extract_room_id_impl(
+        70 => wire__crate__api__extractor__LiveDouyuExtractor_search_anchors_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        71 => wire__crate__api__extractor__LiveHuyaExtractor_get_categories_impl(
+        71 => wire__crate__api__extractor__LiveDouyuExtractor_search_rooms_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        72 => wire__crate__api__extractor__LiveHuyaExtractor_get_category_rooms_impl(
+        72 => wire__crate__api__extractor__LiveDouyuExtractor_set_cookies_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        73 => wire__crate__api__extractor__LiveHuyaExtractor_get_live_status_impl(
+        73 => wire__crate__api__extractor__LiveDouyuExtractor_supports_url_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        74 => wire__crate__api__extractor__LiveHuyaExtractor_get_play_qualities_impl(
+        74 => wire__crate__api__danmaku__LiveHuyaDanmakuProvider_clear_mask_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        75 => wire__crate__api__extractor__LiveHuyaExtractor_get_play_urls_impl(
+        75 => wire__crate__api__danmaku__LiveHuyaDanmakuProvider_connect_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        76 => wire__crate__api__extractor__LiveHuyaExtractor_get_recommend_rooms_impl(
+        76 => wire__crate__api__danmaku__LiveHuyaDanmakuProvider_disconnect_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        77 => wire__crate__api__extractor__LiveHuyaExtractor_get_room_detail_impl(
+        77 => wire__crate__api__danmaku__LiveHuyaDanmakuProvider_extract_room_id_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        78 => wire__crate__api__extractor__LiveHuyaExtractor_get_super_chat_messages_impl(
+        78 => wire__crate__api__danmaku__LiveHuyaDanmakuProvider_get_mask_stats_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        79 => wire__crate__api__extractor__LiveHuyaExtractor_new_impl(
+        79 => wire__crate__api__danmaku__LiveHuyaDanmakuProvider_new_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        80 => wire__crate__api__extractor__LiveHuyaExtractor_search_anchors_impl(
+        80 => wire__crate__api__danmaku__LiveHuyaDanmakuProvider_receive_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        81 => wire__crate__api__extractor__LiveHuyaExtractor_search_rooms_impl(
+        81 => wire__crate__api__danmaku__LiveHuyaDanmakuProvider_reset_mask_stats_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        82 => wire__crate__api__extractor__LiveHuyaExtractor_set_cookies_impl(
+        82 => wire__crate__api__danmaku__LiveHuyaDanmakuProvider_supports_url_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        83 => wire__crate__api__extractor__LiveHuyaExtractor_set_sdk_ua_impl(
+        83 => wire__crate__api__extractor__LiveHuyaExtractor_extract_room_id_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        84 => wire__crate__api__extractor__LiveHuyaExtractor_supports_url_impl(
+        84 => wire__crate__api__extractor__LiveHuyaExtractor_get_categories_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        85 => wire__crate__api__danmaku__LiveTwitchDanmakuProvider_connect_impl(
+        85 => wire__crate__api__extractor__LiveHuyaExtractor_get_category_rooms_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        86 => wire__crate__api__danmaku__LiveTwitchDanmakuProvider_disconnect_impl(
+        86 => wire__crate__api__extractor__LiveHuyaExtractor_get_live_status_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        87 => wire__crate__api__danmaku__LiveTwitchDanmakuProvider_extract_room_id_impl(
+        87 => wire__crate__api__extractor__LiveHuyaExtractor_get_play_qualities_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        88 => wire__crate__api__danmaku__LiveTwitchDanmakuProvider_new_impl(
+        88 => wire__crate__api__extractor__LiveHuyaExtractor_get_play_urls_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        89 => wire__crate__api__danmaku__LiveTwitchDanmakuProvider_receive_impl(
+        89 => wire__crate__api__extractor__LiveHuyaExtractor_get_recommend_rooms_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        90 => wire__crate__api__danmaku__LiveTwitchDanmakuProvider_supports_url_impl(
+        90 => wire__crate__api__extractor__LiveHuyaExtractor_get_room_detail_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        91 => wire__crate__api__extractor__LiveTwitchExtractor_extract_room_id_impl(
+        91 => wire__crate__api__extractor__LiveHuyaExtractor_get_super_chat_messages_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        92 => wire__crate__api__extractor__LiveTwitchExtractor_get_categories_impl(
+        92 => wire__crate__api__extractor__LiveHuyaExtractor_new_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        93 => wire__crate__api__extractor__LiveTwitchExtractor_get_category_rooms_impl(
+        93 => wire__crate__api__extractor__LiveHuyaExtractor_search_anchors_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        94 => wire__crate__api__extractor__LiveTwitchExtractor_get_live_status_impl(
+        94 => wire__crate__api__extractor__LiveHuyaExtractor_search_rooms_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        95 => wire__crate__api__extractor__LiveTwitchExtractor_get_play_qualities_impl(
+        95 => wire__crate__api__extractor__LiveHuyaExtractor_set_cookies_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        96 => wire__crate__api__extractor__LiveTwitchExtractor_get_play_urls_impl(
+        96 => wire__crate__api__extractor__LiveHuyaExtractor_set_sdk_ua_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        97 => wire__crate__api__extractor__LiveTwitchExtractor_get_recommend_rooms_impl(
+        97 => wire__crate__api__extractor__LiveHuyaExtractor_supports_url_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        98 => wire__crate__api__extractor__LiveTwitchExtractor_get_room_detail_impl(
+        98 => wire__crate__api__danmaku__LiveTwitchDanmakuProvider_clear_mask_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        99 => wire__crate__api__extractor__LiveTwitchExtractor_get_super_chat_messages_impl(
+        99 => wire__crate__api__danmaku__LiveTwitchDanmakuProvider_connect_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        100 => wire__crate__api__extractor__LiveTwitchExtractor_new_impl(
+        100 => wire__crate__api__danmaku__LiveTwitchDanmakuProvider_disconnect_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        101 => wire__crate__api__extractor__LiveTwitchExtractor_search_anchors_impl(
+        101 => wire__crate__api__danmaku__LiveTwitchDanmakuProvider_extract_room_id_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        102 => wire__crate__api__extractor__LiveTwitchExtractor_search_rooms_impl(
+        102 => wire__crate__api__danmaku__LiveTwitchDanmakuProvider_get_mask_stats_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        103 => wire__crate__api__extractor__LiveTwitchExtractor_set_cookies_impl(
+        103 => wire__crate__api__danmaku__LiveTwitchDanmakuProvider_new_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        104 => wire__crate__api__extractor__LiveTwitchExtractor_supports_url_impl(
+        104 => wire__crate__api__danmaku__LiveTwitchDanmakuProvider_receive_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        105 => wire__crate__api__simple__detect_platform_impl(port, ptr, rust_vec_len, data_len),
-        106 => wire__crate__api__danmaku__douyu_danmaku_diagnostic_impl(
+        105 => wire__crate__api__danmaku__LiveTwitchDanmakuProvider_reset_mask_stats_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        107 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
-        111 => wire__crate__api__log__setup_log_stream_impl(port, ptr, rust_vec_len, data_len),
-        112 => wire__crate__api__simple__test_log_impl(port, ptr, rust_vec_len, data_len),
-        113 => wire__crate__api__log__test_log_value_impl(port, ptr, rust_vec_len, data_len),
+        106 => wire__crate__api__danmaku__LiveTwitchDanmakuProvider_supports_url_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        107 => wire__crate__api__extractor__LiveTwitchExtractor_extract_room_id_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        108 => wire__crate__api__extractor__LiveTwitchExtractor_get_categories_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        109 => wire__crate__api__extractor__LiveTwitchExtractor_get_category_rooms_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        110 => wire__crate__api__extractor__LiveTwitchExtractor_get_live_status_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        111 => wire__crate__api__extractor__LiveTwitchExtractor_get_play_qualities_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        112 => wire__crate__api__extractor__LiveTwitchExtractor_get_play_urls_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        113 => wire__crate__api__extractor__LiveTwitchExtractor_get_recommend_rooms_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        114 => wire__crate__api__extractor__LiveTwitchExtractor_get_room_detail_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        115 => wire__crate__api__extractor__LiveTwitchExtractor_get_super_chat_messages_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        116 => wire__crate__api__extractor__LiveTwitchExtractor_new_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        117 => wire__crate__api__extractor__LiveTwitchExtractor_search_anchors_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        118 => wire__crate__api__extractor__LiveTwitchExtractor_search_rooms_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        119 => wire__crate__api__extractor__LiveTwitchExtractor_set_cookies_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        120 => wire__crate__api__extractor__LiveTwitchExtractor_supports_url_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        121 => wire__crate__api__simple__detect_platform_impl(port, ptr, rust_vec_len, data_len),
+        122 => wire__crate__api__danmaku__douyu_danmaku_diagnostic_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        123 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
+        127 => wire__crate__api__log__setup_log_stream_impl(port, ptr, rust_vec_len, data_len),
+        128 => wire__crate__api__simple__test_log_impl(port, ptr, rust_vec_len, data_len),
+        129 => wire__crate__api__log__test_log_value_impl(port, ptr, rust_vec_len, data_len),
         _ => unreachable!(),
     }
 }
@@ -7943,17 +9381,17 @@ fn pde_ffi_dispatcher_sync_impl(
 ) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
     // Codec=Pde (Serialization + dispatch), see doc to use other codecs
     match func_id {
-        108 => wire__crate__api__models__live_message_color__live_message_color_from_int_impl(
+        124 => wire__crate__api__models__live_message_color__live_message_color_from_int_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        109 => wire__crate__api__models__live_message_color__live_message_color_to_hex_impl(
+        125 => wire__crate__api__models__live_message_color__live_message_color_to_hex_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        110 => wire__crate__api__models__live_message_color__live_message_color_white_impl(
+        126 => wire__crate__api__models__live_message_color__live_message_color_white_impl(
             ptr,
             rust_vec_len,
             data_len,
@@ -8315,6 +9753,72 @@ impl flutter_rust_bridge::IntoIntoDart<crate::api::models::live_danmu_item::Live
     for crate::api::models::live_danmu_item::LiveDanmuItem
 {
     fn into_into_dart(self) -> crate::api::models::live_danmu_item::LiveDanmuItem {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::models::live_mask_config::LiveFrequencyConfig {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.base_window_ms.into_into_dart().into_dart(),
+            self.bucket_count.into_into_dart().into_dart(),
+            self.use_normalization.into_into_dart().into_dart(),
+            self.max_frequency.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::api::models::live_mask_config::LiveFrequencyConfig
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::models::live_mask_config::LiveFrequencyConfig>
+    for crate::api::models::live_mask_config::LiveFrequencyConfig
+{
+    fn into_into_dart(self) -> crate::api::models::live_mask_config::LiveFrequencyConfig {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::models::live_mask_config::LiveMaskConfig {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.frequency.into_into_dart().into_dart(),
+            self.blacklist_words.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::api::models::live_mask_config::LiveMaskConfig
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::models::live_mask_config::LiveMaskConfig>
+    for crate::api::models::live_mask_config::LiveMaskConfig
+{
+    fn into_into_dart(self) -> crate::api::models::live_mask_config::LiveMaskConfig {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::models::live_mask_stats::LiveMaskStats {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.total_received.into_into_dart().into_dart(),
+            self.passed.into_into_dart().into_dart(),
+            self.blocked.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::api::models::live_mask_stats::LiveMaskStats
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::models::live_mask_stats::LiveMaskStats>
+    for crate::api::models::live_mask_stats::LiveMaskStats
+{
+    fn into_into_dart(self) -> crate::api::models::live_mask_stats::LiveMaskStats {
         self
     }
 }
@@ -9083,6 +10587,36 @@ impl SseEncode for crate::api::models::live_danmu_item::LiveDanmuItem {
     }
 }
 
+impl SseEncode for crate::api::models::live_mask_config::LiveFrequencyConfig {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <u32>::sse_encode(self.base_window_ms, serializer);
+        <u16>::sse_encode(self.bucket_count, serializer);
+        <bool>::sse_encode(self.use_normalization, serializer);
+        <u16>::sse_encode(self.max_frequency, serializer);
+    }
+}
+
+impl SseEncode for crate::api::models::live_mask_config::LiveMaskConfig {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Option<crate::api::models::live_mask_config::LiveFrequencyConfig>>::sse_encode(
+            self.frequency,
+            serializer,
+        );
+        <Option<Vec<String>>>::sse_encode(self.blacklist_words, serializer);
+    }
+}
+
+impl SseEncode for crate::api::models::live_mask_stats::LiveMaskStats {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <u64>::sse_encode(self.total_received, serializer);
+        <u64>::sse_encode(self.passed, serializer);
+        <u64>::sse_encode(self.blocked, serializer);
+    }
+}
+
 impl SseEncode for crate::api::models::live_message::LiveMessage {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -9258,11 +10792,64 @@ impl SseEncode for Option<crate::api::models::live_danmu_item::LiveDanmuItem> {
     }
 }
 
+impl SseEncode for Option<crate::api::models::live_mask_config::LiveFrequencyConfig> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::api::models::live_mask_config::LiveFrequencyConfig>::sse_encode(
+                value, serializer,
+            );
+        }
+    }
+}
+
+impl SseEncode for Option<crate::api::models::live_mask_config::LiveMaskConfig> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::api::models::live_mask_config::LiveMaskConfig>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<Vec<String>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <Vec<String>>::sse_encode(value, serializer);
+        }
+    }
+}
+
 impl SseEncode for (String, String) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <String>::sse_encode(self.0, serializer);
         <String>::sse_encode(self.1, serializer);
+    }
+}
+
+impl SseEncode for u16 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_u16::<NativeEndian>(self).unwrap();
+    }
+}
+
+impl SseEncode for u32 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_u32::<NativeEndian>(self).unwrap();
+    }
+}
+
+impl SseEncode for u64 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_u64::<NativeEndian>(self).unwrap();
     }
 }
 

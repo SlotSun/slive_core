@@ -14,6 +14,8 @@ import 'api/models/live_category.dart';
 import 'api/models/live_category_result.dart';
 import 'api/models/live_danmu_control_event.dart';
 import 'api/models/live_danmu_item.dart';
+import 'api/models/live_mask_config.dart';
+import 'api/models/live_mask_stats.dart';
 import 'api/models/live_message.dart';
 import 'api/models/live_message_color.dart';
 import 'api/models/live_message_type.dart';
@@ -228,6 +230,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   int dco_decode_CastedPrimitive_i_64(dynamic raw);
 
   @protected
+  int dco_decode_CastedPrimitive_u_64(dynamic raw);
+
+  @protected
   Map<String, String> dco_decode_Map_String_String_None(dynamic raw);
 
   @protected
@@ -314,6 +319,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   LiveDanmuItem dco_decode_box_autoadd_live_danmu_item(dynamic raw);
 
   @protected
+  LiveFrequencyConfig dco_decode_box_autoadd_live_frequency_config(dynamic raw);
+
+  @protected
+  LiveMaskConfig dco_decode_box_autoadd_live_mask_config(dynamic raw);
+
+  @protected
   LiveMessage dco_decode_box_autoadd_live_message(dynamic raw);
 
   @protected
@@ -382,6 +393,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   LiveDanmuItem dco_decode_live_danmu_item(dynamic raw);
 
   @protected
+  LiveFrequencyConfig dco_decode_live_frequency_config(dynamic raw);
+
+  @protected
+  LiveMaskConfig dco_decode_live_mask_config(dynamic raw);
+
+  @protected
+  LiveMaskStats dco_decode_live_mask_stats(dynamic raw);
+
+  @protected
   LiveMessage dco_decode_live_message(dynamic raw);
 
   @protected
@@ -427,7 +447,27 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   LiveDanmuItem? dco_decode_opt_box_autoadd_live_danmu_item(dynamic raw);
 
   @protected
+  LiveFrequencyConfig? dco_decode_opt_box_autoadd_live_frequency_config(
+    dynamic raw,
+  );
+
+  @protected
+  LiveMaskConfig? dco_decode_opt_box_autoadd_live_mask_config(dynamic raw);
+
+  @protected
+  List<String>? dco_decode_opt_list_String(dynamic raw);
+
+  @protected
   (String, String) dco_decode_record_string_string(dynamic raw);
+
+  @protected
+  int dco_decode_u_16(dynamic raw);
+
+  @protected
+  int dco_decode_u_32(dynamic raw);
+
+  @protected
+  BigInt dco_decode_u_64(dynamic raw);
 
   @protected
   int dco_decode_u_8(dynamic raw);
@@ -583,6 +623,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   int sse_decode_CastedPrimitive_i_64(SseDeserializer deserializer);
 
   @protected
+  int sse_decode_CastedPrimitive_u_64(SseDeserializer deserializer);
+
+  @protected
   Map<String, String> sse_decode_Map_String_String_None(
     SseDeserializer deserializer,
   );
@@ -671,6 +714,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   LiveDanmuItem sse_decode_box_autoadd_live_danmu_item(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  LiveFrequencyConfig sse_decode_box_autoadd_live_frequency_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  LiveMaskConfig sse_decode_box_autoadd_live_mask_config(
     SseDeserializer deserializer,
   );
 
@@ -767,6 +820,17 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   LiveDanmuItem sse_decode_live_danmu_item(SseDeserializer deserializer);
 
   @protected
+  LiveFrequencyConfig sse_decode_live_frequency_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  LiveMaskConfig sse_decode_live_mask_config(SseDeserializer deserializer);
+
+  @protected
+  LiveMaskStats sse_decode_live_mask_stats(SseDeserializer deserializer);
+
+  @protected
   LiveMessage sse_decode_live_message(SseDeserializer deserializer);
 
   @protected
@@ -822,9 +886,31 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  LiveFrequencyConfig? sse_decode_opt_box_autoadd_live_frequency_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  LiveMaskConfig? sse_decode_opt_box_autoadd_live_mask_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  List<String>? sse_decode_opt_list_String(SseDeserializer deserializer);
+
+  @protected
   (String, String) sse_decode_record_string_string(
     SseDeserializer deserializer,
   );
+
+  @protected
+  int sse_decode_u_16(SseDeserializer deserializer);
+
+  @protected
+  int sse_decode_u_32(SseDeserializer deserializer);
+
+  @protected
+  BigInt sse_decode_u_64(SseDeserializer deserializer);
 
   @protected
   int sse_decode_u_8(SseDeserializer deserializer);
@@ -1006,6 +1092,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_CastedPrimitive_i_64(int self, SseSerializer serializer);
 
   @protected
+  void sse_encode_CastedPrimitive_u_64(int self, SseSerializer serializer);
+
+  @protected
   void sse_encode_Map_String_String_None(
     Map<String, String> self,
     SseSerializer serializer,
@@ -1109,6 +1198,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_box_autoadd_live_danmu_item(
     LiveDanmuItem self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_live_frequency_config(
+    LiveFrequencyConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_live_mask_config(
+    LiveMaskConfig self,
     SseSerializer serializer,
   );
 
@@ -1227,6 +1328,21 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_live_danmu_item(LiveDanmuItem self, SseSerializer serializer);
 
   @protected
+  void sse_encode_live_frequency_config(
+    LiveFrequencyConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_live_mask_config(
+    LiveMaskConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_live_mask_stats(LiveMaskStats self, SseSerializer serializer);
+
+  @protected
   void sse_encode_live_message(LiveMessage self, SseSerializer serializer);
 
   @protected
@@ -1302,10 +1418,34 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_opt_box_autoadd_live_frequency_config(
+    LiveFrequencyConfig? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_live_mask_config(
+    LiveMaskConfig? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_list_String(List<String>? self, SseSerializer serializer);
+
+  @protected
   void sse_encode_record_string_string(
     (String, String) self,
     SseSerializer serializer,
   );
+
+  @protected
+  void sse_encode_u_16(int self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_u_32(int self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_u_64(BigInt self, SseSerializer serializer);
 
   @protected
   void sse_encode_u_8(int self, SseSerializer serializer);

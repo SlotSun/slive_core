@@ -6,6 +6,8 @@
 import '../frb_generated.dart';
 import 'models/live_danmu_control_event.dart';
 import 'models/live_danmu_item.dart';
+import 'models/live_mask_config.dart';
+import 'models/live_mask_stats.dart';
 import 'models/live_message.dart';
 import 'models/live_message_color.dart';
 import 'models/live_message_type.dart';
@@ -18,15 +20,20 @@ Future<String> douyuDanmakuDiagnostic({required String roomId}) =>
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveBilibiliDanmakuProvider>>
 abstract class LiveBilibiliDanmakuProvider implements RustOpaqueInterface {
+  Future<void> clearMask({required LiveDanmuConnection connection});
+
   Future<LiveDanmuConnection> connect({
     required String roomId,
     String? cookies,
     String? danmakuData,
+    LiveMaskConfig? maskConfig,
   });
 
   Future<void> disconnect({required LiveDanmuConnection connection});
 
   Future<String?> extractRoomId({required String url});
+
+  Future<LiveMaskStats> getMaskStats({required LiveDanmuConnection connection});
 
   // HINT: Make it `#[frb(sync)]` to let it become the default constructor of Dart class.
   static Future<LiveBilibiliDanmakuProvider> newInstance() =>
@@ -34,11 +41,15 @@ abstract class LiveBilibiliDanmakuProvider implements RustOpaqueInterface {
 
   Future<LiveDanmuItem?> receive({required LiveDanmuConnection connection});
 
+  Future<void> resetMaskStats({required LiveDanmuConnection connection});
+
   Future<bool> supportsUrl({required String url});
 }
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDanmuConnection>>
 abstract class LiveDanmuConnection implements RustOpaqueInterface {
+  Future<String> id();
+
   Future<bool> isConnected();
 
   Future<String> platform();
@@ -48,15 +59,20 @@ abstract class LiveDanmuConnection implements RustOpaqueInterface {
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDouyinDanmakuProvider>>
 abstract class LiveDouyinDanmakuProvider implements RustOpaqueInterface {
+  Future<void> clearMask({required LiveDanmuConnection connection});
+
   Future<LiveDanmuConnection> connect({
     required String roomId,
     String? cookies,
     String? danmakuData,
+    LiveMaskConfig? maskConfig,
   });
 
   Future<void> disconnect({required LiveDanmuConnection connection});
 
   Future<String?> extractRoomId({required String url});
+
+  Future<LiveMaskStats> getMaskStats({required LiveDanmuConnection connection});
 
   // HINT: Make it `#[frb(sync)]` to let it become the default constructor of Dart class.
   static Future<LiveDouyinDanmakuProvider> newInstance() =>
@@ -64,20 +80,27 @@ abstract class LiveDouyinDanmakuProvider implements RustOpaqueInterface {
 
   Future<LiveDanmuItem?> receive({required LiveDanmuConnection connection});
 
+  Future<void> resetMaskStats({required LiveDanmuConnection connection});
+
   Future<bool> supportsUrl({required String url});
 }
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveDouyuDanmakuProvider>>
 abstract class LiveDouyuDanmakuProvider implements RustOpaqueInterface {
+  Future<void> clearMask({required LiveDanmuConnection connection});
+
   Future<LiveDanmuConnection> connect({
     required String roomId,
     String? cookies,
     String? danmakuData,
+    LiveMaskConfig? maskConfig,
   });
 
   Future<void> disconnect({required LiveDanmuConnection connection});
 
   Future<String?> extractRoomId({required String url});
+
+  Future<LiveMaskStats> getMaskStats({required LiveDanmuConnection connection});
 
   // HINT: Make it `#[frb(sync)]` to let it become the default constructor of Dart class.
   static Future<LiveDouyuDanmakuProvider> newInstance() =>
@@ -85,20 +108,27 @@ abstract class LiveDouyuDanmakuProvider implements RustOpaqueInterface {
 
   Future<LiveDanmuItem?> receive({required LiveDanmuConnection connection});
 
+  Future<void> resetMaskStats({required LiveDanmuConnection connection});
+
   Future<bool> supportsUrl({required String url});
 }
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveHuyaDanmakuProvider>>
 abstract class LiveHuyaDanmakuProvider implements RustOpaqueInterface {
+  Future<void> clearMask({required LiveDanmuConnection connection});
+
   Future<LiveDanmuConnection> connect({
     required String roomId,
     String? cookies,
     String? danmakuData,
+    LiveMaskConfig? maskConfig,
   });
 
   Future<void> disconnect({required LiveDanmuConnection connection});
 
   Future<String?> extractRoomId({required String url});
+
+  Future<LiveMaskStats> getMaskStats({required LiveDanmuConnection connection});
 
   // HINT: Make it `#[frb(sync)]` to let it become the default constructor of Dart class.
   static Future<LiveHuyaDanmakuProvider> newInstance() =>
@@ -106,26 +136,35 @@ abstract class LiveHuyaDanmakuProvider implements RustOpaqueInterface {
 
   Future<LiveDanmuItem?> receive({required LiveDanmuConnection connection});
 
+  Future<void> resetMaskStats({required LiveDanmuConnection connection});
+
   Future<bool> supportsUrl({required String url});
 }
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LiveTwitchDanmakuProvider>>
 abstract class LiveTwitchDanmakuProvider implements RustOpaqueInterface {
+  Future<void> clearMask({required LiveDanmuConnection connection});
+
   Future<LiveDanmuConnection> connect({
     required String roomId,
     String? cookies,
     String? danmakuData,
+    LiveMaskConfig? maskConfig,
   });
 
   Future<void> disconnect({required LiveDanmuConnection connection});
 
   Future<String?> extractRoomId({required String url});
 
+  Future<LiveMaskStats> getMaskStats({required LiveDanmuConnection connection});
+
   // HINT: Make it `#[frb(sync)]` to let it become the default constructor of Dart class.
   static Future<LiveTwitchDanmakuProvider> newInstance() =>
       RustLib.instance.api.crateApiDanmakuLiveTwitchDanmakuProviderNew();
 
   Future<LiveDanmuItem?> receive({required LiveDanmuConnection connection});
+
+  Future<void> resetMaskStats({required LiveDanmuConnection connection});
 
   Future<bool> supportsUrl({required String url});
 }

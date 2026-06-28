@@ -1,5 +1,17 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:slive_core/src/rust/api/types.dart';
+import 'package:slive_core/src/rust/api/models/live_anchor_item.dart';
+import 'package:slive_core/src/rust/api/models/live_category.dart';
+import 'package:slive_core/src/rust/api/models/live_category_result.dart';
+import 'package:slive_core/src/rust/api/models/live_danmu_control_event.dart';
+import 'package:slive_core/src/rust/api/models/live_message.dart';
+import 'package:slive_core/src/rust/api/models/live_message_color.dart';
+import 'package:slive_core/src/rust/api/models/live_message_type.dart';
+import 'package:slive_core/src/rust/api/models/live_play_quality.dart';
+import 'package:slive_core/src/rust/api/models/live_play_url.dart';
+import 'package:slive_core/src/rust/api/models/live_room_detail.dart';
+import 'package:slive_core/src/rust/api/models/live_room_item.dart';
+import 'package:slive_core/src/rust/api/models/live_sub_category.dart';
+import 'package:slive_core/src/rust/api/models/live_super_chat_message.dart';
 
 void main() {
   group('LiveRoomDetail', () {
